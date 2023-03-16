@@ -17,7 +17,7 @@ def get_dep_news_queryset(request):
     accidentally see or touch those they shouldn't.
     """
     model = News
-    queryset = model.objects.exclude(created_by_id=10 or 1003)
+    queryset = model.objects.exclude(created_by_id=10 or 1003 or 1004)
     role = request.user.profile.activated_role
     deps = request.user.groups.filter(groupprofile__is_department=True)
     if not role:
@@ -34,7 +34,7 @@ def news_list(request):
     paginate_by = 5
     template_name = 'news/news_list.html'
     is_supervisor = True
-    qs = News.objects.filter(created_by_id=10 or 1003)  # ID:10 == Vicky
+    qs = News.objects.filter(created_by_id=10 or 1003 or 1004)  # ID:10 == Vicky
     page_number = request.GET.get('page', '')
     paginator = Paginator(qs, paginate_by)
     page_obj = paginator.get_page(page_number)
@@ -83,7 +83,7 @@ def news_create(request):
     form_class = NewsModelForm
     success_url1 = reverse('news:news_list')
     success_url2 = reverse('news:dep_news_list')
-    success_url = success_url1 if request.user.username == 'vicky_lin' or 'Rossanna_Hsieh' else success_url2
+    success_url = success_url1 if request.user.username == 'vicky_lin' or 'Rossanna_Hsieh' or 'Brian_Chiang' else success_url2
     form_buttons = ['create']
     template_name = 'news/news_form.html'
     if request.method == 'POST':
@@ -106,7 +106,7 @@ def news_update(request, pk):
     form_class = NewsModelForm
     success_url1 = reverse('news:news_list')
     success_url2 = reverse('news:dep_news_list')
-    success_url = success_url1 if request.user.username == 'vicky_lin' or 'Rossanna_Hsieh' else success_url2
+    success_url = success_url1 if request.user.username == 'vicky_lin' or 'Rossanna_Hsieh' or 'Brian_Chiang' else success_url2
     form_buttons = ['update']
     template_name = 'news/news_form.html'
     if request.method == 'POST':
@@ -128,7 +128,7 @@ def news_delete(request, pk):
     instance = get_object_or_404(klass=model, pk=pk, created_by=request.user)
     success_url1 = reverse('news:news_list')
     success_url2 = reverse('news:dep_news_list')
-    success_url = success_url1 if request.user.username == 'vicky_lin' or 'Rossanna_Hsieh' else success_url2
+    success_url = success_url1 if request.user.username == 'vicky_lin' or 'Rossanna_Hsieh' or 'Brian_Chiang' else success_url2
     template_name = 'news/news_confirm_delete.html'
     if request.method == 'POST':
         instance.delete()
