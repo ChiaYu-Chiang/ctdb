@@ -17,7 +17,7 @@ def get_dep_news_queryset(request):
     accidentally see or touch those they shouldn't.
     """
     model = News
-    queryset = model.objects.exclude(created_by_id=10 or 1003 or 1004)
+    queryset = model.objects.exclude(created_by_id__in=[10, 1003, 1004])
     role = request.user.profile.activated_role
     deps = request.user.groups.filter(groupprofile__is_department=True)
     if not role:
@@ -34,7 +34,7 @@ def news_list(request):
     paginate_by = 5
     template_name = 'news/news_list.html'
     is_supervisor = True
-    qs = News.objects.filter(created_by_id=10 or 1003 or 1004)  # ID:10 == Vicky
+    qs = News.objects.filter(created_by_id__in=[10, 1003, 1004])  # ID:10 == Vicky
     page_number = request.GET.get('page', '')
     paginator = Paginator(qs, paginate_by)
     page_obj = paginator.get_page(page_number)
