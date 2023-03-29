@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-15 17:19+0800\n"
+"POT-Creation-Date: 2023-03-29 10:06+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -358,8 +358,8 @@ msgstr "檔案"
 #: .\archive\templates\archive\announce_list.html:15
 #: .\archive\templates\archive\archive_list.html:15
 #: .\archive\templates\archive\journals_list.html:15
-#: .\comment\templates\comment\comment_list.html:14
-#: .\comment\templates\comment\comment_message_list.html:14
+#: .\comment\templates\comment\comment_list.html:20
+#: .\comment\templates\comment\comment_message_list.html:21
 #: .\comment\templates\comment\message_list.html:14
 #: .\diary\templates\diary\diary_list.html:26
 #: .\log\templates\log\diary_log_list.html:15
@@ -373,8 +373,8 @@ msgstr "搜尋.."
 #: .\archive\templates\archive\announce_list.html:18
 #: .\archive\templates\archive\archive_list.html:18
 #: .\archive\templates\archive\journals_list.html:26
-#: .\comment\templates\comment\comment_list.html:18
-#: .\comment\templates\comment\comment_message_list.html:18
+#: .\comment\templates\comment\comment_list.html:24
+#: .\comment\templates\comment\comment_message_list.html:25
 #: .\comment\templates\comment\message_list.html:18
 #: .\core\templates\standard_form.html:57
 #: .\core\templates\standard_form_with_file.html:65
@@ -399,8 +399,8 @@ msgstr "新增"
 #: .\archive\templates\archive\announce_list.html:25
 #: .\archive\templates\archive\archive_list.html:25
 #: .\archive\templates\archive\journals_list.html:33
-#: .\comment\templates\comment\comment_list.html:25
-#: .\comment\templates\comment\comment_message_list.html:25
+#: .\comment\templates\comment\comment_list.html:31
+#: .\comment\templates\comment\comment_message_list.html:34
 #: .\comment\templates\comment\message_list.html:25
 #: .\diary\templates\diary\diary_list.html:47 .\log\models.py:9
 #: .\log\templates\log\diary_log_list.html:25
@@ -417,11 +417,12 @@ msgstr "動作"
 #: .\archive\templates\archive\announce_list.html:26
 #: .\archive\templates\archive\archive_list.html:26
 #: .\archive\templates\archive\journals_list.html:34 .\comment\models.py:20
-#: .\comment\models.py:45 .\comment\templates\comment\comment_list.html:26
-#: .\comment\templates\comment\comment_message_list.html:26
+#: .\comment\models.py:44 .\comment\templates\comment\comment_list.html:33
+#: .\comment\templates\comment\comment_message_list.html:14
+#: .\comment\templates\comment\comment_message_list.html:36
 #: .\comment\templates\comment\message_list.html:26 .\diary\models.py:24
 #: .\diary\templates\diary\diary_list.html:48 .\log\models.py:13
-#: .\log\templates\log\diary_log_list.html:27 .\news\models.py:15
+#: .\log\templates\log\diary_log_list.html:27 .\news\models.py:16
 #: .\reminder\models.py:44 .\reminder\templates\reminder\reminder_list.html:32
 #: .\telecom\models.py:25 .\telecom\models.py:49 .\telecom\models.py:89
 #: .\telecom\templates\telecom\isp_list.html:26
@@ -441,8 +442,8 @@ msgstr "名稱"
 #: .\archive\templates\archive\announce_list.html:39
 #: .\archive\templates\archive\archive_list.html:39
 #: .\archive\templates\archive\journals_list.html:47
-#: .\comment\templates\comment\comment_list.html:43
-#: .\comment\templates\comment\comment_message_list.html:41
+#: .\comment\templates\comment\comment_list.html:49
+#: .\comment\templates\comment\comment_message_list.html:50
 #: .\comment\templates\comment\message_list.html:45
 #: .\diary\templates\diary\diary_list.html:71
 #: .\log\templates\log\diary_log_list.html:45
@@ -512,8 +513,9 @@ msgstr "範例"
 msgid "All"
 msgstr ""
 
-#: .\comment\models.py:10 .\comment\models.py:42
-#: .\comment\templates\comment\comment_list.html:27 .\day\models.py:8
+#: .\comment\models.py:10 .\comment\models.py:41
+#: .\comment\templates\comment\comment_list.html:32
+#: .\comment\templates\comment\comment_message_list.html:16 .\day\models.py:8
 #: .\diary\models.py:10 .\diary\templates\diary\diary_list.html:49
 msgid "Date"
 msgstr "日期"
@@ -538,7 +540,8 @@ msgstr "訊息"
 msgid "Post type"
 msgstr "貼文類型"
 
-#: .\comment\models.py:18 .\news\models.py:11
+#: .\comment\models.py:18
+#: .\comment\templates\comment\comment_message_list.html:15 .\news\models.py:11
 msgid "Title"
 msgstr "標題"
 
@@ -560,11 +563,12 @@ msgstr "評論"
 msgid "Comments"
 msgstr "貼文"
 
-#: .\comment\models.py:44
+#: .\comment\models.py:43
 msgid "Message"
 msgstr "回文"
 
 #: .\comment\templates\comment\comment_action_dropdown.html:6
+#: .\comment\templates\comment\message_action_dropdown.html:6
 #: .\core\templates\no_creater_permission_action_dropdown.html:6
 #: .\core\templates\standard_action_dropdown.html:6
 #: .\diary\templates\diary\diary_action_dropdown.html:6
@@ -575,6 +579,7 @@ msgid "Choose"
 msgstr "選擇"
 
 #: .\comment\templates\comment\comment_action_dropdown.html:11
+#: .\comment\templates\comment\message_action_dropdown.html:11
 #: .\core\templates\no_creater_permission_action_dropdown.html:10
 #: .\core\templates\standard_action_dropdown.html:10
 #: .\core\templates\standard_form.html:60
@@ -588,6 +593,7 @@ msgid "Change"
 msgstr "變更"
 
 #: .\comment\templates\comment\comment_action_dropdown.html:14
+#: .\comment\templates\comment\message_action_dropdown.html:14
 #: .\core\templates\no_creater_permission_action_dropdown.html:11
 #: .\core\templates\standard_action_dropdown.html:13
 #: .\core\templates\standard_confirm_delete_form.html:7
@@ -598,23 +604,38 @@ msgstr "變更"
 msgid "Delete"
 msgstr "刪除"
 
-#: .\comment\templates\comment\comment_list.html:28
+#: .\comment\templates\comment\comment_list.html:34
 #: .\comment\templates\comment\message_list.html:28
 msgid "Post Type"
 msgstr "貼文類型"
 
-#: .\comment\templates\comment\comment_list.html:29
+#: .\comment\templates\comment\comment_list.html:35
 #: .\comment\templates\comment\message_list.html:29
 msgid "Post Title"
 msgstr "貼文標題"
 
-#: .\comment\templates\comment\comment_message_list.html:27
+#: .\comment\templates\comment\comment_message_list.html:28
+#: .\pilotadmin\templates\pilotadmin\pilotadmin_content.html:33
+msgid "Back to list"
+msgstr "返回列表"
+
+#: .\comment\templates\comment\comment_message_list.html:35
 msgid "Message Date"
 msgstr "回文日期"
 
-#: .\comment\templates\comment\comment_message_list.html:28
+#: .\comment\templates\comment\comment_message_list.html:37
 msgid "Message Content"
 msgstr "回覆訊息內容"
+
+#: .\comment\templates\comment\message_action_dropdown.html:17
+#: .\core\templates\no_creater_permission_action_dropdown.html:13
+#: .\core\templates\standard_action_dropdown.html:17
+#: .\diary\templates\diary\diary_action_dropdown.html:23
+#: .\pilotadmin\templates\pilotadmin\pilotadmin_action_dropdown.html:21
+#: .\reminder\templates\reminder\reminder_action_dropdown.html:23
+#: .\telecom\templates\telecom\prefixlistupdatetask_action_dropdown.html:16
+msgid "No available options"
+msgstr "沒有可用的選項"
 
 #: .\comment\templates\comment\message_list.html:27
 #, fuzzy
@@ -642,15 +663,6 @@ msgstr "首頁"
 msgid "TDB"
 msgstr ""
 
-#: .\core\templates\no_creater_permission_action_dropdown.html:13
-#: .\core\templates\standard_action_dropdown.html:17
-#: .\diary\templates\diary\diary_action_dropdown.html:23
-#: .\pilotadmin\templates\pilotadmin\pilotadmin_action_dropdown.html:21
-#: .\reminder\templates\reminder\reminder_action_dropdown.html:23
-#: .\telecom\templates\telecom\prefixlistupdatetask_action_dropdown.html:16
-msgid "No available options"
-msgstr "沒有可用的選項"
-
 #: .\core\templates\standard_form.html:31
 #: .\core\templates\standard_form_with_file.html:31
 #: .\core\templates\standard_form_with_file.html:40
@@ -671,7 +683,7 @@ msgid "Save and continue editing"
 msgstr ""
 
 #: .\core\templates\standard_nav.html:21 .\core\templates\standard_nav.html:24
-#: .\core\templates\standard_nav.html:25 .\news\models.py:20
+#: .\core\templates\standard_nav.html:25 .\news\models.py:21
 #: .\news\templates\news\dep_news_list.html:37
 #: .\news\templates\news\news_list.html:27
 msgid "News"
@@ -940,7 +952,11 @@ msgstr "置頂"
 msgid "at"
 msgstr "於"
 
-#: .\news\models.py:19
+#: .\news\models.py:15
+msgid "Due"
+msgstr "到"
+
+#: .\news\models.py:20
 msgid "New"
 msgstr "最新消息"
 
@@ -968,10 +984,6 @@ msgstr "瀏覽"
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_content.html:21
 msgid "Admin Password"
 msgstr "管理者密碼"
-
-#: .\pilotadmin\templates\pilotadmin\pilotadmin_content.html:33
-msgid "Back to list"
-msgstr "返回列表"
 
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_list.html:18
 msgid "Search&nbsp;CustomerName"

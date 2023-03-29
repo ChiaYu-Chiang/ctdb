@@ -3,6 +3,8 @@ from django.core.paginator import Paginator
 from django.http.response import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.db.models import Q
+from django.utils import timezone
 
 from core.decorators import permission_required
 from core.utils import today
@@ -45,7 +47,12 @@ def diary_list(request):
     page_obj = paginator.get_page(page_number)
     is_paginated = page_number.lower() != 'all' and page_obj.has_other_pages()
 
-    is_pinned_news = News.objects.filter(is_pinned=True, created_by_id__in=[10, 1003, 1004])  # 10:Vicky
+    today = timezone.now().date()
+    is_pinned_news = News.objects.filter(
+        Q(created_by_id__in=[10, 1003, 1004]) &
+        Q(is_pinned=True) &
+        (Q(due__isnull=True) | Q(due__gte=today))
+    )
 
     context = {
         'model': model,
