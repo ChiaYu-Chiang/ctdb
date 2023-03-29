@@ -12,6 +12,7 @@ class News(models.Model):
     content = models.TextField(verbose_name=_('Content'))
     is_pinned = models.BooleanField(verbose_name=_('Is pinned'), default=False)
     at = models.DateTimeField(verbose_name=_('at'), default=now)
+    due = models.DateTimeField(verbose_name=_('Due'), null=True, blank=True, default=None)
     created_by = models.ForeignKey(verbose_name=_('Created by'), to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
