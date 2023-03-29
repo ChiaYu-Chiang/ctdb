@@ -90,6 +90,7 @@ INSTALLED_APPS += [
     'log.apps.LogConfig',
     'api.apps.ApiConfig',
     'user.apps.UserConfig',
+    'tool.apps.ToolConfig',
     'pilotadmin.apps.PilotadminConfig',
     'comment.apps.CommentConfig',
 ]
