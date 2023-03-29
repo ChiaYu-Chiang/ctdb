@@ -140,6 +140,21 @@
           {% endif %}
         </li>
         <li class="nav-item dropdown">
+          {% if perms.tool.view_tool or perms.tool.add_tool %}
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {% translate 'Tool' %}
+          </a>
+          <div class="dropdown-menu" aria-labelleby="navbarDropdown">
+            {% if perms.tool.view_tool %}
+            <a class="dropdown-item" href="{% url 'tool:tool_list' %}">{% translate 'Tool' %} | {% translate 'List' %}</a>
+            {% endif %}
+            {% if perms.tool.add_tool %}
+            <a class="dropdown-item" href="{% url 'tool:tool_create' %}">{% translate 'Tool' %} | {% translate 'Add' %}</a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </li>
+        <li class="nav-item dropdown">
           {% if perms.comment.view_comment or perms.comment.add_comment %}
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="true">

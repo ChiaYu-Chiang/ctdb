@@ -15,6 +15,7 @@ urlpatterns = [
     path('', include('news.urls')),
     path('', include('pilotadmin.urls')),
     path('', include('comment.urls')),
+    path('', include('tool.urls')),
     path('log/', include('log.urls')),
     path('auth/', include('accounts.urls')),
     path('api/', include('api.urls')),

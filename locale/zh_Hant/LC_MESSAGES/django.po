@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 10:06+0800\n"
+"POT-Creation-Date: 2023-03-29 13:09+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,7 +148,7 @@ msgstr "使用者"
 msgid "Phone number"
 msgstr "電話號碼"
 
-#: .\accounts\models.py:45 .\core\templates\standard_nav.html:187
+#: .\accounts\models.py:45 .\core\templates\standard_nav.html:202
 msgid "Profile"
 msgstr "個人檔案"
 
@@ -194,7 +194,7 @@ msgstr "群組檔案"
 #: .\diary\templates\diary\base.html:10 .\log\templates\log\base.html:10
 #: .\pilotadmin\templates\pilotadmin\base.html:10
 #: .\reminder\templates\reminder\base.html:10
-#: .\telecom\templates\telecom\base.html:10
+#: .\telecom\templates\telecom\base.html:10 .\tool\templates\base.html:10
 msgid "© 2020 All rights reserved."
 msgstr "© 2020 保留所有權利。"
 
@@ -206,7 +206,7 @@ msgstr "© 2020 保留所有權利。"
 #: .\accounts\templates\registration\signup.html:20
 #: .\accounts\templates\registration\signup_with_account_and_password.html:13
 #: .\accounts\templates\registration\signup_with_email.html:13
-#: .\core\templates\standard_nav.html:213
+#: .\core\templates\standard_nav.html:228
 msgid "Login"
 msgstr "登入"
 
@@ -262,7 +262,7 @@ msgid "Back to the homepage."
 msgstr "返回首頁"
 
 #: .\accounts\templates\registration\password_change_form.html:11
-#: .\core\templates\standard_nav.html:188
+#: .\core\templates\standard_nav.html:203
 msgid "Password change"
 msgstr "密碼變更"
 
@@ -309,8 +309,8 @@ msgid "I didn't recieve it."
 msgstr "我沒有收到"
 
 #: .\accounts\templates\registration\password_reset_form.html:11
-#: .\core\templates\standard_nav.html:190
-#: .\core\templates\standard_nav.html:216
+#: .\core\templates\standard_nav.html:205
+#: .\core\templates\standard_nav.html:231
 msgid "Password reset"
 msgstr "密碼重置"
 
@@ -323,7 +323,7 @@ msgstr "重置"
 #: .\accounts\templates\registration\signup_with_account_and_password.html:41
 #: .\accounts\templates\registration\signup_with_email.html:11
 #: .\accounts\templates\registration\signup_with_email.html:44
-#: .\core\templates\standard_nav.html:214
+#: .\core\templates\standard_nav.html:229
 msgid "Sign up"
 msgstr "註冊"
 
@@ -367,6 +367,7 @@ msgstr "檔案"
 #: .\telecom\templates\telecom\isp_list.html:15
 #: .\telecom\templates\telecom\ispgroup_list.html:15
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:15
+#: .\tool\templates\tool_list.html:15
 msgid "Search.."
 msgstr "搜尋.."
 
@@ -382,7 +383,8 @@ msgstr "搜尋.."
 #: .\core\templates\standard_nav.html:75 .\core\templates\standard_nav.html:91
 #: .\core\templates\standard_nav.html:99 .\core\templates\standard_nav.html:109
 #: .\core\templates\standard_nav.html:125
-#: .\core\templates\standard_nav.html:155
+#: .\core\templates\standard_nav.html:152
+#: .\core\templates\standard_nav.html:170
 #: .\diary\templates\diary\diary_list.html:40
 #: .\log\templates\log\diary_log_list.html:18
 #: .\news\templates\news\dep_news_list.html:27
@@ -393,6 +395,7 @@ msgstr "搜尋.."
 #: .\telecom\templates\telecom\isp_list.html:18
 #: .\telecom\templates\telecom\ispgroup_list.html:18
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:18
+#: .\tool\templates\tool_list.html:18
 msgid "Add"
 msgstr "新增"
 
@@ -411,6 +414,7 @@ msgstr "新增"
 #: .\telecom\templates\telecom\isp_list.html:25
 #: .\telecom\templates\telecom\ispgroup_list.html:25
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:25
+#: .\tool\templates\tool_list.html:25
 msgid "Action"
 msgstr "動作"
 
@@ -428,6 +432,7 @@ msgstr "動作"
 #: .\telecom\templates\telecom\isp_list.html:26
 #: .\telecom\templates\telecom\ispgroup_list.html:26
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:26
+#: .\tool\models.py:9 .\tool\templates\tool_list.html:26
 msgid "Created by"
 msgstr "建立者"
 
@@ -436,6 +441,7 @@ msgstr "建立者"
 #: .\archive\templates\archive\journals_list.html:35 .\telecom\models.py:11
 #: .\telecom\models.py:46 .\telecom\templates\telecom\isp_list.html:27
 #: .\telecom\templates\telecom\ispgroup_list.html:27
+#: .\tool\templates\tool_list.html:27
 msgid "Name"
 msgstr "名稱"
 
@@ -454,6 +460,7 @@ msgstr "名稱"
 #: .\telecom\templates\telecom\isp_list.html:61
 #: .\telecom\templates\telecom\ispgroup_list.html:45
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:59
+#: .\tool\templates\tool_list.html:39
 msgid "No entries."
 msgstr "沒有條目"
 
@@ -698,7 +705,7 @@ msgid "Department"
 msgstr "部門"
 
 #: .\core\templates\standard_nav.html:32 .\core\templates\standard_nav.html:36
-#: .\core\templates\standard_nav.html:39 .\core\templates\standard_nav.html:168
+#: .\core\templates\standard_nav.html:39 .\core\templates\standard_nav.html:183
 #: .\diary\models.py:28
 msgid "Diary"
 msgstr "日誌"
@@ -707,9 +714,10 @@ msgstr "日誌"
 #: .\core\templates\standard_nav.html:71 .\core\templates\standard_nav.html:88
 #: .\core\templates\standard_nav.html:95 .\core\templates\standard_nav.html:104
 #: .\core\templates\standard_nav.html:122
-#: .\core\templates\standard_nav.html:151
-#: .\core\templates\standard_nav.html:169
-#: .\core\templates\standard_nav.html:173
+#: .\core\templates\standard_nav.html:149
+#: .\core\templates\standard_nav.html:166
+#: .\core\templates\standard_nav.html:184
+#: .\core\templates\standard_nav.html:188
 msgid "List"
 msgstr "列表"
 
@@ -759,27 +767,33 @@ msgstr "處級佈達列表"
 msgid "announce Add"
 msgstr "新增處級佈達"
 
-#: .\core\templates\standard_nav.html:146
-#: .\core\templates\standard_nav.html:150
-#: .\core\templates\standard_nav.html:154
+#: .\core\templates\standard_nav.html:145
+#: .\core\templates\standard_nav.html:149
+#: .\core\templates\standard_nav.html:152 .\tool\models.py:13
+msgid "Tool"
+msgstr "工具"
+
+#: .\core\templates\standard_nav.html:161
+#: .\core\templates\standard_nav.html:165
+#: .\core\templates\standard_nav.html:169
 msgid "Post Board"
 msgstr "留言討論版"
 
-#: .\core\templates\standard_nav.html:164
-#: .\core\templates\standard_nav.html:168
-#: .\core\templates\standard_nav.html:172 .\log\models.py:18
+#: .\core\templates\standard_nav.html:179
+#: .\core\templates\standard_nav.html:183
+#: .\core\templates\standard_nav.html:187 .\log\models.py:18
 msgid "Log"
 msgstr ""
 
-#: .\core\templates\standard_nav.html:186
+#: .\core\templates\standard_nav.html:201
 msgid "Logout"
 msgstr "登出"
 
-#: .\core\templates\standard_nav.html:202
+#: .\core\templates\standard_nav.html:217
 msgid "No available roles"
 msgstr "沒有可用的角色"
 
-#: .\core\templates\standard_nav.html:210
+#: .\core\templates\standard_nav.html:225
 msgid "Guest"
 msgstr "訪客"
 
@@ -1304,6 +1318,10 @@ msgstr "中文名稱"
 #: .\telecom\templates\telecom\prefixlistupdatetask_action_dropdown.html:13
 msgid "Preview Email Content"
 msgstr "郵件預覽"
+
+#: .\tool\models.py:14
+msgid "Tools"
+msgstr "工具"
 
 #: .\user\serializers.py:53
 msgid "Unable to authenticate with provided credentials"
