@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import EmailValidator
 
 from core.validators import (validate_comma_separated_prefix_list_string,
                              validate_semicolon_seperated_email_string)
@@ -13,7 +14,7 @@ class Isp(models.Model):
     customer_no = models.CharField(verbose_name=_('Customer No.'), max_length=150, blank=True)
     upstream_as = models.CharField(verbose_name=_('Upstream AS'), max_length=63)
     primary_contact = models.CharField(verbose_name=_('Primary contact'), max_length=63)
-    to = models.CharField(verbose_name=_('To'), blank=True, max_length=63)
+    to = models.EmailField(verbose_name=_('To'), validators=[EmailValidator(message=_('Please enter a valid email address.'))])
     cc = models.TextField(verbose_name=_('CC'), blank=True, validators=[validate_semicolon_seperated_email_string, ])
     bcc = models.TextField(verbose_name=_('BCC'), blank=True, validators=[validate_semicolon_seperated_email_string, ])
     upstream_session_ip = models.TextField(verbose_name=_('Upstream Session IP'), blank=True, validators=[validate_comma_separated_prefix_list_string, ])
