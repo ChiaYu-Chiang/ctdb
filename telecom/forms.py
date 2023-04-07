@@ -5,16 +5,6 @@ from .models import Isp, IspGroup, PrefixListUpdateTask
 
 
 class IspModelForm(forms.ModelForm):
-    to = forms.CharField(
-        label=_('To'),
-        # widget=forms.Textarea(
-        #     attrs={
-        #         'placeholder': _(
-        #             'Please enter only one Email address'
-        #         ),
-        #     }
-        # ),
-    )
     cc = forms.CharField(
         label=_('CC'),
         widget=forms.Textarea(
