@@ -44,7 +44,11 @@
         <p>主旨:[是方電訊] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
         <p>收件人:{{ isp.to }}</p>
         <p>副本:{{ isp.cc }}</p>
+        {% if isp.to == 'unicom@cht.com.tw' %}
+        {% include 'telecom/mail_content_cht.html' %}
+        {% else %}
         {% include 'telecom/mail_content.html' %}
+        {% endif %}
         {% endif %}
         <p>---------------------------------------------------------------------------------------------------------</p>
         {% endfor %}
