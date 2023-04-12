@@ -48,6 +48,8 @@ class ReminderModelForm(forms.ModelForm):
                 if date_list:
                     start_at = min(date_list)
                     end_at = max(date_list)
+        elif policy == 'once':
+            end_at = start_at
         cleaned_data['start_at'] = start_at
         cleaned_data['end_at'] = end_at
         return cleaned_data
