@@ -45,7 +45,7 @@
         <p>收件人:{{ isp.to }}</p>
         <p>副本:{{ isp.cc }}</p>
         {% if isp.to == 'unicom@cht.com.tw' %}
-        {% include 'telecom/mail_content_cht.html' %}
+        {% include 'telecom/mail_content_hinet.html' %}
         {% else %}
         {% include 'telecom/mail_content.html' %}
         {% endif %}

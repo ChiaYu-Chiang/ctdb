@@ -350,8 +350,8 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
         isps = (ispsqs | ispgroupsqs).distinct()
     template_name = 'telecom/mail_content.html'
     eng_template_name = 'telecom/eng_mail_content.html'
-    cht_template_name = 'telecom/mail_content_cht.html'
-    cht_email = 'unicom@cht.com.tw'
+    template_name_hinet = 'telecom/mail_content_hinet.html'
+    hinet_email = 'unicom@cht.com.tw'
     email_contents = {}
 
     for isp in isps:
@@ -360,14 +360,14 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
             mail_content = render_to_string(eng_template_name, context)
         else:
             mail_content = render_to_string(template_name, context)
-        if isp.to == cht_email:
+        if isp.to == hinet_email:
             email_contents[isp] = mail_content
         else:
             handle_task_mail(isp, task, mail_content)
 
     if email_contents:
-        combined_content = render_to_string(cht_template_name, {'email_contents': email_contents})
-        handle_task_mail(Isp.objects.get(to=cht_email), task, combined_content)
+        combined_content = render_to_string(template_name_hinet, {'email_contents': email_contents})
+        handle_task_mail(Isp.objects.get(to=hinet_email), task, combined_content)
 
     time_now = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
     instance.meil_sended_time = time_now
