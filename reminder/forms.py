@@ -1,4 +1,5 @@
 from django import forms
+from datetime import datetime
 from django.utils.translation import gettext_lazy as _
 
 from .models import Reminder
@@ -33,3 +34,22 @@ class ReminderModelForm(forms.ModelForm):
                 ),
             }),
         }
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        start_at = cleaned_data.get('start_at')
+        end_at = cleaned_data.get('end_at')
+        policy = cleaned_data.get('policy')
+        if policy == 'specified dates':
+            specified_dates = cleaned_data.get('specified_dates')
+            if specified_dates:
+                date_list = specified_dates.split(',')
+                date_list = [datetime.strptime(date.strip(), '%Y-%m-%d').date() for date in date_list]
+                if date_list:
+                    start_at = min(date_list)
+                    end_at = max(date_list)
+        elif policy == 'once':
+            end_at = start_at
+        cleaned_data['start_at'] = start_at
+        cleaned_data['end_at'] = end_at
+        return cleaned_data

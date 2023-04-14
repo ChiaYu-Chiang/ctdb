@@ -10,7 +10,11 @@
   <div class="container-fluid max-w-24u">
     <div class="row pt-navbar pb-footer-foot justify-content-center align-items-center min-vh-100">
       <div class="col">
-        <div id="blankTop"></div>
+        <div id="warningMessages">
+          <ul>
+            <li><p style="color: red;">管理者資訊僅供維護使用，請勿提供給客戶。</p></li>
+          </ul>
+        </div>
         <div id="toolbar" class="d-flex justify-content-between">
           <form method="POST">
             {% csrf_token %}
