@@ -236,7 +236,7 @@ def prefixlistupdatetask_create(request):
     form_buttons = ['create']
     template_name = 'telecom/prefixlistupdatetask_form.html'
     if request.method == 'POST':
-        form = form_class(data=request.POST, instance=instance)
+        form = form_class(data=request.POST, files=request.FILES, instance=instance)
         if form.is_valid():
             form.save()
             return redirect(success_url)
@@ -258,7 +258,7 @@ def prefixlistupdatetask_update(request, pk):
     form_buttons = ['update']
     template_name = 'telecom/prefixlistupdatetask_form.html'
     if request.method == 'POST':
-        form = form_class(data=request.POST, instance=instance)
+        form = form_class(data=request.POST, files=request.FILES, instance=instance)
         if form.is_valid():
             form.save()
             return redirect(success_url)
@@ -367,7 +367,8 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
 
     if email_contents:
         combined_content = render_to_string(template_name_hinet, {'email_contents': email_contents})
-        handle_task_mail(Isp.objects.get(to=hinet_email), task, combined_content)
+        file = task.loa.path
+        handle_task_mail(Isp.objects.get(to=hinet_email), task, combined_content, attach_file=file)
 
     time_now = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
     instance.meil_sended_time = time_now

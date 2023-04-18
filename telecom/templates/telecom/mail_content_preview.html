@@ -32,7 +32,38 @@
 
 <body>
     <div id="mail_content_preview" style="font-size: 16px;">
-        {% for isp in isps %}
+    {% for isp in isps %}
+        {% if isp.to == 'unicom@cht.com.tw' %}
+            {% if forloop.first %}
+                <p>主旨:[是方電訊] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
+                <p>收件人:{{ isp.to }}</p>
+                <p>副本:{{ isp.cc }}</p>
+                {% include 'telecom/mail_content_hinet.html' %}
+        <p>---------------------------------------------------------------------------------------------------------</p>
+            {% endif %}
+        {% else %}
+            {% if isp.name == 'Select'%}
+                <p></p>
+            {% elif isp.eng_mail_type %}
+                <p>Subject:[CHIEF TELECOM] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
+                <p>Recevier:{{ isp.to }}</p>
+                <p>CC:{{ isp.cc }}</p>
+                {% include 'telecom/eng_mail_content.html' %}
+        <p>---------------------------------------------------------------------------------------------------------</p>
+            {% else %}
+                <p>主旨:[是方電訊] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
+                <p>收件人:{{ isp.to }}</p>
+                <p>副本:{{ isp.cc }}</p>
+            {% include 'telecom/mail_content.html' %}
+        <p>---------------------------------------------------------------------------------------------------------</p>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    
+    {% comment %} <div id="mail_content_preview" style="font-size: 16px;">
+        {% for isp in isp_other %}
         {% if isp.name == 'Select'%}
         <p></p>
         {% elif isp.eng_mail_type %}
@@ -44,14 +75,24 @@
         <p>主旨:[是方電訊] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
         <p>收件人:{{ isp.to }}</p>
         <p>副本:{{ isp.cc }}</p>
-        {% if isp.to == 'unicom@cht.com.tw' %}
-        {% include 'telecom/mail_content_hinet.html' %}
-        {% else %}
         {% include 'telecom/mail_content.html' %}
-        {% endif %}
         {% endif %}
         <p>---------------------------------------------------------------------------------------------------------</p>
         {% endfor %}
+
+        {% for isp in isp_hinet %}
+        {% if forloop.first %}
+        {% if isp.name == 'Select'%}
+        <p></p>
+        {% else %}
+        <p>主旨:[是方電訊] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
+        <p>收件人:unicom@cht.com.tw</p>
+        <p>副本:twix@cht.com.tw; t21@chief.com.tw</p>
+        {% include 'telecom/mail_content_hinet.html' %}
+        {% endif %}
+        <p>---------------------------------------------------------------------------------------------------------</p>
+        {% endif %}
+        {% endfor %} {% endcomment %}
     </div>
 </body>
 

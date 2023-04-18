@@ -7,7 +7,7 @@ from django.core.validators import EmailValidator
 from core.validators import (validate_comma_separated_prefix_list_string,
                              validate_semicolon_seperated_email_string)
 
-from archive.storage import UUIDFileSystemStorage
+from .storage import UUIDFileSystemStorage
 
 uuid_file_system_storage = UUIDFileSystemStorage()
 

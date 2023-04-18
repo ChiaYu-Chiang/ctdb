@@ -33,7 +33,7 @@
 
 <body>
     <div id="mail_content" style="font-size: 16px;">
-        <p>{{ isp.name }} 您好,</p>
+        <p>HiNet 您好,</p>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;這裡是"是方電訊"(AS 17408)，我們有 {{ task.update_type }} {{ ip_type }} 的需求，麻煩您協助設定並請回覆告知，謝謝您
         </p>
         <br>
@@ -80,9 +80,14 @@
                 </tbody>
             </table>
             <br>
-            <dt>4.ROA: {{ task.ROA }}</dt>
+            <dt>4.ROA: {{ task.roa }}</dt>
             <br>
             <dt>5.LOA: </dt>
+            {% if task.loa %}
+            <dd><a href="{{ task.loa.url }}">file: {{ task.loa.name }}</a></dd>
+            {% else %}
+            <dd><a href="#">no files</a></dd>
+            {% endif %}
         </dl>
     </div>
     <br><br>
