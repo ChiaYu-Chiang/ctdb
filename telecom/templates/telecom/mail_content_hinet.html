@@ -1,0 +1,162 @@
+<head>
+    <style>
+        body {
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .max-w-20 {
+            max-width: 1800px;
+        }
+
+        .w-16 {
+            width: 1800px;
+        }
+
+        .no-wrap {
+            white-space: nowrap;
+        }
+
+        .table-condensed {
+            font-size: 12px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mail_content" style="font-size: 16px;">
+        <p>HiNet 您好,</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;這裡是"是方電訊"(AS 17408)，我們有 {{ task.update_type }} {{ ip_type }} 的需求，麻煩您協助設定並請回覆告知，謝謝您
+        </p>
+        <br>
+        <dl>
+            <dt>1.Prefix: </dt>
+            {% if task.ipv4_prefix_list %}
+            {% for ipv4_content in ipv4_contents %}
+            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {{ipv4_content}}</dd>
+            {% endfor %}
+            {% endif %}
+            {% if task.ipv6_prefix_list %}
+            {% for ipv6_content in ipv6_contents %}
+            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {{ipv6_content}}</dd>
+            {% endfor %}
+            {% endif %}
+            <br>
+            <dt>2.AS-path: {{ task.as_path }}</dt>
+            <br>
+            <dt>3.需開通電路: </dt>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>電路</th>
+                        <th>電路編號</th>
+                        <th>服務類別</th>
+                        <th>Hinet_IP</th>
+                        <th>Chief_IP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>一</td>
+                        <td></td>
+                        <td>Transit</td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國際' %}
+                            <p>{{ isp.upstream_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國際' %}
+                            <p>{{ isp.chief_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>二</td>
+                        <td></td>
+                        <td>TWIX</td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國內' %}
+                            <p>{{ isp.upstream_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國內' %}
+                            <p>{{ isp.chief_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>三</td>
+                        <td></td>
+                        <td>Peering</td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國內' or isp.cname == '中華電信數據分公司' %}
+                            <p>{{ isp.upstream_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國內' or isp.cname == '中華電信數據分公司' %}
+                            <p>{{ isp.chief_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                    </tr>
+                </tbody>
+                {% comment %}
+                <tbody>
+                {% for isp in isps %}
+                    {% if isp.to == 'unicom@cht.com.tw' %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td></td>
+                        <td>{{ isp.cname }}</td>
+                        <td>{{ isp.upstream_session_ip }}</td>
+                        <td>{{ isp.chief_session_ip }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+                {% endcomment %}
+            </table>
+            <br>
+            <dt>4.ROA: {{ task.roa }}</dt>
+            <br>
+            <dt>5.LOA: </dt>
+            {% if task.loa %}
+            <dd><a href="{{ task.loa.url }}">file: {{ file_name }}</a></dd>
+            {% else %}
+            <dd><a href="#">no files</a></dd>
+            {% endif %}
+        </dl>
+    </div>
+    <br><br>
+    <div id="mail_sign" style="font-size: 16px;">
+    Best Ragards,<br>
+    <br><br>
+    是方電訊股份有限公司<br>
+    網路維運部<br>
+    E-mail : t21@chief.com.tw<br>
+    </div>
+</body>

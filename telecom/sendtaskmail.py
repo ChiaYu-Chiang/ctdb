@@ -1,9 +1,22 @@
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives, get_connection
 from django.utils.html import strip_tags
 
 
-def handle_task_mail(isp, task, mail_content, debug=settings.DEBUG):
+def send_mail(subject, message, from_email, recipient_list, fail_silently=False, auth_user=None, auth_password=None,bcc=None, connection=None,cc=None, html_message=None, attach_file=None):
+    connection = connection or get_connection(
+        username=auth_user,
+        password=auth_password,
+        fail_silently=fail_silently,
+    )
+    mail = EmailMultiAlternatives(subject, message, from_email, recipient_list, bcc=bcc, connection=connection, cc=cc)
+    if html_message:
+        mail.attach_alternative(html_message, 'text/html')
+    mail.attach_file(attach_file)
+
+    return mail.send()
+
+def handle_task_mail(isp, task, mail_content, attach_file=None, debug=settings.DEBUG):
     seperator = ';'
     recipients = isp.to[:-1] if isp.to[-1:] == seperator else isp.to
     recipient_list = list(map(str.strip, recipients.split(';')))
@@ -34,4 +47,5 @@ def handle_task_mail(isp, task, mail_content, debug=settings.DEBUG):
         cc=recipient_cc_list,
         html_message=mail_content,
         fail_silently=False,
+        attach_file=attach_file
     )
