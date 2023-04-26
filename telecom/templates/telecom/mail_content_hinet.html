@@ -66,6 +66,66 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td>一</td>
+                        <td></td>
+                        <td>Transit</td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國際' %}
+                            <p>{{ isp.upstream_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國際' %}
+                            <p>{{ isp.chief_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>二</td>
+                        <td></td>
+                        <td>TWIX</td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國內' %}
+                            <p>{{ isp.upstream_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國內' %}
+                            <p>{{ isp.chief_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>三</td>
+                        <td></td>
+                        <td>Peering</td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國內' or isp.cname == '中華電信數據分公司' %}
+                            <p>{{ isp.upstream_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                        <td>
+                        {% for isp in isps %}
+                            {% if isp.cname == '中華電信數據分公司-專業' or isp.cname == '中華電信數據分公司-國內' or isp.cname == '中華電信數據分公司' %}
+                            <p>{{ isp.chief_session_ip }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                    </tr>
+                </tbody>
+                {% comment %}
+                <tbody>
                 {% for isp in isps %}
                     {% if isp.to == 'unicom@cht.com.tw' %}
                     <tr>
@@ -78,13 +138,14 @@
                     {% endif %}
                 {% endfor %}
                 </tbody>
+                {% endcomment %}
             </table>
             <br>
             <dt>4.ROA: {{ task.roa }}</dt>
             <br>
             <dt>5.LOA: </dt>
             {% if task.loa %}
-            <dd><a href="{{ task.loa.url }}">file: {{ task.loa.name }}</a></dd>
+            <dd><a href="{{ task.loa.url }}">file: {{ file_name }}</a></dd>
             {% else %}
             <dd><a href="#">no files</a></dd>
             {% endif %}

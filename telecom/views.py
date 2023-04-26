@@ -4,7 +4,7 @@ from django.http.response import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.template.loader import render_to_string
-
+from django.conf import settings
 from core.decorators import permission_required
 
 from .forms import (IspGroupModelForm, IspModelForm,
@@ -12,6 +12,7 @@ from .forms import (IspGroupModelForm, IspModelForm,
 from .models import Isp, IspGroup, PrefixListUpdateTask
 from .sendtaskmail import handle_task_mail
 from datetime import datetime
+import os
 
 
 def get_telecom_model_queryset(request, model):
@@ -316,6 +317,7 @@ def prefixlistupdatetask_previewmailcontent(request, pk):
     instance = get_object_or_404(klass=queryset, pk=pk)
     instance.pk = None
     task = model.objects.get(pk=pk)
+    file_name = task.loa.name.split("___")[1] if task.loa.name else None
     ip_type = 'ipv4' if task.ipv4_prefix_list else 'ipv6'
     if task.ipv4_prefix_list and task.ipv6_prefix_list:
         ip_type = 'ipv4 & ipv6'
@@ -327,7 +329,7 @@ def prefixlistupdatetask_previewmailcontent(request, pk):
     if ispsqs and ispgroupsqs:
         isps = (ispsqs | ispgroupsqs).distinct()
     template_name = 'telecom/mail_content_preview.html'
-    context = {'model': model, 'task': task, 'isps': isps, 'ip_type': ip_type, 'ipv4_contents': ipv4_contents, 'ipv6_contents': ipv6_contents}
+    context = {'model': model, 'task': task, 'isps': isps, 'ip_type': ip_type, 'ipv4_contents': ipv4_contents, 'ipv6_contents': ipv6_contents, 'file_name': file_name}
     return render(request, template_name, context)
 
 
@@ -367,8 +369,11 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
 
     if email_contents:
         combined_content = render_to_string(template_name_hinet, {'email_contents': email_contents})
-        file = task.loa.path
-        handle_task_mail(Isp.objects.get(to=hinet_email), task, combined_content, attach_file=file)
+        filename = task.loa.name.split("___")[1] if task.loa.name else None
+        path = os.path.join(settings.MEDIA_ROOT, str(task.loa))
+        with open(path, "rb") as f:
+            attach_file = (filename, f.read())
+        handle_task_mail(Isp.objects.get(to=hinet_email), task, combined_content, attach_file=attach_file)
 
     time_now = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
     instance.meil_sended_time = time_now
