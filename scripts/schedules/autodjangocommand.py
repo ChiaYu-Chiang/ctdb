@@ -2,7 +2,6 @@ import json
 import os
 import time
 
-import schedule
 
 with open(r'..\..\secrets.json') as f:
     s = f.read()
@@ -28,9 +27,5 @@ def calld_django_send_reminder_email():
     os.system(cmd)
 
 
-schedule.every().day.at('09:00').do(calld_django_send_diary_user_email)
-schedule.every().day.at('09:00').do(calld_django_send_reminder_email)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+calld_django_send_diary_user_email()
+calld_django_send_reminder_email()
