@@ -120,7 +120,18 @@ class PrefixListUpdateTaskModelForm(forms.ModelForm):
         ),
         required=False
     )
-
+    loa_remark = forms.CharField(
+        label=_('Loa Remark'),
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': _(
+                    'The content will appear for HiNet email.'
+                ),
+                'rows': 3
+            }
+        ),
+        required=False
+    )
     remark = forms.CharField(
         label=_('Remark'),
         widget=forms.Textarea(

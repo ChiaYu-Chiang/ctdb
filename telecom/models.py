@@ -7,6 +7,9 @@ from django.core.validators import EmailValidator
 from core.validators import (validate_comma_separated_prefix_list_string,
                              validate_semicolon_seperated_email_string)
 
+from .storage import UUIDFileSystemStorage
+
+uuid_file_system_storage = UUIDFileSystemStorage()
 
 class Isp(models.Model):
     name = models.CharField(verbose_name=_('Name'), max_length=63)
@@ -85,6 +88,8 @@ class PrefixListUpdateTask(models.Model):
     subject_warning = models.CharField(verbose_name=_('Subject warning'), max_length=63, blank=True)
     related_ticket = models.CharField(verbose_name=_('Related ticket'), max_length=63, blank=True)
     roa = models.CharField(verbose_name='roa', max_length=63, blank=True)
+    loa = models.FileField(verbose_name='loa', storage=uuid_file_system_storage, upload_to='telecom', null=True, blank=True)
+    loa_remark = models.TextField(verbose_name=_('Loa Remark'), blank=True)
     remark = models.TextField(verbose_name=_('Remark'), blank=True)
     meil_sended_time = models.CharField(verbose_name=_('Mail sended time'), max_length=63, blank=True)
     created_by = models.ForeignKey(verbose_name=_('Created by'), to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

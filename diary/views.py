@@ -51,7 +51,7 @@ def diary_list(request):
     is_pinned_news = News.objects.filter(
         Q(created_by_id__in=[10, 1003, 1004]) &
         Q(is_pinned=True) &
-        (Q(due__isnull=True) | Q(due__gte=today))
+        (Q(due__isnull=True) | Q(due__date__gte=today))
     )
 
     context = {
