@@ -317,7 +317,7 @@ def prefixlistupdatetask_previewmailcontent(request, pk):
     instance = get_object_or_404(klass=queryset, pk=pk)
     instance.pk = None
     task = model.objects.get(pk=pk)
-    file_name = task.loa.name.split("___")[1] if task.loa.name else None
+    file_name = task.loa.name if task.loa.name else None
     ip_type = 'ipv4' if task.ipv4_prefix_list else 'ipv6'
     if task.ipv4_prefix_list and task.ipv6_prefix_list:
         ip_type = 'ipv4 & ipv6'
@@ -340,6 +340,7 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
     task = model.objects.get(pk=pk)
     queryset = get_prefixlistupdatetask_queryset(request)
     instance = get_object_or_404(klass=queryset, pk=pk)
+    file_name = task.loa.name if task.loa.name else None
     ip_type = 'ipv4' if task.ipv4_prefix_list else 'ipv6'
     if task.ipv4_prefix_list and task.ipv6_prefix_list:
         ip_type = 'ipv4 & ipv6'
@@ -354,26 +355,27 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
     eng_template_name = 'telecom/eng_mail_content.html'
     template_name_hinet = 'telecom/mail_content_hinet.html'
     hinet_email = 'unicom@cht.com.tw'
-    email_contents = {}
+    isps_hinet = isps.filter(to=hinet_email)
+    isps_other = isps.exclude(to=hinet_email)
 
-    for isp in isps:
-        context = {'model': model, 'task': task, 'isp': isp, 'ip_type': ip_type, 'ipv4_contents': ipv4_contents, 'ipv6_contents': ipv6_contents, 'upstream_session_ip': isp.upstream_session_ip, 'chief_session_ip': isp.chief_session_ip}
-        if isp.eng_mail_type:
-            mail_content = render_to_string(eng_template_name, context)
-        else:
-            mail_content = render_to_string(template_name, context)
-        if isp.to == hinet_email:
-            email_contents[isp] = mail_content
-        else:
+    if isps_other:
+        for isp in isps_other:
+            context = {'model': model, 'task': task, 'isp': isp, 'ip_type': ip_type, 'ipv4_contents': ipv4_contents, 'ipv6_contents': ipv6_contents}
+            if isp.eng_mail_type:
+                mail_content = render_to_string(eng_template_name, context)
+            else:
+                mail_content = render_to_string(template_name, context)
             handle_task_mail(isp, task, mail_content)
 
-    if email_contents:
-        combined_content = render_to_string(template_name_hinet, {'email_contents': email_contents})
-        filename = task.loa.name.split("___")[1] if task.loa.name else None
-        path = os.path.join(settings.MEDIA_ROOT, str(task.loa))
-        with open(path, "rb") as f:
-            attach_file = (filename, f.read())
-        handle_task_mail(Isp.objects.get(to=hinet_email), task, combined_content, attach_file=attach_file)
+    if isps_hinet:
+        context = {'model': model, 'task': task, 'isps': isps_hinet, 'ip_type': ip_type, 'ipv4_contents': ipv4_contents, 'ipv6_contents': ipv6_contents, 'file_name': file_name}
+        mail_content = render_to_string(template_name_hinet, context)
+        isp = isps_hinet.first()
+        if task.loa:
+            path = os.path.join(settings.MEDIA_ROOT, str(task.loa))
+            handle_task_mail(isp, task, mail_content, attach_file=path)
+        else:
+            handle_task_mail(isp, task, mail_content)
 
     time_now = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
     instance.meil_sended_time = time_now

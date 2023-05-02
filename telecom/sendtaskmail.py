@@ -12,7 +12,8 @@ def send_mail(subject, message, from_email, recipient_list, fail_silently=False,
     mail = EmailMultiAlternatives(subject, message, from_email, recipient_list, bcc=bcc, connection=connection, cc=cc)
     if html_message:
         mail.attach_alternative(html_message, 'text/html')
-    mail.attach_file(attach_file)
+    if attach_file:
+        mail.attach_file(attach_file)
 
     return mail.send()
 
@@ -38,14 +39,27 @@ def handle_task_mail(isp, task, mail_content, attach_file=None, debug=settings.D
         print("Sending a Email cc to ", recipient_cc_list)
         print("Email:")
         print(email_subject)
-    send_mail(
-        email_subject,
-        email_content,
-        from_email=settings.T21_FROM_MAIL,
-        recipient_list=recipient_list,
-        bcc=recipient_bcc_list,
-        cc=recipient_cc_list,
-        html_message=mail_content,
-        fail_silently=False,
-        attach_file=attach_file
-    )
+    if attach_file:
+        send_mail(
+            email_subject,
+            email_content,
+            from_email=settings.T21_FROM_MAIL,
+            recipient_list=recipient_list,
+            bcc=recipient_bcc_list,
+            cc=recipient_cc_list,
+            html_message=mail_content,
+            fail_silently=False,
+            attach_file=attach_file
+        )
+    else:
+        send_mail(
+            email_subject,
+            email_content,
+            from_email=settings.T21_FROM_MAIL,
+            recipient_list=recipient_list,
+            bcc=recipient_bcc_list,
+            cc=recipient_cc_list,
+            html_message=mail_content,
+            fail_silently=False
+        )
+        

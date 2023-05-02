@@ -124,31 +124,11 @@
                         </td>
                     </tr>
                 </tbody>
-                {% comment %}
-                <tbody>
-                {% for isp in isps %}
-                    {% if isp.to == 'unicom@cht.com.tw' %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td></td>
-                        <td>{{ isp.cname }}</td>
-                        <td>{{ isp.upstream_session_ip }}</td>
-                        <td>{{ isp.chief_session_ip }}</td>
-                    </tr>
-                    {% endif %}
-                {% endfor %}
-                </tbody>
-                {% endcomment %}
             </table>
             <br>
             <dt>4.ROA: {{ task.roa }}</dt>
             <br>
-            <dt>5.LOA: </dt>
-            {% if task.loa %}
-            <dd><a href="{{ task.loa.url }}">file: {{ file_name }}</a></dd>
-            {% else %}
-            <dd><a href="#">no files</a></dd>
-            {% endif %}
+            <dt>5.LOA: {{ task.loa_remark }}</dt>
         </dl>
     </div>
     <br><br>
