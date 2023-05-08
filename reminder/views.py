@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.http.response import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+import urllib.parse
 
 from core.decorators import permission_required
 from core.utils import remove_unnecessary_seperator
@@ -105,8 +106,12 @@ def reminder_delete(request, pk):
     instance = get_object_or_404(klass=queryset, pk=pk, created_by=request.user)
     success_url = reverse('reminder:reminder_list')
     template_name = 'reminder/reminder_confirm_delete.html'
+    create_by = request.GET.get('created_by') 
+    print(create_by)
     if request.method == 'POST':
         instance.delete()
+        if create_by:
+            success_url += f'?created_by={create_by}'
         return redirect(success_url)
     context = {'model': model}
     return render(request, template_name, context)
