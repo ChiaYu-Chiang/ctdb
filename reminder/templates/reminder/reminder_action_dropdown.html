@@ -7,7 +7,11 @@
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
     {% if user|can_change:obj %}
-      <a class="dropdown-item" href="{{ obj.get_update_url }}">{% translate 'Change' %}</a>
+      {% if create_by %}
+        <a class="dropdown-item" href="{{ obj.get_update_url }}?created_by={{ create_by }}">{% translate 'Change' %}</a>
+      {% else %}
+        <a class="dropdown-item" href="{{ obj.get_update_url }}">{% translate 'Change' %}</a>
+      {% endif %}
     {% endif %}
     {% if user|can_delete:obj %}
       {% if create_by %}
@@ -17,10 +21,18 @@
       {% endif %}
     {% endif %}
     {% if user|can_change:obj %}
-      <a class="dropdown-item" href="{{ obj.get_clone_url }}">{% translate 'Clone' %}</a>
+      {% if create_by %}
+        <a class="dropdown-item" href="{{ obj.get_clone_url }}?created_by={{ create_by }}">{% translate 'Clone' %}</a>
+      {% else %}
+        <a class="dropdown-item" href="{{ obj.get_clone_url }}">{% translate 'Clone' %}</a>
+      {% endif %}
     {% endif %}
     {% if user|can_change:obj %}
-      <a class="dropdown-item" href="{{ obj.get_send_email_url }}">{% translate 'Send Email' %}</a>
+      {% if create_by %}
+        <a class="dropdown-item" href="{{ obj.get_send_email_url }}?created_by={{ create_by }}">{% translate 'Send Email' %}</a>
+      {% else %}
+        <a class="dropdown-item" href="{{ obj.get_send_email_url }}">{% translate 'Send Email' %}</a>
+      {% endif %}
     {% endif %}
     {% if user|can_change:obj or user|can_delete:obj %}
     {% else %}
