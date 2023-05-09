@@ -73,6 +73,22 @@ def isp_list(request):
 
 @login_required
 @permission_required('telecom.add_isp', raise_exception=True, exception=Http404)
+def isp_review(request, pk):
+    model = Isp
+    queryset = get_isp_queryset(request)
+    instance = get_object_or_404(klass=queryset, pk=pk)
+    form_class = IspModelForm
+    template_name = 'telecom/isp_form.html'
+    form = form_class(instance=instance)
+    for field in form.fields:
+        form.fields[field].disabled = True
+    context = {'model': model, 'form': form}
+    return render(request, template_name, context)
+
+
+
+@login_required
+@permission_required('telecom.add_isp', raise_exception=True, exception=Http404)
 def isp_create(request):
     model = Isp
     instance = model(created_by=request.user)

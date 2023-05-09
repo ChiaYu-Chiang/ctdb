@@ -36,6 +36,9 @@ class Isp(models.Model):
     def __str__(self):
         return f'{self.name} ({self.cname})'
 
+    def get_review_url(self):
+        return reverse('telecom:isp_review', kwargs={'pk': self.pk})
+
     def get_create_url(self):
         return reverse('telecom:isp_create')
 

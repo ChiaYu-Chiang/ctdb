@@ -5,6 +5,15 @@ from .models import Isp, IspGroup, PrefixListUpdateTask
 
 
 class IspModelForm(forms.ModelForm):
+    customer_no = forms.CharField(
+        label=_('Customer No.'),
+        widget=forms.Textarea(
+            attrs={
+                'rows': 2
+            }
+        ),
+        required=False
+    )
     cc = forms.CharField(
         label=_('CC'),
         widget=forms.Textarea(

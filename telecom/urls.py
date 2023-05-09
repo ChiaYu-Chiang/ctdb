@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import (isp_create, isp_delete, isp_list, isp_update,
+from .views import (isp_create, isp_delete, isp_list, isp_review, isp_update,
                     ispgroup_create, ispgroup_delete, ispgroup_list,
                     ispgroup_update, prefixlistupdatetask_clone,
                     prefixlistupdatetask_create, prefixlistupdatetask_delete,
@@ -11,6 +11,7 @@ app_name = 'telecom'
 
 urlpatterns = [
     path('isps/', isp_list, name='isp_list'),
+    path('isps/<int:pk>/review/', isp_review, name='isp_review'),
     path('isps/add/', isp_create, name='isp_create'),
     path('isps/<int:pk>/change/', isp_update, name='isp_update'),
     path('isps/<int:pk>/delete/', isp_delete, name='isp_delete'),
