@@ -74,6 +74,32 @@ class IspModelForm(forms.ModelForm):
             }
         )
     )
+    subject = forms.CharField(
+        label=_('Subject'),
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': _(
+                    'Create a custom letter subject for this ISP contact.\n'
+                    'If left blank, the default template will be used.\n'
+                ),
+                'rows': 3
+            }
+        ),
+        required=False
+    )
+    content = forms.CharField(
+        label=_('Content'),
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': _(
+                    'Create a custom letter content description for this ISP contact.\n'
+                    'If left blank, the default template will be used.\n'
+                ),
+                'rows': 6
+            }
+        ),
+        required=False
+    )
 
     class Meta:
         model = Isp

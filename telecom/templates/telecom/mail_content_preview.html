@@ -42,23 +42,31 @@
                 <p>附件:<a href="{{ task.loa.url }}">{{ file_name }}</a></p>
                 {% endif %}
                 {% include 'telecom/mail_content_hinet.html' %}
-        <p>---------------------------------------------------------------------------------------------------------</p>
+                <p>---------------------------------------------------------------------------------------------------------</p>
             {% endif %}
         {% else %}
             {% if isp.name == 'Select'%}
                 <p></p>
             {% elif isp.eng_mail_type %}
-                <p>Subject:[CHIEF TELECOM] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
+                {% if isp.subject %}
+                    <p>Subject:{{ isp.subject }}</p>
+                {% else %}
+                    <p>Subject:[CHIEF TELECOM] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
+                {% endif %}
                 <p>Recevier:{{ isp.to }}</p>
                 <p>CC:{{ isp.cc }}</p>
                 {% include 'telecom/eng_mail_content.html' %}
-        <p>---------------------------------------------------------------------------------------------------------</p>
+                <p>---------------------------------------------------------------------------------------------------------</p>
             {% else %}
-                <p>主旨:[是方電訊] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
+                {% if isp.subject %}
+                    <p>Subject:{{ isp.subject }}</p>
+                {% else %}
+                    <p>主旨:[是方電訊] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
+                {% endif %}
                 <p>收件人:{{ isp.to }}</p>
                 <p>副本:{{ isp.cc }}</p>
-            {% include 'telecom/mail_content.html' %}
-        <p>---------------------------------------------------------------------------------------------------------</p>
+                {% include 'telecom/mail_content.html' %}
+                <p>---------------------------------------------------------------------------------------------------------</p>
             {% endif %}
         {% endif %}
     {% endfor %}

@@ -344,6 +344,7 @@ def prefixlistupdatetask_previewmailcontent(request, pk):
     isps = ispsqs if ispsqs else ispgroupsqs
     if ispsqs and ispgroupsqs:
         isps = (ispsqs | ispgroupsqs).distinct()
+    isps = sorted(isps, key=lambda x: x.to == 'unicom@cht.com.tw', reverse=True)
     template_name = 'telecom/mail_content_preview.html'
     context = {'model': model, 'task': task, 'isps': isps, 'ip_type': ip_type, 'ipv4_contents': ipv4_contents, 'ipv6_contents': ipv6_contents, 'file_name': file_name}
     return render(request, template_name, context)

@@ -27,11 +27,16 @@ def handle_task_mail(isp, task, mail_content, attach_file=None, debug=settings.D
 
     recipients_bcc = isp.bcc[:-1] if isp.bcc[-1:] == seperator else isp.bcc
     recipient_bcc_list = list(map(str.strip, recipients_bcc.split(';')))
-
-    if isp.eng_mail_type:
-        email_subject = f'[CHIEF TELECOM] -- Please add new BGP entry for our customer - {task.origin_as} {task.subject_warning}'
-    else:
+    if isp.to == 'unicom@cht.com.tw':
         email_subject = f'[是方電訊] -- Please add new BGP entry for our customer - {task.origin_as} {task.subject_warning}'
+    else:
+        if isp.subject:
+            email_subject = isp.subject
+        else:
+            if isp.eng_mail_type:
+                email_subject = f'[CHIEF TELECOM] -- Please add new BGP entry for our customer - {task.origin_as} {task.subject_warning}'
+            else:
+                email_subject = f'[是方電訊] -- Please add new BGP entry for our customer - {task.origin_as} {task.subject_warning}'
     email_content = strip_tags(mail_content)
 
     if debug:
