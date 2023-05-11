@@ -41,7 +41,21 @@
               {% for obj in object_list %}
               <tr>
                 <td class="text-nowrap">
-                  {% include 'no_creater_permission_action_dropdown.html' %}
+                  <div class="dropdown show">
+                    <button class="btn btn-light bg-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                      data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
+                      {% translate 'Choose' %}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      {% if user|has_perm:perm_name %}
+                      <a class="dropdown-item" href="{{ obj.get_review_url }}">{% translate 'Review' %}</a>
+                      <a class="dropdown-item" href="{{ obj.get_update_url }}">{% translate 'Change' %}</a>
+                      <a class="dropdown-item" href="{{ obj.get_delete_url }}">{% translate 'Delete' %}</a>
+                      {% else %}
+                      <a class="dropdown-item" href="">{% translate 'No available options' %}</a>
+                      {% endif %}
+                    </div>
+                  </div>
                 </td>
                 <td class="text-nowrap">{{ obj.created_by }}</td>
                 <td class="text-nowrap">{{ obj.name }}</td>

@@ -24,6 +24,8 @@ class Isp(models.Model):
     chief_session_ip = models.TextField(verbose_name=_('Chief Session IP'), blank=True, validators=[validate_comma_separated_prefix_list_string, ])
     telephone = models.CharField(verbose_name=_('Telephone'), max_length=63, blank=True)
     cellphone = models.CharField(verbose_name=_('Cellphone'), max_length=63, blank=True)
+    subject = models.TextField(verbose_name=_('Subject'),blank=True)
+    content = models.TextField(verbose_name=_('Content'),blank=True)
     remark = models.TextField(verbose_name=_('Remark'), blank=True)
     eng_mail_type = models.BooleanField(verbose_name=_('English format'), default=False)
     created_by = models.ForeignKey(verbose_name=_('Created by'), to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -35,6 +37,9 @@ class Isp(models.Model):
 
     def __str__(self):
         return f'{self.name} ({self.cname})'
+
+    def get_review_url(self):
+        return reverse('telecom:isp_review', kwargs={'pk': self.pk})
 
     def get_create_url(self):
         return reverse('telecom:isp_create')

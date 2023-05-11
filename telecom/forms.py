@@ -5,6 +5,15 @@ from .models import Isp, IspGroup, PrefixListUpdateTask
 
 
 class IspModelForm(forms.ModelForm):
+    customer_no = forms.CharField(
+        label=_('Customer No.'),
+        widget=forms.Textarea(
+            attrs={
+                'rows': 2
+            }
+        ),
+        required=False
+    )
     cc = forms.CharField(
         label=_('CC'),
         widget=forms.Textarea(
@@ -64,6 +73,32 @@ class IspModelForm(forms.ModelForm):
                 'rows': 6
             }
         )
+    )
+    subject = forms.CharField(
+        label=_('Subject'),
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': _(
+                    'Create a custom letter subject for this ISP contact.\n'
+                    'If left blank, the default template will be used.\n'
+                ),
+                'rows': 3
+            }
+        ),
+        required=False
+    )
+    content = forms.CharField(
+        label=_('Content'),
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': _(
+                    'Create a custom letter content description for this ISP contact.\n'
+                    'If left blank, the default template will be used.\n'
+                ),
+                'rows': 6
+            }
+        ),
+        required=False
     )
 
     class Meta:

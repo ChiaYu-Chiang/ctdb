@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.http.response import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+import urllib.parse
 
 from core.decorators import permission_required
 from core.utils import remove_unnecessary_seperator
@@ -85,10 +86,13 @@ def reminder_update(request, pk):
     success_url = reverse('reminder:reminder_list')
     form_buttons = ['update']
     template_name = 'reminder/reminder_form.html'
+    create_by = request.GET.get('created_by')
     if request.method == 'POST':
         form = form_class(data=request.POST, instance=instance)
         if form.is_valid():
             form.save()
+            if create_by:
+                success_url += f'?created_by={create_by}'
             return redirect(success_url)
         context = {'model': model, 'form': form, 'form_buttons': form_buttons}
         return render(request, template_name, context)
@@ -105,8 +109,11 @@ def reminder_delete(request, pk):
     instance = get_object_or_404(klass=queryset, pk=pk, created_by=request.user)
     success_url = reverse('reminder:reminder_list')
     template_name = 'reminder/reminder_confirm_delete.html'
+    create_by = request.GET.get('created_by')
     if request.method == 'POST':
         instance.delete()
+        if create_by:
+            success_url += f'?created_by={create_by}'
         return redirect(success_url)
     context = {'model': model}
     return render(request, template_name, context)
@@ -123,10 +130,13 @@ def reminder_clone(request, pk):
     success_url = reverse('reminder:reminder_list')
     form_buttons = ['create']
     template_name = 'reminder/reminder_form.html'
+    create_by = request.GET.get('created_by')
     if request.method == 'POST':
         form = form_class(data=request.POST, instance=instance)
         if form.is_valid():
             form.save()
+            if create_by:
+                success_url += f'?created_by={create_by}'
             return redirect(success_url)
         context = {'model': model, 'form': form, 'form_buttons': form_buttons}
         return render(request, template_name, context)
@@ -143,6 +153,7 @@ def reminder_send_email(request, pk):
     instance = get_object_or_404(klass=queryset, pk=pk, created_by=request.user)
     success_url = reverse('reminder:reminder_list')
     template_name = 'reminder/reminder_confirm_send_email.html'
+    create_by = request.GET.get('created_by')
     if request.method == 'POST':
         s = remove_unnecessary_seperator(instance.recipients, ';')
         recipient_list = list(map(str.strip, s.split(';')))
@@ -153,6 +164,8 @@ def reminder_send_email(request, pk):
             recipient_list=recipient_list,
             fail_silently=False,
         )
+        if create_by:
+            success_url += f'?created_by={create_by}'
         return redirect(success_url)
     context = {'model': model}
     return render(request, template_name, context)
