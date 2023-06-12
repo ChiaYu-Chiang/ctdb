@@ -27,7 +27,7 @@
     <div id="mail_content" style="font-size: 16px;">
         <p>{{ isp.name }} 您好,</p>
         {% if isp.content %}
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ isp.content }}</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ isp.content|linebreaks }}</p>
         {% else %}
             <p>&nbsp;&nbsp;&nbsp;&nbsp;這裡是"是方電訊"(AS 17408)，我們有 {{ task.update_type }} {{ ip_type }} 的需求，麻煩您協助設定並請回覆告知，謝謝您
             </p>
