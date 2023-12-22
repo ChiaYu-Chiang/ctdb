@@ -15,7 +15,7 @@
             <p style="color: red;font-size: 18px;">置頂消息：</p>
             {% for pinned_news in is_pinned_news %}
             <ul>
-              <li><p style="color: red;">{{ pinned_news.content }}</p></li>
+              <li><p><a href="/news/?page=all#news-{{ pinned_news.id }}" style="color: red;">{{ pinned_news.title }}</a></p></li>
             </ul>
             {% endfor %}
           {% else %}
