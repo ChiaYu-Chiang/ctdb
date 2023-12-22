@@ -30,7 +30,7 @@
             {% endif %}
             <tbody>
               {% for obj in object_list %}
-              <tr>
+              <tr id="news-{{ obj.id }}">
                 {% if user|has_perm:change_perm and request.user.username == 'vicky_lin' or 'Rossanna_Hsieh' or 'Brian_Chiang' %}
                 <td class="text-nowrap">{% include 'standard_action_dropdown.html' %}</td>
                 {% endif %}
