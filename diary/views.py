@@ -49,7 +49,7 @@ def diary_list(request):
 
     today = timezone.now().date()
     is_pinned_news = News.objects.filter(
-        Q(created_by_id__in=[10, 1003, 1004]) &
+        Q(created_by_id__in=[10, 1006, 1004]) &
         Q(is_pinned=True) &
         (Q(due__isnull=True) | Q(due__date__gte=today))
     )
