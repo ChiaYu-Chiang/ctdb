@@ -13,14 +13,14 @@
         <div id="blankTop"></div>
         <div id="toolbar" class="d-flex justify-content-end">
           {% name model|attr:'_meta'|get_perm_name:'add' as add_perm %}
-          {% if user|has_perm:add_perm and request.user.username == "vicky_lin" or 'Rossanna_Hsieh' or 'Brian_Chiang' %}
+          {% if user|has_perm:add_perm and request.user.username == "vicky_lin" or 'jill_ko' or 'Brian_Chiang' %}
           <a id="addButton" class="btn btn-light border shadow-sm" href="{{ model.get_create_url }}">{% translate 'Add' %}</a>
           {% endif %}
         </div>
         <div class="table-responsive">
           <table id="searchTable" class="table table-light table-borderless table-solid">
             {% name model|attr:'_meta'|get_perm_name:'change' as change_perm %}
-            {% if user|has_perm:change_perm and request.user.username == 'vicky_lin' or 'Rossanna_Hsieh' or 'Brian_Chiang' %}
+            {% if user|has_perm:change_perm and request.user.username == 'vicky_lin' or 'jill_ko' or 'Brian_Chiang' %}
             <thead>
               <tr>
                 <th style="width: 1px;">{% translate 'Action' %}</th>
@@ -31,7 +31,7 @@
             <tbody>
               {% for obj in object_list %}
               <tr id="news-{{ obj.id }}">
-                {% if user|has_perm:change_perm and request.user.username == 'vicky_lin' or 'Rossanna_Hsieh' or 'Brian_Chiang' %}
+                {% if user|has_perm:change_perm and request.user.username == 'vicky_lin' or 'jill_ko' or 'Brian_Chiang' %}
                 <td class="text-nowrap">{% include 'standard_action_dropdown.html' %}</td>
                 {% endif %}
                 <td class="p-4"><h5>{{ obj.title }}</h5><hr><p>{{ obj.content|safe|linebreaks }}</p><small class="text-secondary text-right d-block">{{ obj.at|date:'Y-m-d A H:i' }}</small></td>
