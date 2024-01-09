@@ -15,12 +15,6 @@ uuid_file_system_storage = UUIDFileSystemStorage()
 
 
 class File(models.Model):
-    task = models.ManyToManyField(
-        "PrefixListUpdateTask",
-        related_name="files",
-        through="FileTaskMapping",
-        blank=True,
-    )
     file = models.FileField(
         storage=uuid_file_system_storage,
         upload_to="telecom",
@@ -162,13 +156,7 @@ class PrefixListUpdateTask(models.Model):
         verbose_name=_("Related ticket"), max_length=63, blank=True
     )
     roa = models.CharField(verbose_name="roa", max_length=63, blank=True)
-    loa = models.ManyToManyField(
-        "File",
-        verbose_name="loa",
-        related_name="prefix_list_task",
-        through="FileTaskMapping",
-        blank=True,
-    )
+    loa = models.ManyToManyField(verbose_name=_("loa"), to="telecom.File", blank=True)
     loa_remark = models.TextField(verbose_name=_("Loa Remark"), blank=True)
     remark = models.TextField(verbose_name=_("Remark"), blank=True)
     meil_sended_time = models.CharField(
@@ -206,8 +194,3 @@ class PrefixListUpdateTask(models.Model):
         return reverse(
             "telecom:prefixlistupdatetask_sendtaskmail", kwargs={"pk": self.pk}
         )
-
-
-class FileTaskMapping(models.Model):
-    file = models.ForeignKey(File, on_delete=models.CASCADE)
-    task = models.ForeignKey(PrefixListUpdateTask, on_delete=models.CASCADE)

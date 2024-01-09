@@ -8,7 +8,7 @@ from django.conf import settings
 from core.decorators import permission_required
 
 from .forms import IspGroupModelForm, IspModelForm, PrefixListUpdateTaskModelForm
-from .models import Isp, IspGroup, PrefixListUpdateTask, File, FileTaskMapping
+from .models import Isp, IspGroup, PrefixListUpdateTask, File
 from .sendtaskmail import handle_task_mail
 from datetime import datetime
 import os
@@ -257,15 +257,15 @@ def prefixlistupdatetask_create(request):
     if request.method == "POST":
         form = form_class(data=request.POST, instance=instance)
         files = request.FILES.getlist("loa")
-        print(files)
         if form.is_valid():
             task = form.save(commit=False)
             task.save()
             for file in files:
-                print(f"Processing file: {file.name}")
                 file_instance = File(file=file)
                 file_instance.save()
-                FileTaskMapping.objects.create(file=file_instance, task=task)
+                task.loa.add(file_instance)
+            isps = form.cleaned_data.get("isps")
+            task.isps.set(isps)
             return redirect(success_url)
         context = {"model": model, "form": form, "form_buttons": form_buttons}
         return render(request, template_name, context)
@@ -286,15 +286,29 @@ def prefixlistupdatetask_update(request, pk):
     success_url = reverse("telecom:prefixlistupdatetask_list")
     form_buttons = ["update"]
     template_name = "telecom/prefixlistupdatetask_form.html"
+    loa_files = instance.loa.all()
     if request.method == "POST":
         form = form_class(data=request.POST, files=request.FILES, instance=instance)
+        files_to_remove = request.POST.getlist("remove_loa")
+        files = request.FILES.getlist("loa")
         if form.is_valid():
-            form.save()
+            task = form.save(commit=False)
+            task.save()
+            if files_to_remove:
+                for file_id in files_to_remove:
+                    file_to_remove = File.objects.get(pk=file_id)
+                    file_to_remove.delete()
+            for file in files:
+                file_instance = File(file=file)
+                file_instance.save()
+                task.loa.add(file_instance)
+            isps = form.cleaned_data.get("isps")
+            task.isps.set(isps)
             return redirect(success_url)
         context = {"model": model, "form": form, "form_buttons": form_buttons}
         return render(request, template_name, context)
     form = form_class(instance=instance)
-    context = {"model": model, "form": form, "form_buttons": form_buttons}
+    context = {"model": model, "form": form, "form_buttons": form_buttons, "loa_files": loa_files}
     return render(request, template_name, context)
 
 
@@ -308,7 +322,11 @@ def prefixlistupdatetask_delete(request, pk):
     instance = get_object_or_404(klass=queryset, pk=pk)
     success_url = reverse("telecom:prefixlistupdatetask_list")
     template_name = "telecom/prefixlistupdatetask_confirm_delete.html"
+    loa_files = instance.loa.all()
     if request.method == "POST":
+        for file in loa_files:
+            print(f"CHECKTHIS: {file}")
+            file.delete()
         instance.delete()
         return redirect(success_url)
     context = {"model": model}
@@ -323,16 +341,26 @@ def prefixlistupdatetask_clone(request, pk):
     model = PrefixListUpdateTask
     queryset = get_prefixlistupdatetask_queryset(request)
     instance = get_object_or_404(klass=queryset, pk=pk)
-    instance.pk = None
     instance.created_by = request.user
     form_class = PrefixListUpdateTaskModelForm
     success_url = reverse("telecom:prefixlistupdatetask_list")
     form_buttons = ["update"]
     template_name = "telecom/prefixlistupdatetask_form.html"
     if request.method == "POST":
+        instance.pk = None
         form = form_class(data=request.POST, instance=instance)
+        files = request.FILES.getlist("loa")
+        print(files)
         if form.is_valid():
-            form.save()
+            task = form.save(commit=False)
+            task.save()
+            for file in files:
+                print(f"Processing file: {file.name}")
+                file_instance = File(file=file)
+                file_instance.save()
+                task.loa.add(file_instance)
+            isps = form.cleaned_data.get("isps")
+            task.isps.set(isps)
             return redirect(success_url)
         context = {"model": model, "form": form, "form_buttons": form_buttons}
         return render(request, template_name, context)

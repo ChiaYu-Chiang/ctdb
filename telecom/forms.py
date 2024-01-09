@@ -155,7 +155,7 @@ class PrefixListUpdateTaskModelForm(forms.ModelForm):
         required=False,
     )
     loa = forms.FileField(
-        label=_("loa"),
+        label=_("Loa"),
         widget=forms.ClearableFileInput(attrs={"multiple": True}),
         required=False,
     )
