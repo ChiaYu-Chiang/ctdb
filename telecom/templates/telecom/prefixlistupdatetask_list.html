@@ -32,7 +32,6 @@
                 <th style="width: 1px;">{% translate 'Related ticket' %}</th>
                 <th style="width: 30%;">{% translate 'IPv4-Prefix-list' %}</th>
                 <th style="width: 30%;">{% translate 'IPv6-Prefix-list' %}</th>
-                <th style="width: 20%;">ROA</th>
                 <th style="width: 50%;">{% translate 'Mail sended time' %}</th>
               </tr>
             </thead>
@@ -51,7 +50,6 @@
                 <td class="text-nowarp">{{ obj.related_ticket}}</td>
                 <td class="text-nowrap">{{ obj.ipv4_prefix_list|linebreaks }}</td>
                 <td class="text-nowrap">{{ obj.ipv6_prefix_list|linebreaks }}</td>
-                <td class="text-nowarp">{{ obj.roa }}</td>
                 <td class="text-nowrap">{{ obj.meil_sended_time|linebreaks }}</td>
               </tr>
               {% empty %}

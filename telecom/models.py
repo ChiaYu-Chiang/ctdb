@@ -155,8 +155,8 @@ class PrefixListUpdateTask(models.Model):
     related_ticket = models.CharField(
         verbose_name=_("Related ticket"), max_length=63, blank=True
     )
-    roa = models.CharField(verbose_name="roa", max_length=63, blank=True)
-    loa = models.ManyToManyField(verbose_name=_("loa"), to="telecom.File", blank=True)
+    roa = models.ManyToManyField(verbose_name=_("roa"), to="telecom.File", blank=True, related_name="roa_tasks")
+    loa = models.ManyToManyField(verbose_name=_("loa"), to="telecom.File", blank=True, related_name="loa_tasks")
     loa_remark = models.TextField(verbose_name=_("Loa Remark"), blank=True)
     remark = models.TextField(verbose_name=_("Remark"), blank=True)
     meil_sended_time = models.CharField(

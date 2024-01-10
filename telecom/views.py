@@ -256,16 +256,23 @@ def prefixlistupdatetask_create(request):
     template_name = "telecom/prefixlistupdatetask_form.html"
     if request.method == "POST":
         form = form_class(data=request.POST, instance=instance)
-        files = request.FILES.getlist("loa")
+        roa_files = request.FILES.getlist("roa")
+        loa_files = request.FILES.getlist("loa")
         if form.is_valid():
             task = form.save(commit=False)
             task.save()
-            for file in files:
+            for file in roa_files:
+                file_instance = File(file=file)
+                file_instance.save()
+                task.roa.add(file_instance)
+            for file in loa_files:
                 file_instance = File(file=file)
                 file_instance.save()
                 task.loa.add(file_instance)
             isps = form.cleaned_data.get("isps")
+            isp_groups = form.cleaned_data.get("isp_groups")
             task.isps.set(isps)
+            task.isp_groups.set(isp_groups)
             return redirect(success_url)
         context = {"model": model, "form": form, "form_buttons": form_buttons}
         return render(request, template_name, context)
@@ -286,29 +293,42 @@ def prefixlistupdatetask_update(request, pk):
     success_url = reverse("telecom:prefixlistupdatetask_list")
     form_buttons = ["update"]
     template_name = "telecom/prefixlistupdatetask_form.html"
+    roa_files = instance.roa.all()
     loa_files = instance.loa.all()
     if request.method == "POST":
         form = form_class(data=request.POST, files=request.FILES, instance=instance)
-        files_to_remove = request.POST.getlist("remove_loa")
-        files = request.FILES.getlist("loa")
+        roa_files_to_remove = request.POST.getlist("remove_roa")
+        loa_files_to_remove = request.POST.getlist("remove_loa")
+        roa_files = request.FILES.getlist("roa")
+        loa_files = request.FILES.getlist("loa")
         if form.is_valid():
             task = form.save(commit=False)
             task.save()
-            if files_to_remove:
-                for file_id in files_to_remove:
+            if roa_files_to_remove:
+                for file_id in roa_files_to_remove:
                     file_to_remove = File.objects.get(pk=file_id)
                     file_to_remove.delete()
-            for file in files:
+            if loa_files_to_remove:
+                for file_id in loa_files_to_remove:
+                    file_to_remove = File.objects.get(pk=file_id)
+                    file_to_remove.delete()
+            for file in roa_files:
+                file_instance = File(file=file)
+                file_instance.save()
+                task.roa.add(file_instance)
+            for file in loa_files:
                 file_instance = File(file=file)
                 file_instance.save()
                 task.loa.add(file_instance)
             isps = form.cleaned_data.get("isps")
+            isp_groups = form.cleaned_data.get("isp_groups")
             task.isps.set(isps)
+            task.isp_groups.set(isp_groups)
             return redirect(success_url)
         context = {"model": model, "form": form, "form_buttons": form_buttons}
         return render(request, template_name, context)
     form = form_class(instance=instance)
-    context = {"model": model, "form": form, "form_buttons": form_buttons, "loa_files": loa_files}
+    context = {"model": model, "form": form, "form_buttons": form_buttons, "roa_files": roa_files, "loa_files": loa_files}
     return render(request, template_name, context)
 
 
@@ -322,10 +342,12 @@ def prefixlistupdatetask_delete(request, pk):
     instance = get_object_or_404(klass=queryset, pk=pk)
     success_url = reverse("telecom:prefixlistupdatetask_list")
     template_name = "telecom/prefixlistupdatetask_confirm_delete.html"
+    roa_files = instance.roa.all()
     loa_files = instance.loa.all()
     if request.method == "POST":
+        for file in roa_files:
+            file.delete()
         for file in loa_files:
-            print(f"CHECKTHIS: {file}")
             file.delete()
         instance.delete()
         return redirect(success_url)
@@ -349,18 +371,23 @@ def prefixlistupdatetask_clone(request, pk):
     if request.method == "POST":
         instance.pk = None
         form = form_class(data=request.POST, instance=instance)
-        files = request.FILES.getlist("loa")
-        print(files)
+        roa_files = request.FILES.getlist("roa")
+        loa_files = request.FILES.getlist("loa")
         if form.is_valid():
             task = form.save(commit=False)
             task.save()
-            for file in files:
-                print(f"Processing file: {file.name}")
+            for file in roa_files:
+                file_instance = File(file=file)
+                file_instance.save()
+                task.loa.add(file_instance)
+            for file in loa_files:
                 file_instance = File(file=file)
                 file_instance.save()
                 task.loa.add(file_instance)
             isps = form.cleaned_data.get("isps")
+            isp_groups = form.cleaned_data.get("isp_groups")
             task.isps.set(isps)
+            task.isp_groups.set(isp_groups)
             return redirect(success_url)
         context = {"model": model, "form": form, "form_buttons": form_buttons}
         return render(request, template_name, context)

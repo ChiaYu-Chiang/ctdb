@@ -27,10 +27,23 @@
           {% for field in form %}
           <div class="form-row" id="id_form_row_{{ field.name }}">
             <div class="form-group col">
-              {% if field.name == 'loa' %}
+              {% if field.name == 'roa' %}
+              <label for="{{ form.roa.id_for_label }}">{{ form.roa.label }}{% translate ':' %}</label>
+              <input type="file" name="{{ form.roa.name }}" multiple id="{{ form.roa.id_for_label }}">
+              {% if roa_files %}
+                <p>已上傳的檔案：</p>
+                <ul>
+                  {% for file in roa_files %}
+                    <li>
+                      <p>移除</p><input type="checkbox" name="remove_roa" value="{{ file.id }}">
+                      {{ file.file }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              {% elif field.name == 'loa' %}
               <label for="{{ form.loa.id_for_label }}">{{ form.loa.label }}{% translate ':' %}</label>
               <input type="file" name="{{ form.loa.name }}" multiple id="{{ form.loa.id_for_label }}">
-              <!-- 列出現有 loa 檔案 -->
               {% if loa_files %}
                 <p>已上傳的檔案：</p>
                 <ul>
@@ -41,8 +54,6 @@
                     </li>
                   {% endfor %}
                 </ul>
-              {% else %}
-                <p>目前沒有已上傳的檔案。</p>
               {% endif %}
               {% else %}
               {% with has_error=field.errors has_placeholder=field.field.widget.attrs.placeholder input_type=field.field.widget.input_type %}
