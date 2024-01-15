@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.http.response import Http404
 from django.shortcuts import get_object_or_404, redirect, render
@@ -8,6 +10,7 @@ from core.decorators import permission_required
 
 from .forms import NewsModelForm
 from .models import News
+from django.contrib.auth.models import User
 
 
 def get_dep_news_queryset(request):
@@ -90,6 +93,19 @@ def news_create(request):
         form = form_class(data=request.POST, instance=instance)
         if form.is_valid():
             form.save()
+
+            if success_url == success_url1:
+                active_users = User.objects.filter(is_active=1)
+                recipient_list = [user.email for user in active_users if user.email]
+                send_mail(
+                    subject="TDB最新消息發布通知",
+                    message="請至TDB最新消息專區查看最新發布公告",
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=recipient_list,
+                    fail_silently=False,
+                    html_message='<a href="https://tdb.chief.net.tw/news/">最新消息</a>',
+                )
+
             return redirect(success_url)
         context = {'model': model, 'form': form, 'form_buttons': form_buttons}
         return render(request, template_name, context)
