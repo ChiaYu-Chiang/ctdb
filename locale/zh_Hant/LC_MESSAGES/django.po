@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-10 15:25+0800\n"
+"POT-Creation-Date: 2024-02-01 16:11+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -433,7 +433,7 @@ msgstr "動作"
 #: .\comment\templates\comment\message_list.html:26 .\diary\models.py:24
 #: .\diary\templates\diary\diary_list.html:48 .\log\models.py:13
 #: .\log\templates\log\diary_log_list.html:27 .\news\models.py:16
-#: .\reminder\models.py:44 .\reminder\templates\reminder\reminder_list.html:32
+#: .\reminder\models.py:45 .\reminder\templates\reminder\reminder_list.html:32
 #: .\telecom\models.py:31 .\telecom\models.py:58 .\telecom\models.py:100
 #: .\telecom\templates\telecom\isp_list.html:26
 #: .\telecom\templates\telecom\ispgroup_list.html:26
@@ -733,7 +733,7 @@ msgid "List"
 msgstr "列表"
 
 #: .\core\templates\standard_nav.html:48 .\core\templates\standard_nav.html:52
-#: .\core\templates\standard_nav.html:56 .\reminder\models.py:48
+#: .\core\templates\standard_nav.html:56 .\reminder\models.py:49
 msgid "Reminder"
 msgstr ""
 
@@ -1066,82 +1066,86 @@ msgid "Daily"
 msgstr "每天"
 
 #: .\reminder\models.py:16
+msgid "Hourly"
+msgstr "每小時"
+
+#: .\reminder\models.py:17
 msgid "Once"
 msgstr "單次"
 
-#: .\reminder\models.py:17
+#: .\reminder\models.py:18
 msgid "Every Monday"
 msgstr "每週一"
 
-#: .\reminder\models.py:18
+#: .\reminder\models.py:19
 msgid "Every Tuesday"
 msgstr "每週二"
 
-#: .\reminder\models.py:19
+#: .\reminder\models.py:20
 msgid "Every Wednesday"
 msgstr "每週三"
 
-#: .\reminder\models.py:20
+#: .\reminder\models.py:21
 msgid "Every Thursday"
 msgstr "每週四"
 
-#: .\reminder\models.py:21
+#: .\reminder\models.py:22
 msgid "Every Friday"
 msgstr "每週五"
 
-#: .\reminder\models.py:22
+#: .\reminder\models.py:23
 msgid "Every Saturday"
 msgstr "每週六"
 
-#: .\reminder\models.py:23
+#: .\reminder\models.py:24
 msgid "Every Sunday"
 msgstr "每週日"
 
-#: .\reminder\models.py:26
+#: .\reminder\models.py:27
 msgid "Specific"
 msgstr "特定"
 
-#: .\reminder\models.py:27 .\reminder\models.py:36
+#: .\reminder\models.py:28 .\reminder\models.py:37
 msgid "Specified dates"
 msgstr "特定日期"
 
-#: .\reminder\models.py:31 .\reminder\templates\reminder\reminder_list.html:33
+#: .\reminder\models.py:32 .\reminder\templates\reminder\reminder_list.html:33
 msgid "Is active"
 msgstr "啟用"
 
-#: .\reminder\models.py:32 .\reminder\templates\reminder\reminder_list.html:34
+#: .\reminder\models.py:33 .\reminder\templates\reminder\reminder_list.html:34
 msgid "Event"
 msgstr "事件"
 
-#: .\reminder\models.py:33 .\reminder\templates\reminder\reminder_list.html:35
+#: .\reminder\models.py:34 .\reminder\templates\reminder\reminder_list.html:35
 msgid "Policy"
 msgstr "規則"
 
-#: .\reminder\models.py:34
+#: .\reminder\models.py:35
 msgid "Start at"
 msgstr "開始於"
 
-#: .\reminder\models.py:35
+#: .\reminder\models.py:36
 msgid "End at"
 msgstr "結束於"
 
-#: .\reminder\models.py:37 .\reminder\templates\reminder\reminder_list.html:38
+#: .\reminder\models.py:38 .\reminder\templates\reminder\reminder_list.html:38
 msgid "Email subject"
 msgstr "Email 主旨"
 
-#: .\reminder\models.py:38 .\reminder\templates\reminder\reminder_list.html:39
+#: .\reminder\models.py:39 .\reminder\templates\reminder\reminder_list.html:39
 msgid "Email content"
 msgstr "Email 內容"
 
-#: .\reminder\models.py:40 .\reminder\templates\reminder\reminder_list.html:40
+#: .\reminder\models.py:41 .\reminder\templates\reminder\reminder_list.html:40
 msgid "Recipients"
 msgstr "收件者"
 
-#: .\reminder\models.py:41
+#: .\reminder\models.py:42
 msgid "Use \";\" to seperate multiple recipient."
 msgstr "使用 \";\" 分隔多個收件者"
 
-#: .\reminder\models.py:49
+#: .\reminder\models.py:50
 msgid "Reminders"
 msgstr ""
 
