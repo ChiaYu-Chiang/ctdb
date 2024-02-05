@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.template import loader
+from datetime import datetime
 
 from core.mail import send_mail
 from core.utils import date_range, today
@@ -156,19 +157,21 @@ class Command(BaseCommand):
         return email_configs
 
     def handle(self, *args, **options):
-        users = self.get_diary_users()
-        diary_needed = self.get_diary_needed(users=users)
-        diary_existing = self.get_diary_existing()
-        diary_missing = self.get_diary_missing(needed=diary_needed, existing=diary_existing)
-        email_configs = self.get_email_configs(missing=diary_missing)
-        for config in email_configs:
-            subject, body, to, cc = config['subject'], config['body'], config['to'], config['cc']
-            if not options['debug']:
-                send_mail(subject=subject, body=body, to=to, cc=cc)
-            log = (
-                f'to:\n{to}\n'
-                f'cc:\n{cc}\n'
-                f'subject:\n{subject}\n'
-                f'body:\n{body}'
-            )
-            logger.info(log)
+        now = datetime.now()
+        if now.hour == 9:
+            users = self.get_diary_users()
+            diary_needed = self.get_diary_needed(users=users)
+            diary_existing = self.get_diary_existing()
+            diary_missing = self.get_diary_missing(needed=diary_needed, existing=diary_existing)
+            email_configs = self.get_email_configs(missing=diary_missing)
+            for config in email_configs:
+                subject, body, to, cc = config['subject'], config['body'], config['to'], config['cc']
+                if not options['debug']:
+                    send_mail(subject=subject, body=body, to=to, cc=cc)
+                log = (
+                    f'to:\n{to}\n'
+                    f'cc:\n{cc}\n'
+                    f'subject:\n{subject}\n'
+                    f'body:\n{body}'
+                )
+                logger.info(log)
