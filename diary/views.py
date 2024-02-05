@@ -54,6 +54,29 @@ def diary_list(request):
         (Q(due__isnull=True) | Q(due__date__gte=today))
     )
 
+    if request.method == 'POST':
+        search_input = request.POST.get('search_input', '')
+        dep = request.POST.get('roles', '')
+        queryset = get_diary_queryset(request)
+        queryset = queryset.filter(created_by__groups__name=dep) if dep else queryset
+        if search_input:
+            queryset = queryset.filter(
+                Q(created_by__username__icontains=search_input) |
+                Q(daily_record__icontains=search_input) |
+                Q(todo__icontains=search_input) |
+                Q(date__icontains=search_input) |
+                Q(daily_check__icontains=search_input) |
+                Q(remark__icontains=search_input) |
+                Q(comment__icontains=search_input)
+            )
+        if not queryset.exists():
+            page_obj = None
+            is_paginated = False
+        else:
+            paginator = Paginator(queryset, len(queryset))
+            page_obj = paginator.get_page(1)
+            is_paginated = False
+
     context = {
         'model': model,
         'page_obj': page_obj,
