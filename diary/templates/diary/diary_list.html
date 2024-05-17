@@ -22,18 +22,34 @@
             <div id="blankTop"></div>
           {% endif %}
         </div>
-        <div id="toolbar" class="d-flex">
-          <input type="text" id="searchInput" class="form-control shadow-sm{% if not supervise_roles %} mr-auto{% endif %}" placeholder={% translate 'Search..' %}>
-          {% if supervise_roles %}
-          <div class="mr-auto">
-            <select id="rolesSelect" class="shadow-sm form-control" name="roles">
-              <option value="">{% translate 'All' %}</option>
-              {% for role in supervise_roles %}
-              <option value="{{ role.name }}"{% if role.name == request.GET.dep %} selected{% endif %}>{{ role.name }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          {% endif %}
+        <div id="toolbar" class="d-flex justify-content-between">
+          <form id="searchForm" method="POST" action="{% url 'diary:diary_list' %}">
+            {% csrf_token %}
+            <div class="input-group">
+              <input type="text" name="search_input" id="searchInput" class="form-control shadow-sm{% if not supervise_roles %} mr-auto{% endif %}" placeholder={% translate 'Search..' %}>
+              {% if supervise_roles %}
+              <div class="mr-auto">
+                <select id="rolesSelect" class="shadow-sm form-control" name="roles">
+                  <option value="">{% translate 'All' %}</option>
+                  {% for role in supervise_roles %}
+                  <option value="{{ role.name }}"{% if role.name == request.GET.dep %} selected{% endif %}>{{ role.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="mr-auto">
+                <select id="membersSelect" class="shadow-sm form-control" name="members">
+                  <option value="">{% translate 'All' %}</option>
+                  {% for member in supervise_members %}
+                  <option value="{{ member.username }}"{% if member.username == request.GET.member %} selected{% endif %}>{{ member.username }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% endif %}
+              <div class="input-group-append">
+                <button type="submit" class="border shadow-sm form-control btn btn-light">{% translate 'Search' %}</button>
+              </div>
+            </div>
+          </form>
           {% name model|attr:'_meta'|get_perm_name:'add' as perm_name %}
           {% if user|has_perm:perm_name %}
           <a id="addButton" class="border shadow-sm form-control btn btn-light"
@@ -85,6 +101,5 @@
 {% endblock %}
 
 {% block extrajs %}
-<script src="{% static 'js/table_search.js' %}"></script>
 <script src="{% static 'diary/js/diary_list.js' %}"></script>
 {% endblock %}

@@ -13,6 +13,7 @@ class Reminder(models.Model):
         (_('Common'), (
             ('on weekdays', _('On weekdays')),
             ('daily', _('Daily')),
+            ('hourly', _('Hourly')),
             ('once', _('Once')),
             ('every monday', _('Every Monday')),
             ('every tuesday', _('Every Tuesday')),

@@ -39,10 +39,25 @@ def diary_list(request):
     paginate_by = 5
     template_name = 'diary/diary_list.html'
     page_number = request.GET.get('page', '')
-    dep = request.GET.get('dep')
+    dep = request.GET.get('dep', '')
+    member = request.GET.get('member', '')
+    search_input = request.GET.get('search_input', '')
     queryset = queryset.filter(created_by__groups__name=dep) if dep else queryset
+    queryset = queryset.filter(created_by__username=member) if member else queryset
+    if search_input:
+        queryset = queryset.filter(
+            Q(created_by__username__icontains=search_input) |
+            Q(daily_record__icontains=search_input) |
+            Q(todo__icontains=search_input) |
+            Q(date__icontains=search_input) |
+            Q(daily_check__icontains=search_input) |
+            Q(remark__icontains=search_input) |
+            Q(comment__icontains=search_input)
+        )
     role = request.user.profile.activated_role
     supervise_roles = role.groupprofile.supervise_roles.all() if role else None
+    dep_role = supervise_roles.filter(name=dep).first() if supervise_roles else None
+    supervise_members = dep_role.user_set.filter(is_active=True) if dep_role else None
     paginator = Paginator(queryset, paginate_by)
     page_obj = paginator.get_page(page_number)
     is_paginated = page_number.lower() != 'all' and page_obj.has_other_pages()
@@ -60,6 +75,7 @@ def diary_list(request):
         'object_list': page_obj if is_paginated else queryset,
         'is_paginated': is_paginated,
         'supervise_roles': supervise_roles,
+        'supervise_members': supervise_members,
         'is_pinned_news': is_pinned_news,
     }
     return render(request, template_name, context)
