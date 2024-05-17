@@ -30,28 +30,54 @@
               {% if field.name == 'roa' %}
               <label for="{{ form.roa.id_for_label }}">{{ form.roa.label }}{% translate ':' %}</label>
               <input type="file" name="{{ form.roa.name }}" multiple id="{{ form.roa.id_for_label }}">
+              <p>已選擇的檔案：</p>
+              <div id="selectedroaFiles"></div>
               {% if roa_files %}
                 <p>已上傳的檔案：</p>
-                <ul>
+                <ul id="uploadedroaFiles">
                   {% for file in roa_files %}
+                  {% for file_isp in file.roataskfileisp_set.all %}
                     <li>
-                      <p>移除</p><input type="checkbox" name="remove_roa" value="{{ file.id }}">
-                      {{ file.file }}
+                      <input type="checkbox" name="remove_roa_{{ file.id }}_{{ file_isp.isp.id }}">
+                      移除{{ file.name }} - {{ file_isp.isp.cname }}
                     </li>
+                  {% endfor %}
                   {% endfor %}
                 </ul>
               {% endif %}
               {% elif field.name == 'loa' %}
               <label for="{{ form.loa.id_for_label }}">{{ form.loa.label }}{% translate ':' %}</label>
               <input type="file" name="{{ form.loa.name }}" multiple id="{{ form.loa.id_for_label }}">
+              <p>已選擇的檔案：</p>
+              <div id="selectedloaFiles"></div>
               {% if loa_files %}
                 <p>已上傳的檔案：</p>
-                <ul>
+                <ul id="uploadedloaFiles">
                   {% for file in loa_files %}
+                  {% for file_isp in file.loataskfileisp_set.all %}
                     <li>
-                      <p>移除</p><input type="checkbox" name="remove_loa" value="{{ file.id }}">
-                      {{ file.file }}
+                      <input type="checkbox" name="remove_loa_{{ file.id }}_{{ file_isp.isp.id }}">
+                      移除{{ file.name }} - {{ file_isp.isp.cname }}
                     </li>
+                  {% endfor %}
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              {% elif field.name == 'extra_file' %}
+              <label for="{{ form.extra_file.id_for_label }}">{{ form.extra_file.label }}{% translate ':' %}</label>
+              <input type="file" name="{{ form.extra_file.name }}" multiple id="{{ form.extra_file.id_for_label }}">
+              <p>已選擇的檔案：</p>
+              <div id="selectedextra_fileFiles"></div>
+              {% if extra_file_files %}
+                <p>已上傳的檔案：</p>
+                <ul id="uploadedextra_fileFiles">
+                  {% for file in extra_file_files %}
+                  {% for file_isp in file.extrafiletaskfileisp_set.all %}
+                    <li>
+                      <input type="checkbox" name="remove_extra_file_{{ file.id }}_{{ file_isp.isp.id }}">
+                      移除{{ file.name }} - {{ file_isp.isp.cname }}
+                    </li>
+                  {% endfor %}
                   {% endfor %}
                 </ul>
               {% endif %}

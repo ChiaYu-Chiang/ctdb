@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import EmailValidator
+import os
 
 from core.validators import (
     validate_comma_separated_prefix_list_string,
@@ -15,10 +16,17 @@ uuid_file_system_storage = UUIDFileSystemStorage()
 
 
 class File(models.Model):
+    name = models.CharField(verbose_name=_("Name"), max_length=255)
     file = models.FileField(
         storage=uuid_file_system_storage,
         upload_to="telecom",
     )
+
+    def save(self, *args, **kwargs):
+        self.name = os.path.basename(
+            self.file.name
+        )  # 使用 os.path.basename 獲取檔案名稱
+        super().save(*args, **kwargs)
 
 
 class Isp(models.Model):
@@ -155,8 +163,27 @@ class PrefixListUpdateTask(models.Model):
     related_ticket = models.CharField(
         verbose_name=_("Related ticket"), max_length=63, blank=True
     )
-    roa = models.ManyToManyField(verbose_name=_("roa"), to="telecom.File", blank=True, related_name="roa_tasks")
-    loa = models.ManyToManyField(verbose_name=_("loa"), to="telecom.File", blank=True, related_name="loa_tasks")
+    roa = models.ManyToManyField(
+        verbose_name=_("roa"),
+        to="telecom.File",
+        blank=True,
+        through="RoaTaskFileISP",
+        related_name="roa_tasks",
+    )
+    loa = models.ManyToManyField(
+        verbose_name=_("loa"),
+        to="telecom.File",
+        blank=True,
+        through="LoaTaskFileISP",
+        related_name="loa_tasks",
+    )
+    extra_file = models.ManyToManyField(
+        verbose_name=_("extra_file"),
+        to="telecom.File",
+        blank=True,
+        through="ExtraFileTaskFileISP",
+        related_name="extra_file_tasks",
+    )
     loa_remark = models.TextField(verbose_name=_("Loa Remark"), blank=True)
     remark = models.TextField(verbose_name=_("Remark"), blank=True)
     meil_sended_time = models.CharField(
@@ -194,3 +221,27 @@ class PrefixListUpdateTask(models.Model):
         return reverse(
             "telecom:prefixlistupdatetask_sendtaskmail", kwargs={"pk": self.pk}
         )
+
+
+class RoaTaskFileISP(models.Model):
+    task = models.ForeignKey(
+        to="telecom.PrefixListUpdateTask", on_delete=models.CASCADE
+    )
+    file = models.ForeignKey(to="telecom.File", on_delete=models.CASCADE)
+    isp = models.ForeignKey(to="telecom.Isp", on_delete=models.CASCADE)
+
+
+class LoaTaskFileISP(models.Model):
+    task = models.ForeignKey(
+        to="telecom.PrefixListUpdateTask", on_delete=models.CASCADE
+    )
+    file = models.ForeignKey(to="telecom.File", on_delete=models.CASCADE)
+    isp = models.ForeignKey(to="telecom.Isp", on_delete=models.CASCADE)
+
+
+class ExtraFileTaskFileISP(models.Model):
+    task = models.ForeignKey(
+        to="telecom.PrefixListUpdateTask", on_delete=models.CASCADE
+    )
+    file = models.ForeignKey(to="telecom.File", on_delete=models.CASCADE)
+    isp = models.ForeignKey(to="telecom.Isp", on_delete=models.CASCADE)

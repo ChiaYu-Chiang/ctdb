@@ -8,7 +8,15 @@ from django.conf import settings
 from core.decorators import permission_required
 
 from .forms import IspGroupModelForm, IspModelForm, PrefixListUpdateTaskModelForm
-from .models import Isp, IspGroup, PrefixListUpdateTask, File
+from .models import (
+    Isp,
+    IspGroup,
+    PrefixListUpdateTask,
+    File,
+    RoaTaskFileISP,
+    LoaTaskFileISP,
+    ExtraFileTaskFileISP,
+)
 from .sendtaskmail import handle_task_mail
 from datetime import datetime
 import os
@@ -243,6 +251,29 @@ def prefixlistupdatetask_list(request):
     return render(request, template_name, context)
 
 
+def handle_file_isp_relationship(task, files, file_prefix, request_post):
+    for file in files:
+        file_instance = File(file=file)
+        file_instance.save()
+        selected_isps = request_post.getlist(
+            f"selectedISP_{file_prefix}_{files.index(file)}"
+        )
+        for isp_id in selected_isps:
+            isp_instance = Isp.objects.get(id=isp_id)
+            if file_prefix == "id_roa":
+                RoaTaskFileISP.objects.create(
+                    file=file_instance, isp=isp_instance, task=task
+                )
+            elif file_prefix == "id_loa":
+                LoaTaskFileISP.objects.create(
+                    file=file_instance, isp=isp_instance, task=task
+                )
+            elif file_prefix == "id_extra_file":
+                ExtraFileTaskFileISP.objects.create(
+                    file=file_instance, isp=isp_instance, task=task
+                )
+
+
 @login_required
 @permission_required(
     "telecom.add_prefixlistupdatetask", raise_exception=True, exception=Http404
@@ -256,27 +287,27 @@ def prefixlistupdatetask_create(request):
     template_name = "telecom/prefixlistupdatetask_form.html"
     if request.method == "POST":
         form = form_class(data=request.POST, instance=instance)
-        roa_files = request.FILES.getlist("roa")
-        loa_files = request.FILES.getlist("loa")
         if form.is_valid():
             task = form.save(commit=False)
             task.save()
-            for file in roa_files:
-                file_instance = File(file=file)
-                file_instance.save()
-                task.roa.add(file_instance)
-            for file in loa_files:
-                file_instance = File(file=file)
-                file_instance.save()
-                task.loa.add(file_instance)
+
+            handle_file_isp_relationship(
+                task, request.FILES.getlist("roa"), "id_roa", request.POST
+            )
+            handle_file_isp_relationship(
+                task, request.FILES.getlist("loa"), "id_loa", request.POST
+            )
+            handle_file_isp_relationship(
+                task, request.FILES.getlist("extra_file"), "id_extra_file", request.POST
+            )
+
             isps = form.cleaned_data.get("isps")
             isp_groups = form.cleaned_data.get("isp_groups")
             task.isps.set(isps)
             task.isp_groups.set(isp_groups)
             return redirect(success_url)
-        context = {"model": model, "form": form, "form_buttons": form_buttons}
-        return render(request, template_name, context)
-    form = form_class()
+    else:
+        form = form_class()
     context = {"model": model, "form": form, "form_buttons": form_buttons}
     return render(request, template_name, context)
 
@@ -287,48 +318,64 @@ def prefixlistupdatetask_create(request):
 )
 def prefixlistupdatetask_update(request, pk):
     model = PrefixListUpdateTask
-    queryset = get_prefixlistupdatetask_queryset(request)
-    instance = get_object_or_404(klass=queryset, pk=pk)
+    instance = get_object_or_404(model, pk=pk)
     form_class = PrefixListUpdateTaskModelForm
     success_url = reverse("telecom:prefixlistupdatetask_list")
-    form_buttons = ["update"]
     template_name = "telecom/prefixlistupdatetask_form.html"
-    roa_files = instance.roa.all()
-    loa_files = instance.loa.all()
+
+    roa_files = instance.roa.all().distinct()
+    loa_files = instance.loa.all().distinct()
+    extra_file_files = instance.extra_file.all().distinct()
+
     if request.method == "POST":
-        form = form_class(data=request.POST, files=request.FILES, instance=instance)
-        roa_files_to_remove = request.POST.getlist("remove_roa")
-        loa_files_to_remove = request.POST.getlist("remove_loa")
-        roa_files = request.FILES.getlist("roa")
-        loa_files = request.FILES.getlist("loa")
+        form = form_class(data=request.POST, instance=instance)
         if form.is_valid():
-            task = form.save(commit=False)
-            task.save()
-            if roa_files_to_remove:
-                for file_id in roa_files_to_remove:
-                    file_to_remove = File.objects.get(pk=file_id)
-                    file_to_remove.delete()
-            if loa_files_to_remove:
-                for file_id in loa_files_to_remove:
-                    file_to_remove = File.objects.get(pk=file_id)
-                    file_to_remove.delete()
-            for file in roa_files:
-                file_instance = File(file=file)
-                file_instance.save()
-                task.roa.add(file_instance)
-            for file in loa_files:
-                file_instance = File(file=file)
-                file_instance.save()
-                task.loa.add(file_instance)
-            isps = form.cleaned_data.get("isps")
-            isp_groups = form.cleaned_data.get("isp_groups")
-            task.isps.set(isps)
-            task.isp_groups.set(isp_groups)
+            form.save()
+            handle_file_isp_relationship(
+                instance, request.FILES.getlist("roa"), "id_roa", request.POST
+            )
+            handle_file_isp_relationship(
+                instance, request.FILES.getlist("loa"), "id_loa", request.POST
+            )
+            handle_file_isp_relationship(
+                instance,
+                request.FILES.getlist("extra_file"),
+                "id_extra_file",
+                request.POST,
+            )
+            for key in request.POST:
+                if key.startswith("remove_"):
+                    parts = key.split("_")
+                    action_type = "_".join(parts[1:-2])
+                    file_id = parts[-2]
+                    isp_id = parts[-1]
+                    if action_type == "roa":
+                        to_remove = RoaTaskFileISP.objects.get(
+                            task_id=instance, file_id=file_id, isp_id=isp_id
+                        )
+                    elif action_type == "loa":
+                        to_remove = LoaTaskFileISP.objects.get(
+                            task_id=instance, file_id=file_id, isp_id=isp_id
+                        )
+                    elif action_type == "extra_file":
+                        to_remove = ExtraFileTaskFileISP.objects.get(
+                            task_id=instance, file_id=file_id, isp_id=isp_id
+                        )
+                    to_remove.delete()
             return redirect(success_url)
-        context = {"model": model, "form": form, "form_buttons": form_buttons}
-        return render(request, template_name, context)
-    form = form_class(instance=instance)
-    context = {"model": model, "form": form, "form_buttons": form_buttons, "roa_files": roa_files, "loa_files": loa_files}
+
+    else:
+        form = form_class(instance=instance)
+
+    context = {
+        "model": model,
+        "form": form,
+        "form_buttons": ["update"],
+        "instance": instance,
+        "roa_files": roa_files,
+        "loa_files": loa_files,
+        "extra_file_files": extra_file_files,
+    }
     return render(request, template_name, context)
 
 
@@ -342,12 +389,12 @@ def prefixlistupdatetask_delete(request, pk):
     instance = get_object_or_404(klass=queryset, pk=pk)
     success_url = reverse("telecom:prefixlistupdatetask_list")
     template_name = "telecom/prefixlistupdatetask_confirm_delete.html"
-    roa_files = instance.roa.all()
-    loa_files = instance.loa.all()
     if request.method == "POST":
-        for file in roa_files:
+        for file in instance.roa.all():
             file.delete()
-        for file in loa_files:
+        for file in instance.loa.all():
+            file.delete()
+        for file in instance.extra_file.all():
             file.delete()
         instance.delete()
         return redirect(success_url)
@@ -357,42 +404,46 @@ def prefixlistupdatetask_delete(request, pk):
 
 @login_required
 @permission_required(
-    "telecom.change_prefixlistupdatetask", raise_exception=True, exception=Http404
+    "telecom.add_prefixlistupdatetask", raise_exception=True, exception=Http404
 )
 def prefixlistupdatetask_clone(request, pk):
     model = PrefixListUpdateTask
-    queryset = get_prefixlistupdatetask_queryset(request)
-    instance = get_object_or_404(klass=queryset, pk=pk)
-    instance.created_by = request.user
+    instance = get_object_or_404(model, pk=pk)
     form_class = PrefixListUpdateTaskModelForm
     success_url = reverse("telecom:prefixlistupdatetask_list")
-    form_buttons = ["update"]
     template_name = "telecom/prefixlistupdatetask_form.html"
+
     if request.method == "POST":
-        instance.pk = None
-        form = form_class(data=request.POST, instance=instance)
-        roa_files = request.FILES.getlist("roa")
-        loa_files = request.FILES.getlist("loa")
+        form = form_class(data=request.POST, instance=model(created_by=request.user))
         if form.is_valid():
             task = form.save(commit=False)
             task.save()
-            for file in roa_files:
-                file_instance = File(file=file)
-                file_instance.save()
-                task.loa.add(file_instance)
-            for file in loa_files:
-                file_instance = File(file=file)
-                file_instance.save()
-                task.loa.add(file_instance)
+
+            handle_file_isp_relationship(
+                task, request.FILES.getlist("roa"), "id_roa", request.POST
+            )
+            handle_file_isp_relationship(
+                task, request.FILES.getlist("loa"), "id_loa", request.POST
+            )
+            handle_file_isp_relationship(
+                task, request.FILES.getlist("extra_file"), "id_extra_file", request.POST
+            )
+
             isps = form.cleaned_data.get("isps")
             isp_groups = form.cleaned_data.get("isp_groups")
             task.isps.set(isps)
             task.isp_groups.set(isp_groups)
             return redirect(success_url)
-        context = {"model": model, "form": form, "form_buttons": form_buttons}
-        return render(request, template_name, context)
-    form = form_class(instance=instance)
-    context = {"model": model, "form": form, "form_buttons": form_buttons}
+
+    else:
+        form = form_class(instance=instance)
+
+    context = {
+        "model": model,
+        "form": form,
+        "form_buttons": ["update"],
+        "instance": instance,
+    }
     return render(request, template_name, context)
 
 
@@ -404,16 +455,15 @@ def prefixlistupdatetask_previewmailcontent(request, pk):
     model = PrefixListUpdateTask
     queryset = get_prefixlistupdatetask_queryset(request)
     instance = get_object_or_404(klass=queryset, pk=pk)
-    instance.pk = None
-    task = model.objects.get(pk=pk)
-    file_name = task.loa.name if task.loa.name else None
-    ip_type = "ipv4" if task.ipv4_prefix_list else "ipv6"
-    if task.ipv4_prefix_list and task.ipv6_prefix_list:
+    ip_type = "ipv4" if instance.ipv4_prefix_list else "ipv6"
+    if instance.ipv4_prefix_list and instance.ipv6_prefix_list:
         ip_type = "ipv4 & ipv6"
-    ipv4_contents = task.ipv4_prefix_list.split(",\r\n")
-    ipv6_contents = task.ipv6_prefix_list.split(",\r\n")
-    ispsqs = task.isps.all()
-    ispgroupsqs = task.isp_groups.get().isps.all() if task.isp_groups.all() else None
+    ipv4_contents = instance.ipv4_prefix_list.split(",\r\n")
+    ipv6_contents = instance.ipv6_prefix_list.split(",\r\n")
+    ispsqs = instance.isps.all()
+    ispgroupsqs = (
+        instance.isp_groups.get().isps.all() if instance.isp_groups.all() else None
+    )
     isps = ispsqs if ispsqs else ispgroupsqs
     if ispsqs and ispgroupsqs:
         isps = (ispsqs | ispgroupsqs).distinct()
@@ -421,12 +471,16 @@ def prefixlistupdatetask_previewmailcontent(request, pk):
     template_name = "telecom/mail_content_preview.html"
     context = {
         "model": model,
-        "task": task,
+        "task": instance,
         "isps": isps,
         "ip_type": ip_type,
         "ipv4_contents": ipv4_contents,
         "ipv6_contents": ipv6_contents,
-        "file_name": file_name,
+        "taskfileisps": {
+            "roa": RoaTaskFileISP.objects.filter(task_id=instance),
+            "loa": LoaTaskFileISP.objects.filter(task_id=instance),
+            "extra_file": ExtraFileTaskFileISP.objects.filter(task_id=instance),
+        },
     }
     return render(request, template_name, context)
 
@@ -437,63 +491,66 @@ def prefixlistupdatetask_previewmailcontent(request, pk):
 )
 def prefixlistupdatetask_sendtaskmail(request, pk):
     model = PrefixListUpdateTask
-    task = model.objects.get(pk=pk)
-    queryset = get_prefixlistupdatetask_queryset(request)
-    instance = get_object_or_404(klass=queryset, pk=pk)
-    file_name = task.loa.name if task.loa.name else None
-    ip_type = "ipv4" if task.ipv4_prefix_list else "ipv6"
-    if task.ipv4_prefix_list and task.ipv6_prefix_list:
-        ip_type = "ipv4 & ipv6"
-    ipv4_contents = task.ipv4_prefix_list.split(",\r\n")
-    ipv6_contents = task.ipv6_prefix_list.split(",\r\n")
-    ispsqs = task.isps.all()
-    ispgroupsqs = task.isp_groups.get().isps.all() if task.isp_groups.all() else None
-    isps = ispsqs if ispsqs else ispgroupsqs
-    if ispsqs and ispgroupsqs:
-        isps = (ispsqs | ispgroupsqs).distinct()
+    hinet_mail = "unicom@cht.com.tw"
     template_name = "telecom/mail_content.html"
     eng_template_name = "telecom/eng_mail_content.html"
     template_name_hinet = "telecom/mail_content_hinet.html"
-    hinet_email = "unicom@cht.com.tw"
-    isps_hinet = isps.filter(to=hinet_email)
-    isps_other = isps.exclude(to=hinet_email)
-
-    if isps_other:
-        for isp in isps_other:
-            context = {
-                "model": model,
-                "task": task,
-                "isp": isp,
-                "ip_type": ip_type,
-                "ipv4_contents": ipv4_contents,
-                "ipv6_contents": ipv6_contents,
-            }
-            if isp.eng_mail_type:
-                mail_content = render_to_string(eng_template_name, context)
-            else:
-                mail_content = render_to_string(template_name, context)
-            handle_task_mail(isp, task, mail_content)
-
-    if isps_hinet:
+    queryset = get_prefixlistupdatetask_queryset(request)
+    instance = get_object_or_404(klass=queryset, pk=pk)
+    ip_type = "ipv4" if instance.ipv4_prefix_list else "ipv6"
+    if instance.ipv4_prefix_list and instance.ipv6_prefix_list:
+        ip_type = "ipv4 & ipv6"
+    ipv4_contents = instance.ipv4_prefix_list.split(",\r\n")
+    ipv6_contents = instance.ipv6_prefix_list.split(",\r\n")
+    ispsqs = instance.isps.all()
+    ispgroupsqs = (
+        instance.isp_groups.get().isps.all() if instance.isp_groups.all() else None
+    )
+    isps = ispsqs if ispsqs else ispgroupsqs
+    if ispsqs and ispgroupsqs:
+        isps = (ispsqs | ispgroupsqs).distinct()
+    isps = sorted(isps, key=lambda x: x.to == hinet_mail, reverse=True)
+    for isp in isps:
+        roa_files = RoaTaskFileISP.objects.filter(task_id=instance, isp_id=isp)
+        loa_files = LoaTaskFileISP.objects.filter(task_id=instance, isp_id=isp)
+        extra_files = ExtraFileTaskFileISP.objects.filter(task_id=instance, isp_id=isp)
+        attachments = []
+        for taskfileisp in roa_files:
+            file = taskfileisp.file
+            path = os.path.join(settings.MEDIA_ROOT, str(file.file))
+            attachments.append(path)
+        for taskfileisp in loa_files:
+            file = taskfileisp.file
+            path = os.path.join(settings.MEDIA_ROOT, str(file.file))
+            attachments.append(path)
+        for taskfileisp in extra_files:
+            file = taskfileisp.file
+            path = os.path.join(settings.MEDIA_ROOT, str(file.file))
+            attachments.append(path)
         context = {
             "model": model,
-            "task": task,
-            "isps": isps_hinet,
+            "task": instance,
+            "isp": isp,
             "ip_type": ip_type,
             "ipv4_contents": ipv4_contents,
             "ipv6_contents": ipv6_contents,
-            "file_name": file_name,
+            "attach_file": attachments,
         }
-        mail_content = render_to_string(template_name_hinet, context)
-        isp = isps_hinet.first()
-        if task.loa:
-            path = os.path.join(settings.MEDIA_ROOT, str(task.loa))
-            handle_task_mail(isp, task, mail_content, attach_file=path)
+        if isp == hinet_mail:
+            mail_content = render_to_string(template_name_hinet, context)
+            # handle_task_mail(isp, instance, mail_content, attachments)
+        elif isp.eng_mail_type:
+            mail_content = render_to_string(eng_template_name, context)
+            # handle_task_mail(isp, instance, mail_content, attachments)
         else:
-            handle_task_mail(isp, task, mail_content)
+            mail_content = render_to_string(template_name, context)
+            # handle_task_mail(isp, instance, mail_content, attachments)
 
-    time_now = datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S")
-    instance.meil_sended_time = time_now
-    instance.save()
+        print(
+            f"isp: {isp}, task: {instance}, attachments: {attachments}, mail_content: {mail_content}"
+        )
+        print("===")
+    return None
+
     task_list_url = reverse("telecom:prefixlistupdatetask_list")
     return redirect(task_list_url)

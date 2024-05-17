@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from .models import Isp, IspGroup, PrefixListUpdateTask
+from .models import Isp, IspGroup, PrefixListUpdateTask, File
 
 
 class IspModelForm(forms.ModelForm):
@@ -161,6 +161,11 @@ class PrefixListUpdateTaskModelForm(forms.ModelForm):
     )
     loa = forms.FileField(
         label=_("Loa"),
+        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+        required=False,
+    )
+    extra_file = forms.FileField(
+        label=_("Extra File"),
         widget=forms.ClearableFileInput(attrs={"multiple": True}),
         required=False,
     )

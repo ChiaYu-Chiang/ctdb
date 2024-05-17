@@ -38,9 +38,16 @@
                 <p>主旨:[是方電訊] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
                 <p>收件人:{{ isp.to }}</p>
                 <p>副本:{{ isp.cc }}</p>
-                {% if task.loa %}
-                <p>附件:<a href="{{ task.loa.url }}">{{ file_name }}</a></p>
-                {% endif %}
+                <p>附件:</p>
+                {% for type, taskfileisps in taskfileisps.items %}
+                    <ul>{{ type }}
+                        {% for taskfileisp in taskfileisps %}
+                        {% if taskfileisp.isp.to == isp.to %}
+                        <li><a href="{{ taskfileisp.file.file }}">{{ taskfileisp.file.name }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
                 {% include 'telecom/mail_content_hinet.html' %}
                 <p>---------------------------------------------------------------------------------------------------------</p>
             {% endif %}
@@ -55,6 +62,16 @@
                 {% endif %}
                 <p>Recevier:{{ isp.to }}</p>
                 <p>CC:{{ isp.cc }}</p>
+                <p>Attachment:</p>
+                {% for type, taskfileisps in taskfileisps.items %}
+                    <ul>{{ type }}
+                        {% for taskfileisp in taskfileisps %}
+                        {% if taskfileisp.isp.to == isp.to %}
+                        <li><a href="{{ taskfileisp.file.file }}">{{ taskfileisp.file.name }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
                 {% include 'telecom/eng_mail_content.html' %}
                 <p>---------------------------------------------------------------------------------------------------------</p>
             {% else %}
@@ -65,6 +82,16 @@
                 {% endif %}
                 <p>收件人:{{ isp.to }}</p>
                 <p>副本:{{ isp.cc }}</p>
+                <p>附件:</p>
+                {% for type, taskfileisps in taskfileisps.items %}
+                    <ul>{{ type }}
+                        {% for taskfileisp in taskfileisps %}
+                        {% if taskfileisp.isp.to == isp.to %}
+                        <li><a href="{{ taskfileisp.file.file }}">{{ taskfileisp.file.name }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
                 {% include 'telecom/mail_content.html' %}
                 <p>---------------------------------------------------------------------------------------------------------</p>
             {% endif %}
