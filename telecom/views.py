@@ -538,19 +538,12 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
         }
         if isp == hinet_mail:
             mail_content = render_to_string(template_name_hinet, context)
-            # handle_task_mail(isp, instance, mail_content, attachments)
+            handle_task_mail(isp, instance, mail_content, attachments)
         elif isp.eng_mail_type:
             mail_content = render_to_string(eng_template_name, context)
-            # handle_task_mail(isp, instance, mail_content, attachments)
+            handle_task_mail(isp, instance, mail_content, attachments)
         else:
             mail_content = render_to_string(template_name, context)
-            # handle_task_mail(isp, instance, mail_content, attachments)
-
-        print(
-            f"isp: {isp}, task: {instance}, attachments: {attachments}, mail_content: {mail_content}"
-        )
-        print("===")
-    return None
-
+            handle_task_mail(isp, instance, mail_content, attachments)
     task_list_url = reverse("telecom:prefixlistupdatetask_list")
     return redirect(task_list_url)
