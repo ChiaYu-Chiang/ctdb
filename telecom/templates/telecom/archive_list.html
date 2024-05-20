@@ -24,33 +24,17 @@
               <tr>
                 <th style="width: 1px;">{% translate 'Action' %}</th>
                 <th style="width: 1px;">{% translate 'Created by' %}</th>
-                <th style="width: 1px;">{% translate 'Update type' %}</th>
-                <th style="width: 1px;">{% translate 'ISPs' %}</th>
-                <th style="width: 1px;">{% translate 'ISP groups' %}</th>
-                <th style="width: 1px;">{% translate 'Origin AS' %}</th>
-                <th style="width: 1px;">{% translate 'AS path' %}</th>
-                <th style="width: 1px;">{% translate 'Related ticket' %}</th>
-                <th style="width: 30%;">{% translate 'IPv4-Prefix-list' %}</th>
-                <th style="width: 30%;">{% translate 'IPv6-Prefix-list' %}</th>
-                <th style="width: 50%;">{% translate 'Mail sended time' %}</th>
+                <th style="width: 1px;">{% translate 'Date' %}</th>
+                <th style="width: 100%">{% translate 'Name' %}</th>
               </tr>
             </thead>
             <tbody>
               {% for obj in object_list %}
               <tr>
-                <td class="text-nowrap">
-                  {% include 'telecom/prefixlistupdatetask_action_dropdown.html' %}
-                </td>
+                <td class="text-nowrap">{% include 'standard_action_dropdown.html' %}</td>
                 <td class="text-nowrap">{{ obj.created_by }}</td>
-                <td class="text-nowrap">{{ obj.get_update_type_display }}</td>
-                <td class="text-nowrap">{{ obj.isps.all|join_with_newline:','|linebreaks }}</td>
-                <td class="text-nowrap">{{ obj.isp_groups.all|join_with_newline:','|linebreaks }}</td>
-                <td class="text-nowrap">{{ obj.origin_as }}</td>
-                <td class="text-nowrap">{{ obj.as_path }}</td>
-                <td class="text-nowarp">{{ obj.related_ticket}}</td>
-                <td class="text-nowrap">{{ obj.ipv4_prefix_list|linebreaks }}</td>
-                <td class="text-nowrap">{{ obj.ipv6_prefix_list|linebreaks }}</td>
-                <td class="text-nowrap">{{ obj.meil_sended_time|linebreaks }}</td>
+                <td class="text-nowrap">{{ obj.date|date:"Y-m-d" }}</td>
+                <td class="text-nowrap"><a href="{{ obj.archive.url }}">{{ obj.name }}</a></td>
               </tr>
               {% empty %}
               <tr>
