@@ -3,6 +3,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import EmailValidator
+
+from core.utils import today
 import os
 
 from core.validators import (
@@ -245,3 +247,32 @@ class ExtraFileTaskFileISP(models.Model):
     )
     file = models.ForeignKey(to="telecom.File", on_delete=models.CASCADE)
     isp = models.ForeignKey(to="telecom.Isp", on_delete=models.CASCADE)
+
+
+class Archive(models.Model):
+    archive = models.FileField(storage=uuid_file_system_storage, upload_to="telecom")
+    name = models.CharField(max_length=255)
+    type = models.CharField(max_length=255)
+    date = models.DateField(verbose_name=_("Date"), default=today)
+    created_by = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="telecom_archives",
+    )
+
+    class Meta:
+        ordering = ["-date"]
+        verbose_name = _("Archive")
+        verbose_name_plural = _("Archives")
+
+    def __str__(self):
+        return self.name
+
+    def get_create_url(self):
+        return reverse("telecom:archive_create")
+
+    def get_update_url(self):
+        return reverse("telecom:archive_update", kwargs={"pk": self.pk})
+
+    def get_delete_url(self):
+        return reverse("telecom:archive_delete", kwargs={"pk": self.pk})

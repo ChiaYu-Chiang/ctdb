@@ -28,6 +28,7 @@
           <div class="form-row" id="id_form_row_{{ field.name }}">
             <div class="form-group col">
               {% if field.name == 'roa' %}
+              <a href="{% url 'telecom:archive_list' %}" target="_blank">ROA LOA範例檔案下載</a><br>
               <label for="{{ form.roa.id_for_label }}">{{ form.roa.label }}{% translate ':' %}</label>
               <input type="file" name="{{ form.roa.name }}" multiple id="{{ form.roa.id_for_label }}">
               <p>已選擇的檔案：</p>

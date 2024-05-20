@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from .models import Isp, IspGroup, PrefixListUpdateTask, File
+from .models import Isp, IspGroup, PrefixListUpdateTask, Archive
 
 
 class IspModelForm(forms.ModelForm):
@@ -195,3 +195,9 @@ class PrefixListUpdateTaskModelForm(forms.ModelForm):
     class Meta:
         model = PrefixListUpdateTask
         exclude = ["created_by", "meil_sended_time"]
+
+
+class ArchiveModelForm(forms.ModelForm):
+    class Meta:
+        model = Archive
+        exclude = ["created_by", "type", "date"]
