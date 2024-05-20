@@ -178,7 +178,8 @@ DB_CONFIGS['MSSQL'] = {
     'default': {
         # 'ENGINE': 'sql_server.pyodbc',
         'ENGINE': 'mssql',
-        'NAME': 'TDB2',
+        'NAME': 'TDB2_test',
+        # 'NAME': 'TDB2',
         'USER': 'jimmy_lin',
         'PASSWORD': DATABASES_MSSQL_PASSWORD,
         'HOST': '10.210.31.15',
