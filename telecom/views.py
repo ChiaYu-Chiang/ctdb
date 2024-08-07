@@ -288,6 +288,10 @@ def prefixlistupdatetask_create(request):
     model = PrefixListUpdateTask
     instance = model(created_by=request.user)
     form_class = PrefixListUpdateTaskModelForm
+    ispgroups = IspGroup.objects.all()
+    ispgroups_dict = {
+        group.id: list(group.isps.values_list("id", flat=True)) for group in ispgroups
+    }
     success_url = reverse("telecom:prefixlistupdatetask_list")
     form_buttons = ["create"]
     template_name = "telecom/prefixlistupdatetask_form.html"
@@ -296,7 +300,6 @@ def prefixlistupdatetask_create(request):
         if form.is_valid():
             task = form.save(commit=False)
             task.save()
-
             handle_file_isp_relationship(
                 task, request.FILES.getlist("roa"), "id_roa", request.POST
             )
@@ -314,7 +317,12 @@ def prefixlistupdatetask_create(request):
             return redirect(success_url)
     else:
         form = form_class()
-    context = {"model": model, "form": form, "form_buttons": form_buttons}
+    context = {
+        "model": model,
+        "form": form,
+        "form_buttons": form_buttons,
+        "ispgroups": ispgroups_dict,
+    }
     return render(request, template_name, context)
 
 
@@ -329,6 +337,11 @@ def prefixlistupdatetask_update(request, pk):
     success_url = reverse("telecom:prefixlistupdatetask_list")
     template_name = "telecom/prefixlistupdatetask_form.html"
 
+    ispgroups = IspGroup.objects.all()
+    ispgroups_dict = {
+        group.id: list(group.isps.values_list("id", flat=True)) for group in ispgroups
+    }
+
     roa_files = instance.roa.all().distinct()
     loa_files = instance.loa.all().distinct()
     extra_file_files = instance.extra_file.all().distinct()
@@ -336,19 +349,34 @@ def prefixlistupdatetask_update(request, pk):
     if request.method == "POST":
         form = form_class(data=request.POST, instance=instance)
         if form.is_valid():
-            form.save()
+            task = form.save(commit=False)
+            task.save()
             handle_file_isp_relationship(
-                instance, request.FILES.getlist("roa"), "id_roa", request.POST
+                task, request.FILES.getlist("roa"), "id_roa", request.POST
             )
             handle_file_isp_relationship(
-                instance, request.FILES.getlist("loa"), "id_loa", request.POST
+                task, request.FILES.getlist("loa"), "id_loa", request.POST
             )
             handle_file_isp_relationship(
-                instance,
+                task,
                 request.FILES.getlist("extra_file"),
                 "id_extra_file",
                 request.POST,
             )
+
+            isps = form.cleaned_data.get("isps")
+            isp_groups = form.cleaned_data.get("isp_groups")
+
+            if isps is not None:
+                task.isps.set(isps)
+            else:
+                task.isps.clear()
+
+            if isp_groups is not None:
+                task.isp_groups.set(isp_groups)
+            else:
+                task.isp_groups.clear()
+
             for key in request.POST:
                 if key.startswith("remove_"):
                     parts = key.split("_")
@@ -357,15 +385,15 @@ def prefixlistupdatetask_update(request, pk):
                     isp_id = parts[-1]
                     if action_type == "roa":
                         to_remove = RoaTaskFileISP.objects.get(
-                            task_id=instance, file_id=file_id, isp_id=isp_id
+                            task=task, file_id=file_id, isp_id=isp_id
                         )
                     elif action_type == "loa":
                         to_remove = LoaTaskFileISP.objects.get(
-                            task_id=instance, file_id=file_id, isp_id=isp_id
+                            task=task, file_id=file_id, isp_id=isp_id
                         )
                     elif action_type == "extra_file":
                         to_remove = ExtraFileTaskFileISP.objects.get(
-                            task_id=instance, file_id=file_id, isp_id=isp_id
+                            task=task, file_id=file_id, isp_id=isp_id
                         )
                     to_remove.delete()
             return redirect(success_url)
@@ -381,6 +409,7 @@ def prefixlistupdatetask_update(request, pk):
         "roa_files": roa_files,
         "loa_files": loa_files,
         "extra_file_files": extra_file_files,
+        "ispgroups": ispgroups_dict,
     }
     return render(request, template_name, context)
 
@@ -416,15 +445,17 @@ def prefixlistupdatetask_clone(request, pk):
     model = PrefixListUpdateTask
     instance = get_object_or_404(model, pk=pk)
     form_class = PrefixListUpdateTaskModelForm
+    ispgroups = IspGroup.objects.all()
+    ispgroups_dict = {
+        group.id: list(group.isps.values_list("id", flat=True)) for group in ispgroups
+    }
     success_url = reverse("telecom:prefixlistupdatetask_list")
     template_name = "telecom/prefixlistupdatetask_form.html"
-
     if request.method == "POST":
         form = form_class(data=request.POST, instance=model(created_by=request.user))
         if form.is_valid():
             task = form.save(commit=False)
             task.save()
-
             handle_file_isp_relationship(
                 task, request.FILES.getlist("roa"), "id_roa", request.POST
             )
@@ -434,21 +465,19 @@ def prefixlistupdatetask_clone(request, pk):
             handle_file_isp_relationship(
                 task, request.FILES.getlist("extra_file"), "id_extra_file", request.POST
             )
-
             isps = form.cleaned_data.get("isps")
             isp_groups = form.cleaned_data.get("isp_groups")
             task.isps.set(isps)
             task.isp_groups.set(isp_groups)
             return redirect(success_url)
-
     else:
         form = form_class(instance=instance)
-
     context = {
         "model": model,
         "form": form,
         "form_buttons": ["update"],
         "instance": instance,
+        "ispgroups": ispgroups_dict,
     }
     return render(request, template_name, context)
 
@@ -468,7 +497,9 @@ def prefixlistupdatetask_previewmailcontent(request, pk):
     ipv6_contents = instance.ipv6_prefix_list.split(",\r\n")
     ispsqs = instance.isps.all()
     ispgroupsqs = (
-        instance.isp_groups.get().isps.all() if instance.isp_groups.all() else None
+        Isp.objects.filter(ispgroup__in=instance.isp_groups.all())
+        if instance.isp_groups.exists()
+        else None
     )
     isps = ispsqs if ispsqs else ispgroupsqs
     if ispsqs and ispgroupsqs:
@@ -510,7 +541,9 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
     ipv6_contents = instance.ipv6_prefix_list.split(",\r\n")
     ispsqs = instance.isps.all()
     ispgroupsqs = (
-        instance.isp_groups.get().isps.all() if instance.isp_groups.all() else None
+        Isp.objects.filter(ispgroup__in=instance.isp_groups.all())
+        if instance.isp_groups.exists()
+        else None
     )
     isps = ispsqs if ispsqs else ispgroupsqs
     if ispsqs and ispgroupsqs:

@@ -1,103 +1,111 @@
 document.addEventListener("DOMContentLoaded", function() {
   const select = document.querySelector("#id_isps");
+  const groupSelect = document.querySelector("#id_isp_groups");
   const loa = document.querySelector("#id_form_row_loa");
   const loa_remark = document.querySelector("#id_form_row_loa_remark");
   const extra_file = document.querySelector("#id_form_row_extra_file");
-  loa.style.display = "none";
-  loa_remark.style.display = "none";
-  extra_file.style.display = "none";
-  for (let i = 0; i < select.options.length; i++) {
-    if (
-      select.options[i].selected &&
-      select.options[i].textContent.includes("HiNet")
-    ) {
-      loa.style.display = "";
-      loa_remark.style.display = "";
-      extra_file.style.display = "";
-      break;
-    }
+  const ispgroups = JSON.parse(
+    document.getElementById("ispgroups").textContent
+  );
+
+  function updateVisibility() {
+    const selectedISPs = getSelectedISPs();
+    const showElements = selectedISPs.some((isp) => isp.name.includes("HiNet"));
+    [loa, loa_remark, extra_file].forEach(
+      (el) => (el.style.display = showElements ? "" : "none")
+    );
   }
-  select.addEventListener("change", function() {
-    for (let i = 0; i < select.options.length; i++) {
-      if (
-        select.options[i].selected &&
-        select.options[i].textContent.includes("HiNet")
-      ) {
-        loa.style.display = "";
-        loa_remark.style.display = "";
-        extra_file.style.display = "";
-        return;
+
+  function getSelectedISPs() {
+    const selectedISPs = new Set();
+
+    // Add ISPs from direct selection
+    Array.from(select.selectedOptions).forEach((option) =>
+      selectedISPs.add(option.value.toString())
+    );
+
+    // Add ISPs from selected groups
+    Array.from(groupSelect.selectedOptions).forEach((option) => {
+      const group = option.value;
+      if (ispgroups[group]) {
+        ispgroups[group].forEach((isp) => selectedISPs.add(isp.toString()));
       }
-    }
-    loa.style.display = "none";
-    loa_remark.style.display = "none";
-    extra_file.style.display = "none";
+    });
+
+    // Convert Set to Array of objects
+    return Array.from(selectedISPs).map((id) => {
+      const option = select.querySelector(`option[value="${id}"]`);
+      return {
+        id: id,
+        name: option ? option.textContent : `ISP ${id}`, // Fallback name if option not found
+      };
+    });
+  }
+
+  function updateSelectedFiles(fileId, selectedFilesDivId) {
+    const selectedFilesDiv = document.getElementById(selectedFilesDivId);
+    selectedFilesDiv.innerHTML = "";
+    const files = document.getElementById(fileId).files;
+    const fileList = document.createElement("ul");
+
+    Array.from(files).forEach((file, i) => {
+      const fileItem = document.createElement("li");
+      const fileInfo = document.createElement("p");
+      fileInfo.textContent = file.name;
+      fileItem.appendChild(fileInfo);
+
+      const ispList = document.createElement("ul");
+      const selectedISPs = getSelectedISPs();
+
+      if (selectedISPs.length > 0) {
+        selectedISPs.forEach((isp) => {
+          const ispItem = document.createElement("li");
+          const input = document.createElement("input");
+          input.type = "checkbox";
+          input.name = `selectedISP_${fileId}_${i}`;
+          input.value = isp.id;
+
+          const label = document.createElement("label");
+          label.appendChild(input);
+          label.appendChild(document.createTextNode(isp.name));
+
+          ispItem.appendChild(label);
+          ispList.appendChild(ispItem);
+        });
+      } else {
+        const noIspItem = document.createElement("li");
+        noIspItem.textContent = "No ISPs selected";
+        ispList.appendChild(noIspItem);
+      }
+
+      fileItem.appendChild(ispList);
+      fileList.appendChild(fileItem);
+    });
+
+    selectedFilesDiv.appendChild(fileList);
+  }
+
+  function updateAllFiles() {
+    ["id_roa", "id_loa", "id_extra_file"].forEach((id) =>
+      updateSelectedFiles(id, `selected${id.slice(3)}Files`)
+    );
+  }
+
+  function updateAll() {
+    updateVisibility();
+    updateAllFiles();
+  }
+
+  updateAll();
+
+  select.addEventListener("change", updateAll);
+  groupSelect.addEventListener("change", updateAll);
+
+  ["id_roa", "id_loa", "id_extra_file"].forEach((id) => {
+    document
+      .getElementById(id)
+      .addEventListener("change", () =>
+        updateSelectedFiles(id, `selected${id.slice(3)}Files`)
+      );
   });
-});
-function showSelectedFiles(fileId, selectedFilesDivId) {
-  var selectedFilesDiv = document.getElementById(selectedFilesDivId);
-  selectedFilesDiv.innerHTML = "";
-
-  var files = document.getElementById(fileId).files;
-  var fileList = document.createElement("ul");
-
-  for (var i = 0; i < files.length; i++) {
-    var fileItem = document.createElement("li");
-
-    // File info
-    var fileInfo = document.createElement("p");
-    fileInfo.textContent = files[i].name;
-    fileItem.appendChild(fileInfo);
-
-    // Display the selected ISPs under each file with radio buttons
-    var selectElement = document.getElementById("id_isps");
-    var selectedISPs = [];
-    for (var j = 0; j < selectElement.options.length; j++) {
-      if (selectElement.options[j].selected) {
-        var ispId = selectElement.options[j].value;
-        var ispName = selectElement.options[j].text;
-        selectedISPs.push({ id: ispId, name: ispName });
-      }
-    }
-
-    // Selected ISPs with radio buttons
-    var ispList = document.createElement("ul");
-    for (var k = 0; k < selectedISPs.length; k++) {
-      var ispItem = document.createElement("li");
-      var input = document.createElement("input");
-      input.type = fileId === "id_roa" ? "radio" : "checkbox";
-      input.name = "selectedISP_" + fileId + "_" + i;
-      input.value = selectedISPs[k].id;
-
-      var label = document.createElement("label");
-      label.appendChild(input);
-      label.appendChild(document.createTextNode(selectedISPs[k].name));
-
-      ispItem.appendChild(label);
-      ispList.appendChild(ispItem);
-    }
-
-    fileItem.appendChild(ispList);
-    fileList.appendChild(fileItem);
-  }
-
-  selectedFilesDiv.appendChild(fileList);
-}
-
-document.getElementById("id_isps").addEventListener("change", function() {
-  showSelectedFiles("id_roa", "selectedroaFiles");
-  showSelectedFiles("id_loa", "selectedloaFiles");
-  showSelectedFiles("id_extra_file", "selectedextra_fileFiles");
-});
-
-document.getElementById("id_roa").addEventListener("change", function() {
-  showSelectedFiles("id_roa", "selectedroaFiles");
-});
-
-document.getElementById("id_loa").addEventListener("change", function() {
-  showSelectedFiles("id_loa", "selectedloaFiles");
-});
-
-document.getElementById("id_extra_file").addEventListener("change", function() {
-  showSelectedFiles("id_extra_file", "selectedextra_fileFiles");
 });

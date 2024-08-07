@@ -129,5 +129,6 @@
 
 
 {% block extrajs %}
+{{ ispgroups|json_script:"ispgroups" }}
 <script src="{% static 'telecom/js/telecom_form.js' %}"></script>
 {% endblock %}
