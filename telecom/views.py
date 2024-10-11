@@ -556,16 +556,16 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
         attachments = []
         for taskfileisp in roa_files:
             file = taskfileisp.file
-            path = os.path.join(settings.MEDIA_ROOT, str(file.file))
-            attachments.append(path)
+            print(str(file.name))
+            attachments.append((os.path.join(settings.MEDIA_ROOT, str(file.file)), str(file.name)))
         for taskfileisp in loa_files:
             file = taskfileisp.file
-            path = os.path.join(settings.MEDIA_ROOT, str(file.file))
-            attachments.append(path)
+            print(str(file.name))
+            attachments.append((os.path.join(settings.MEDIA_ROOT, str(file.file)), str(file.name)))
         for taskfileisp in extra_files:
             file = taskfileisp.file
-            path = os.path.join(settings.MEDIA_ROOT, str(file.file))
-            attachments.append(path)
+            print(str(file.name))
+            attachments.append((os.path.join(settings.MEDIA_ROOT, str(file.file)), str(file.name)))
         context = {
             "model": model,
             "task": instance,

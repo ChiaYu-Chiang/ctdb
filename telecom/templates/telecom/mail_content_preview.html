@@ -43,7 +43,7 @@
                     <ul>{{ type }}
                         {% for taskfileisp in taskfileisps %}
                         {% if taskfileisp.isp.to == isp.to %}
-                        <li><a href="{{ taskfileisp.file.file }}">{{ taskfileisp.file.name }}</a></li>
+                        <li><a href="{{ taskfileisp.file.file }}" download="{{ taskfileisp.file.name }}">{{ taskfileisp.file.name }}</a></li>
                         {% endif %}
                         {% endfor %}
                     </ul>
@@ -67,7 +67,7 @@
                     <ul>{{ type }}
                         {% for taskfileisp in taskfileisps %}
                         {% if taskfileisp.isp.to == isp.to %}
-                        <li><a href="{{ taskfileisp.file.file }}">{{ taskfileisp.file.name }}</a></li>
+                        <li><a href="{{ taskfileisp.file.file }}" download="{{ taskfileisp.file.name }}">{{ taskfileisp.file.name }}</a></li>
                         {% endif %}
                         {% endfor %}
                     </ul>
@@ -87,7 +87,7 @@
                     <ul>{{ type }}
                         {% for taskfileisp in taskfileisps %}
                         {% if taskfileisp.isp.to == isp.to %}
-                        <li><a href="{{ taskfileisp.file.file }}">{{ taskfileisp.file.name }}</a></li>
+                        <li><a href="{{ taskfileisp.file.file }}" download="{{ taskfileisp.file.name }}">{{ taskfileisp.file.name }}</a></li>
                         {% endif %}
                         {% endfor %}
                     </ul>

@@ -34,7 +34,7 @@
               <p>已選擇的檔案：</p>
               <div id="selectedroaFiles"></div>
               {% if roa_files %}
-                <p>已上傳的檔案：</p>
+                <p>已上傳的檔案：若要移除請勾選</p>
                 <ul id="uploadedroaFiles">
                   {% for file in roa_files %}
                   {% for file_isp in file.roataskfileisp_set.all %}
@@ -52,7 +52,7 @@
               <p>已選擇的檔案：</p>
               <div id="selectedloaFiles"></div>
               {% if loa_files %}
-                <p>已上傳的檔案：</p>
+                <p>已上傳的檔案：若要移除請勾選</p>
                 <ul id="uploadedloaFiles">
                   {% for file in loa_files %}
                   {% for file_isp in file.loataskfileisp_set.all %}
@@ -70,7 +70,7 @@
               <p>已選擇的檔案：</p>
               <div id="selectedextra_fileFiles"></div>
               {% if extra_file_files %}
-                <p>已上傳的檔案：</p>
+                <p>已上傳的檔案：若要移除請勾選</p>
                 <ul id="uploadedextra_fileFiles">
                   {% for file in extra_file_files %}
                   {% for file_isp in file.extrafiletaskfileisp_set.all %}

@@ -1,7 +1,8 @@
+import mimetypes
 from django.conf import settings
 from django.core.mail import send_mail, EmailMultiAlternatives, get_connection
 from django.utils.html import strip_tags
-
+from email.header import Header
 
 def send_mail(
     subject,
@@ -34,8 +35,14 @@ def send_mail(
     if html_message:
         mail.attach_alternative(html_message, "text/html")
     if attach_file:
-        for file in attach_file:
-            mail.attach_file(file)
+        for filepath, filename in attach_file:
+            with open(filepath, 'rb') as file:
+                content = file.read()
+                mime_type, _ = mimetypes.guess_type(filepath)
+                if mime_type is None:
+                    mime_type = 'application/octet-stream'
+                encoded_filename = Header(filename, 'utf-8').encode()
+                mail.attach(encoded_filename, content, mime_type)
 
     return mail.send()
 
