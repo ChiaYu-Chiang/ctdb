@@ -40,7 +40,7 @@
               <tr>
                 <td class="text-nowrap">{% include 'standard_action_dropdown.html' %}</td>
                 <td class="text-nowrap">{{ obj.created_by }}</td>
-                <td class="text-nowrap"><a href="{{ obj.archive.url }}">{{ obj.name }}</a></td>
+                <td class="text-nowrap"><a href="{{ obj.archive }}"	download="obj.name">{{ obj.name }}</a></td>
               </tr>
               {% empty %}
               <tr>
