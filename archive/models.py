@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+import os
 
 from .storage import UUIDFileSystemStorage
 
@@ -36,3 +37,8 @@ class Archive(models.Model):
 
     def get_create_announce_url(self):
         return reverse('archive:announce_create')
+
+    def get_full_filename(self):
+        _, extension = os.path.splitext(self.archive.name)
+        return f"{self.name}{extension}"
+    
