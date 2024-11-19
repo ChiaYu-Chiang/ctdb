@@ -577,13 +577,16 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
         }
         if isp == hinet_mail:
             mail_content = render_to_string(template_name_hinet, context)
-            handle_task_mail(isp, instance, mail_content, attachments)
         elif isp.eng_mail_type:
             mail_content = render_to_string(eng_template_name, context)
-            handle_task_mail(isp, instance, mail_content, attachments)
         else:
             mail_content = render_to_string(template_name, context)
-            handle_task_mail(isp, instance, mail_content, attachments)
+        success = handle_task_mail(isp, instance, mail_content, attachments)
+        if not success:
+            print(request, f"Failed to send email to {isp.to}")
+        else:
+            print(request, f"Successfully sent email to {isp.to}")
+        
     task_list_url = reverse("telecom:prefixlistupdatetask_list")
     return redirect(task_list_url)
 
