@@ -4,18 +4,27 @@ from django.utils.html import strip_tags
 
 
 def send_mail(subject, message, from_email, recipient_list, fail_silently=False, auth_user=None, auth_password=None,bcc=None, connection=None,cc=None, html_message=None, attach_file=None):
-    connection = connection or get_connection(
-        username=auth_user,
-        password=auth_password,
-        fail_silently=fail_silently,
-    )
-    mail = EmailMultiAlternatives(subject, message, from_email, recipient_list, bcc=bcc, connection=connection, cc=cc)
-    if html_message:
-        mail.attach_alternative(html_message, 'text/html')
-    if attach_file:
-        mail.attach_file(attach_file)
+    try:
+        connection = connection or get_connection(
+            username=auth_user,
+            password=auth_password,
+            fail_silently=fail_silently,
+        )
+        mail = EmailMultiAlternatives(subject, message, from_email, recipient_list, bcc=bcc, connection=connection, cc=cc)
+        if html_message:
+            mail.attach_alternative(html_message, 'text/html')
+        if attach_file:
+            mail.attach_file(attach_file)
 
-    return mail.send()
+        return mail.send()
+    except Exception as e:
+        print(f"Error sendingemail: {e}")
+        if not fail_silently:
+            raise
+        return False
+    finally:
+        if connection:
+            connection.close()
 
 def handle_task_mail(isp, task, mail_content, attach_file=None, debug=settings.DEBUG):
     seperator = ';'
