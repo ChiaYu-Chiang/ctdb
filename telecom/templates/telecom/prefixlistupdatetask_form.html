@@ -27,6 +27,62 @@
           {% for field in form %}
           <div class="form-row" id="id_form_row_{{ field.name }}">
             <div class="form-group col">
+              {% if field.name == 'roa' %}
+              <a href="{% url 'telecom:archive_list' %}" target="_blank">ROA LOA範例檔案下載</a><br>
+              <label for="{{ form.roa.id_for_label }}">{{ form.roa.label }}{% translate ':' %}</label>
+              <input type="file" name="{{ form.roa.name }}" multiple id="{{ form.roa.id_for_label }}">
+              <p>已選擇的檔案：</p>
+              <div id="selectedroaFiles"></div>
+              {% if roa_files %}
+                <p>已上傳的檔案：若要移除請勾選</p>
+                <ul id="uploadedroaFiles">
+                  {% for file in roa_files %}
+                  {% for file_isp in file.roataskfileisp_set.all %}
+                    <li>
+                      <input type="checkbox" name="remove_roa_{{ file.id }}_{{ file_isp.isp.id }}">
+                      移除{{ file.name }} - {{ file_isp.isp.cname }}
+                    </li>
+                  {% endfor %}
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              {% elif field.name == 'loa' %}
+              <label for="{{ form.loa.id_for_label }}">{{ form.loa.label }}{% translate ':' %}</label>
+              <input type="file" name="{{ form.loa.name }}" multiple id="{{ form.loa.id_for_label }}">
+              <p>已選擇的檔案：</p>
+              <div id="selectedloaFiles"></div>
+              {% if loa_files %}
+                <p>已上傳的檔案：若要移除請勾選</p>
+                <ul id="uploadedloaFiles">
+                  {% for file in loa_files %}
+                  {% for file_isp in file.loataskfileisp_set.all %}
+                    <li>
+                      <input type="checkbox" name="remove_loa_{{ file.id }}_{{ file_isp.isp.id }}">
+                      移除{{ file.name }} - {{ file_isp.isp.cname }}
+                    </li>
+                  {% endfor %}
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              {% elif field.name == 'extra_file' %}
+              <label for="{{ form.extra_file.id_for_label }}">{{ form.extra_file.label }}{% translate ':' %}</label>
+              <input type="file" name="{{ form.extra_file.name }}" multiple id="{{ form.extra_file.id_for_label }}">
+              <p>已選擇的檔案：</p>
+              <div id="selectedextra_fileFiles"></div>
+              {% if extra_file_files %}
+                <p>已上傳的檔案：若要移除請勾選</p>
+                <ul id="uploadedextra_fileFiles">
+                  {% for file in extra_file_files %}
+                  {% for file_isp in file.extrafiletaskfileisp_set.all %}
+                    <li>
+                      <input type="checkbox" name="remove_extra_file_{{ file.id }}_{{ file_isp.isp.id }}">
+                      移除{{ file.name }} - {{ file_isp.isp.cname }}
+                    </li>
+                  {% endfor %}
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              {% else %}
               {% with has_error=field.errors has_placeholder=field.field.widget.attrs.placeholder input_type=field.field.widget.input_type %}
               {% if input_type == 'checkbox' %}
               {% if has_error %}{% render_field field class+='form-check border-danger' %}{% else %}{% render_field field %}{% endif %}
@@ -47,6 +103,7 @@
               {% for error in field.errors %}
               <small class="text-danger d-block px-1">{{ error }}</small>
               {% endfor %}
+              {% endif %}
 
             </div>
           </div>
@@ -72,5 +129,6 @@
 
 
 {% block extrajs %}
+{{ ispgroups|json_script:"ispgroups" }}
 <script src="{% static 'telecom/js/telecom_form.js' %}"></script>
 {% endblock %}

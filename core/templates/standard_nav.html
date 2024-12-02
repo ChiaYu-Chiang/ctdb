@@ -108,6 +108,12 @@
               href="{% url 'telecom:prefixlistupdatetask_create' %}">{% translate 'Prefix-list update task' %} |
               {% translate 'Add' %}</a>
             {% endif %}
+            {% if perms.telecom.view_archive %}
+            <a class="dropdown-item" href="{% url 'telecom:archive_list' %}">{% translate 'Example archive' %} | {% translate 'List' %}</a>
+            {% endif %}
+            {% if perms.telecom.add_archive %}
+            <a class="dropdown-item" href="{% url 'telecom:archive_create' %}">{% translate 'Example archive' %} | {% translate 'Add' %}</a>
+            {% endif %}
           </div>
           {% endif %}
         </li>

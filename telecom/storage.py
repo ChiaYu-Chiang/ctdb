@@ -8,5 +8,5 @@ class UUIDFileSystemStorage(FileSystemStorage):
 
     def generate_filename(self, filename):
         dirname, filename = os.path.split(filename)
-        new_filename = str(uuid.uuid4()) + "___" + filename
+        new_filename = str(uuid.uuid4()) + os.path.splitext(filename)[1]
         return os.path.normpath(os.path.join(dirname, new_filename))

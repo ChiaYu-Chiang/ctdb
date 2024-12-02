@@ -126,7 +126,13 @@
                 </tbody>
             </table>
             <br>
-            <dt>4.ROA: {{ task.roa }}</dt>
+            <dt>4.ROA: 
+                {% if files.roa %}
+                    有更新
+                {% else %}
+                    沒有更新
+                {% endif %}
+            </dt>
             <br>
             <dt>5.LOA: {{ task.loa_remark }}</dt>
         </dl>
