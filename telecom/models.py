@@ -276,3 +276,7 @@ class Archive(models.Model):
 
     def get_delete_url(self):
         return reverse("telecom:archive_delete", kwargs={"pk": self.pk})
+    
+    def get_full_filename(self):
+        _, extension = os.path.splitext(self.archive.name)
+        return f"{self.name}{extension}"
