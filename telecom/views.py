@@ -586,7 +586,9 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
             print(request, f"Failed to send email to {isp.to}")
         else:
             print(request, f"Successfully sent email to {isp.to}")
-        
+    time_now = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
+    instance.meil_sended_time = time_now
+    instance.save()
     task_list_url = reverse("telecom:prefixlistupdatetask_list")
     return redirect(task_list_url)
 
