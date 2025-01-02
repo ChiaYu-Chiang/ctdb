@@ -43,8 +43,8 @@ class ReminderModelForm(forms.ModelForm):
         if policy == 'specified dates':
             specified_dates = cleaned_data.get('specified_dates')
             if specified_dates:
-                date_list = specified_dates.split(',')
-                date_list = [datetime.strptime(date.strip(), '%Y-%m-%d').date() for date in date_list]
+                date_list = [date.strip() for date in specified_dates.split(',') if date.strip()]
+                date_list = [datetime.strptime(date, '%Y-%m-%d').date() for date in date_list]
                 if date_list:
                     start_at = min(date_list)
                     end_at = max(date_list)
