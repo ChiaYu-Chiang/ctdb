@@ -103,7 +103,7 @@ def news_create(request):
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=recipient_list,
                     fail_silently=False,
-                    html_message='<a href="https://tdb.chief.net.tw/news/">最新消息</a>',
+                    html_message='<a href="https://tdb.chief-tech.net/news/">最新消息</a>',
                 )
 
             return redirect(success_url)
