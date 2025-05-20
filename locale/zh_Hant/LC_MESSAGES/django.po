@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-20 15:10+0800\n"
+"POT-Creation-Date: 2025-05-20 12:01+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,72 +73,80 @@ msgid "T00 member"
 msgstr "T00 成員"
 
 #: .\accounts\i18n.py:9
-msgid "T01 member"
-msgstr "T01 成員"
-
-#: .\accounts\i18n.py:10
-msgid "T02 member"
-msgstr "T02 成員"
-
-#: .\accounts\i18n.py:11
 msgid "T11 member"
 msgstr "T11 成員"
 
-#: .\accounts\i18n.py:12
+#: .\accounts\i18n.py:10
 msgid "T12 member"
 msgstr "T12 成員"
 
+#: .\accounts\i18n.py:11
+msgid "T13 member"
+msgstr "T13 成員"
+
+#: .\accounts\i18n.py:12
+msgid "T15 member"
+msgstr "T15 成員"
+
 #: .\accounts\i18n.py:13
-msgid "T21 member"
-msgstr "T21 成員"
+msgid "I00 member"
+msgstr "I00 成員"
 
 #: .\accounts\i18n.py:14
-msgid "T22 member"
-msgstr "T22 成員"
+msgid "I01 member"
+msgstr "I01 成員"
 
 #: .\accounts\i18n.py:15
-msgid "T31 member"
-msgstr "T31 成員"
+msgid "I02 member"
+msgstr "I02 成員"
 
 #: .\accounts\i18n.py:16
-msgid "T32 member"
-msgstr "T32 成員"
+msgid "I03 member"
+msgstr "I03 成員"
 
 #: .\accounts\i18n.py:17
+msgid "I04 member"
+msgstr "I04 成員"
+
+#: .\accounts\i18n.py:18
 msgid "T00 supervisor"
 msgstr "T00 主管"
 
-#: .\accounts\i18n.py:18
-msgid "T01 supervisor"
-msgstr "T01 主管"
-
 #: .\accounts\i18n.py:19
-msgid "T02 supervisor"
-msgstr "T02 主管"
-
-#: .\accounts\i18n.py:20
 msgid "T11 supervisor"
 msgstr "T11 主管"
 
-#: .\accounts\i18n.py:21
+#: .\accounts\i18n.py:20
 msgid "T12 supervisor"
 msgstr "T12 主管"
 
+#: .\accounts\i18n.py:21
+msgid "T13 supervisor"
+msgstr "T13 主管"
+
 #: .\accounts\i18n.py:22
-msgid "T21 supervisor"
-msgstr "T21 主管"
+msgid "T15 supervisor"
+msgstr "T15 主管"
 
 #: .\accounts\i18n.py:23
-msgid "T22 supervisor"
-msgstr "T22 主管"
+msgid "I00 supervisor"
+msgstr "I00 主管"
 
 #: .\accounts\i18n.py:24
-msgid "T31 supervisor"
-msgstr "T31 主管"
+msgid "I01 supervisor"
+msgstr "I01 主管"
 
 #: .\accounts\i18n.py:25
-msgid "T32 supervisor"
-msgstr "T32 主管"
+msgid "I02 supervisor"
+msgstr "I02 主管"
+
+#: .\accounts\i18n.py:26
+msgid "I03 supervisor"
+msgstr "I03 主管"
+
+#: .\accounts\i18n.py:27
+msgid "I04 supervisor"
+msgstr "I04 主管"
 
 #: .\accounts\models.py:10
 msgid "User"
@@ -345,7 +353,7 @@ msgstr "以 Chief 電子信箱繼續"
 msgid "Already have an account?"
 msgstr "已經有帳號了嗎？"
 
-#: .\archive\models.py:19 .\core\templates\standard_nav.html:124
+#: .\archive\models.py:20 .\core\templates\standard_nav.html:124
 #: .\core\templates\standard_nav.html:128
 #: .\core\templates\standard_nav.html:131
 #: .\core\templates\standard_nav.html:134
@@ -355,7 +363,7 @@ msgstr "已經有帳號了嗎？"
 msgid "Archive"
 msgstr "檔案"
 
-#: .\archive\models.py:20 .\telecom\models.py:266
+#: .\archive\models.py:21 .\telecom\models.py:266
 msgid "Archives"
 msgstr "檔案"
 
@@ -585,8 +593,6 @@ msgid "Comment"
 msgstr "評論"
 
 #: .\comment\models.py:25
-#, fuzzy
-#| msgid "Comment"
 msgid "Comments"
 msgstr "貼文"
 
@@ -673,8 +679,6 @@ msgid "No available options"
 msgstr "沒有可用的選項"
 
 #: .\comment\templates\comment\message_list.html:27
-#, fuzzy
-#| msgid "Date"
 msgid "Post Date"
 msgstr "貼文日期"
 
@@ -780,10 +784,8 @@ msgstr "Prefix-list 更新任務"
 
 #: .\core\templates\standard_nav.html:112
 #: .\core\templates\standard_nav.html:115
-#, fuzzy
-#| msgid "Example"
 msgid "Example archive"
-msgstr "範例"
+msgstr "範例檔案"
 
 #: .\core\templates\standard_nav.html:134
 msgid "journals List"
@@ -970,10 +972,8 @@ msgid "Clone"
 msgstr "複製"
 
 #: .\diary\templates\diary\diary_list.html:49
-#, fuzzy
-#| msgid "Search.."
 msgid "Search"
-msgstr "搜尋.."
+msgstr "搜尋"
 
 #: .\log\models.py:10
 msgid "APP label"
@@ -1214,8 +1214,6 @@ msgstr "密件副本"
 
 #: .\telecom\forms.py:46 .\telecom\models.py:61
 #: .\telecom\templates\telecom\isp_list.html:35
-#, fuzzy
-#| msgid "Upstream AS"
 msgid "Upstream Session IP"
 msgstr "上游 Session IP"
 
@@ -1258,17 +1256,13 @@ msgstr ""
 
 #: .\telecom\forms.py:117 .\telecom\models.py:151
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:33
-#, fuzzy
-#| msgid "Prefix-list"
 msgid "IPv4-Prefix-list"
-msgstr "Prefix-list"
+msgstr "IPv4-Prefix-list"
 
 #: .\telecom\forms.py:132 .\telecom\models.py:157
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:34
-#, fuzzy
-#| msgid "Prefix-list"
 msgid "IPv6-Prefix-list"
-msgstr "Prefix-list"
+msgstr "IPv6-Prefix-list"
 
 #: .\telecom\forms.py:136
 #, fuzzy
@@ -1441,7 +1435,3 @@ msgstr "工具"
 msgid "Unable to authenticate with provided credentials"
 msgstr ""
 
-#, fuzzy
-#~| msgid "Update type"
-#~ msgid "post_type"
-#~ msgstr "更新類型"
