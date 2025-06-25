@@ -86,7 +86,7 @@ def news_create(request):
     form_class = NewsModelForm
     success_url1 = reverse('news:news_list')
     success_url2 = reverse('news:dep_news_list')
-    success_url = success_url1 if request.user.username == 'vicky_lin' or 'jill_ko' or 'Brian_Chiang' else success_url2
+    success_url = success_url1 if request.user.username == 'Apple_Lai' or 'jill_ko' or 'Brian_Chiang' else success_url2
     form_buttons = ['create']
     template_name = 'news/news_form.html'
     if request.method == 'POST':
@@ -122,7 +122,7 @@ def news_update(request, pk):
     form_class = NewsModelForm
     success_url1 = reverse('news:news_list')
     success_url2 = reverse('news:dep_news_list')
-    success_url = success_url1 if request.user.username == 'vicky_lin' or 'jill_ko' or 'Brian_Chiang' else success_url2
+    success_url = success_url1 if request.user.username == 'Apple_Lai' or 'jill_ko' or 'Brian_Chiang' else success_url2
     form_buttons = ['update']
     template_name = 'news/news_form.html'
     if request.method == 'POST':
@@ -144,7 +144,7 @@ def news_delete(request, pk):
     instance = get_object_or_404(klass=model, pk=pk, created_by=request.user)
     success_url1 = reverse('news:news_list')
     success_url2 = reverse('news:dep_news_list')
-    success_url = success_url1 if request.user.username == 'vicky_lin' or 'jill_ko' or 'Brian_Chiang' else success_url2
+    success_url = success_url1 if request.user.username == 'Apple_Lai' or 'jill_ko' or 'Brian_Chiang' else success_url2
     template_name = 'news/news_confirm_delete.html'
     if request.method == 'POST':
         instance.delete()
