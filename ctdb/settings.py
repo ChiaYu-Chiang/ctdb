@@ -282,14 +282,14 @@ if USE_GMAIL:
     DEFAULT_FROM_EMAIL = "TDB <j3ycode@gmail.com>"
     SERVER_EMAIL = "TDB <j3ycode@gmail.com>"
 else:
-    EMAIL_HOST = "mail.adsl.chief.net.tw"
+    EMAIL_HOST = "mail.chief-tech.net"
     EMAIL_USE_TLS = False
     EMAIL_PORT = 25
     EMAIL_HOST_USER = ""
     EMAIL_HOST_PASSWORD = ""
-    DEFAULT_FROM_EMAIL = "TDB <TDB@chief.com.tw>"
-    SERVER_EMAIL = "TDB <TDB@chief.com.tw>"
-    T21_FROM_MAIL = "t21@chief.com.tw"
+    DEFAULT_FROM_EMAIL = "TDB <TDB@mail.chief-tech.net>"
+    SERVER_EMAIL = "TDB <TDB@mail.chief-tech.net>"
+    I01_FROM_MAIL = "i01@chief.com.tw"
 
 
 # Authentication things
