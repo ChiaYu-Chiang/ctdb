@@ -15,7 +15,7 @@ def validate_comma_separated_prefix_list_string(value):
     for prefix in prefix_list:
         ip_network, *args = prefix.split(' ')
         try:
-            prefixlen = ipaddress.ip_network(ip_network).prefixlen
+            prefixlen = ipaddress.ip_network(ip_network, strict=False).prefixlen
         except ValueError:
             raise ValidationError(
                 _('%(ip_network)s is not a valid IP network.'),

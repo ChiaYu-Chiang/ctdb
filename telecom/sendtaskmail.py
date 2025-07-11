@@ -88,7 +88,7 @@ def handle_task_mail(isp, task, mail_content, attach_file=None, debug=settings.D
         success = send_mail(
                 email_subject,
                 email_content,
-                from_email=settings.T21_FROM_MAIL,
+                from_email=settings.I01_FROM_MAIL,
                 recipient_list=recipient_list,
                 bcc=recipient_bcc_list,
                 cc=recipient_cc_list,
