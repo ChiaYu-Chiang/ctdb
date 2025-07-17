@@ -10,7 +10,15 @@
     <div class="row pt-navbar pb-footer-foot justify-content-center align-items-center min-vh-100">
       <div class="col-12" style="height: 60px;"></div>
       <div class="col-12 max-w-10u border rounded shadow" style="padding: 2rem;">
-        <h3 class="mb-5">{{ model|default:form.instance|attr:'_meta'|attr:'verbose_name_plural' }}</h3>
+        <h3 class="mb-5">
+          {% if 'create' in form_buttons %}
+            {% trans "新增事件" %}
+          {% elif 'update' in form_buttons %}
+            {% trans "編輯事件" %}
+          {% else %}
+            {{ model|default:form.instance|attr:'_meta'|attr:'verbose_name_plural' }}
+          {% endif %}
+        </h3>
 
         <form method="post" novalidate>
           {% csrf_token %}
@@ -54,13 +62,27 @@
           <div class="form-row">
             <div class="form-group col">
               {% if 'create' in form_buttons %}
-              <button type="submit" class="btn btn-primary btn-block">{% translate 'Add' %}</button>
+              <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-plus"></i> {% translate 'Add' %}
+              </button>
               {% endif %}
               {% if 'update' in form_buttons %}
-              <button type="submit" class="btn btn-success btn-block">{% translate 'Change' %}</button>
+              <button type="submit" class="btn btn-success btn-block">
+                <i class="fas fa-save"></i> {% translate 'Change' %}
+              </button>
               {% endif %}
             </div>
           </div>
+          
+          {% if 'update' in form_buttons %}
+          <div class="form-row">
+            <div class="form-group col">
+              <a href="{% url 'dep_calendar:event_detail' event.id %}" class="btn btn-secondary btn-block">
+                <i class="fas fa-arrow-left"></i> {% trans "返回事件詳情" %}
+              </a>
+            </div>
+          </div>
+          {% endif %}
         </form>
 
       </div>
