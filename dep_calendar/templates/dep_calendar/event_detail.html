@@ -12,38 +12,43 @@
         <div class="card mb-4">
           <div class="card-body">
             <div class="row mb-3">
-              <div class="col-sm-3"><strong>{% trans "標題：" %}</strong></div>
+              <div class="col-sm-3"><strong>{% trans "Title: " %}</strong></div>
               <div class="col-sm-9">{{ event.title }}</div>
             </div>
             
             <div class="row mb-3">
-              <div class="col-sm-3"><strong>{% trans "描述：" %}</strong></div>
-              <div class="col-sm-9">{{ event.description|default:"無描述"|linebreaks }}</div>
+              <div class="col-sm-3"><strong>{% trans "Event type: " %}</strong></div>
+              <div class="col-sm-9">{{ event.event_type }}</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-sm-3"><strong>{% trans "Description: " %}</strong></div>
+              <div class="col-sm-9">{{ event.description|default:" "|linebreaks }}</div>
             </div>
             
             <div class="row mb-3">
-              <div class="col-sm-3"><strong>{% trans "開始時間：" %}</strong></div>
-              <div class="col-sm-9">{{ event.start_time|date:"Y年m月d日 H:i" }}</div>
+              <div class="col-sm-3"><strong>{% trans "Start time: " %}</strong></div>
+              <div class="col-sm-9">{{ event.start_time|date:"Y/m/d H:i" }}</div>
             </div>
             
             <div class="row mb-3">
-              <div class="col-sm-3"><strong>{% trans "結束時間：" %}</strong></div>
-              <div class="col-sm-9">{{ event.end_time|date:"Y年m月d日 H:i" }}</div>
+              <div class="col-sm-3"><strong>{% trans "End time: " %}</strong></div>
+              <div class="col-sm-9">{{ event.end_time|date:"Y/m/d H:i" }}</div>
             </div>
             
             <div class="row mb-3">
-              <div class="col-sm-3"><strong>{% trans "建立者：" %}</strong></div>
+              <div class="col-sm-3"><strong>{% trans "Created by: " %}</strong></div>
               <div class="col-sm-9">{{ event.created_by.get_full_name|default:event.created_by.username }}</div>
             </div>
             
             <div class="row mb-3">
-              <div class="col-sm-3"><strong>{% trans "部門：" %}</strong></div>
+              <div class="col-sm-3"><strong>{% trans "Department: " %}</strong></div>
               <div class="col-sm-9">{{ event.department.name }}</div>
             </div>
             
             {% if event.participants.exists %}
             <div class="row mb-3">
-              <div class="col-sm-3"><strong>{% trans "參與者：" %}</strong></div>
+              <div class="col-sm-3"><strong>{% trans "Participants: " %}</strong></div>
               <div class="col-sm-9">
                 {% for participant in event.participants.all %}
                   <span class="badge badge-secondary mr-1">
@@ -59,17 +64,17 @@
         <div class="row">
           <div class="col-4">
             <a href="{% url 'dep_calendar:event_update' event.id %}" class="btn btn-primary btn-block">
-              <i class="fas fa-edit"></i> {% trans "編輯" %}
+              <i class="fas fa-edit"></i> {% trans "Change" %}
             </a>
           </div>
           <div class="col-4">
             <a href="{% url 'dep_calendar:event_delete' event.id %}" class="btn btn-danger btn-block">
-              <i class="fas fa-trash"></i> {% trans "刪除" %}
+              <i class="fas fa-trash"></i> {% trans "Delete" %}
             </a>
           </div>
           <div class="col-4">
             <a href="{% url 'dep_calendar:event_list' %}" class="btn btn-secondary btn-block">
-              <i class="fas fa-arrow-left"></i> {% trans "返回" %}
+              <i class="fas fa-arrow-left"></i> {% trans "Return" %}
             </a>
           </div>
         </div>

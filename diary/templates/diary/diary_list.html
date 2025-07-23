@@ -50,11 +50,17 @@
               </div>
             </div>
           </form>
-          {% name model|attr:'_meta'|get_perm_name:'add' as perm_name %}
-          {% if user|has_perm:perm_name %}
-          <a id="addButton" class="border shadow-sm form-control btn btn-light"
-            href="{{ model.get_create_url }}">{% translate 'Add' %}</a>
-          {% endif %}
+          <div class="d-flex ms-auto">
+            {% if perms.dep_calendar.view_calendarevent %}
+            <a id="addButton" class="border shadow-sm form-control btn btn-light"
+              href="{% url 'dep_calendar:event_list' %}">{% translate 'Calendar' %}</a>
+            {% endif %}
+            {% name model|attr:'_meta'|get_perm_name:'add' as perm_name %}
+            {% if user|has_perm:perm_name %}
+            <a id="addButton" class="border shadow-sm form-control btn btn-light"
+              href="{{ model.get_create_url }}">{% translate 'Add' %}</a>
+            {% endif %}
+          </div>
         </div>
         <div class="table-responsive">
           <table id="searchTable" class="table table-light table-borderless table-solid">

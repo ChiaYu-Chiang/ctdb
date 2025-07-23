@@ -1,8 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
+from django.utils.translation import gettext_lazy as _
 
 class CalendarEvent(models.Model):
+    EVENT_TYPE = [
+        (_('field_work'), (
+            ('installation', _('installation')),
+            ('maintenance', _('maintenance')),
+            ('termination', _('termination')),
+        )
+        ),
+        (_('other_field'), (
+            ('facility_inspection', _('facility_inspection')),
+            ('local_support', _('local_support')),
+            ('others', _('others')),
+        )
+        ),
+    ]
     title = models.CharField(max_length=255)
+    event_type = models.CharField(verbose_name=_('Event type'), max_length=63, choices=EVENT_TYPE)
     description = models.TextField(blank=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
@@ -14,7 +30,6 @@ class CalendarEvent(models.Model):
         return self.title
 
     def can_user_access(self, user):
-        # 限同部門可見
         if not hasattr(user, 'profile'):
             return False
         return user.profile.activated_role == self.department

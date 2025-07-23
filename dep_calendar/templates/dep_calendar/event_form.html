@@ -12,9 +12,9 @@
       <div class="col-12 max-w-10u border rounded shadow" style="padding: 2rem;">
         <h3 class="mb-5">
           {% if 'create' in form_buttons %}
-            {% trans "新增事件" %}
+            {% trans "Add event" %}
           {% elif 'update' in form_buttons %}
-            {% trans "編輯事件" %}
+            {% trans "Change event" %}
           {% else %}
             {{ model|default:form.instance|attr:'_meta'|attr:'verbose_name_plural' }}
           {% endif %}
@@ -77,8 +77,8 @@
           {% if 'update' in form_buttons %}
           <div class="form-row">
             <div class="form-group col">
-              <a href="{% url 'dep_calendar:event_detail' event.id %}" class="btn btn-secondary btn-block">
-                <i class="fas fa-arrow-left"></i> {% trans "返回事件詳情" %}
+              <a href="{% url 'dep_calendar:event_detail' form.instance.id %}" class="btn btn-secondary btn-block">
+                <i class="fas fa-arrow-left"></i> {% trans "Return" %}
               </a>
             </div>
           </div>
