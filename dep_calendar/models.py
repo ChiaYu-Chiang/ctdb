@@ -17,14 +17,14 @@ class CalendarEvent(models.Model):
         )
         ),
     ]
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, verbose_name=_('Title'))
     event_type = models.CharField(verbose_name=_('Event type'), max_length=63, choices=EVENT_TYPE)
-    description = models.TextField(blank=True)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_events')
-    department = models.ForeignKey(Group, on_delete=models.CASCADE, limit_choices_to={'groupprofile__is_department': True})
-    participants = models.ManyToManyField(User, related_name='calendar_events', blank=True)
+    description = models.TextField(blank=True, verbose_name=_('Description'))
+    start_time = models.DateTimeField(verbose_name=_('Start time'))
+    end_time = models.DateTimeField(verbose_name=_('End time'))
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_events', verbose_name=_('Created by'))
+    department = models.ForeignKey(Group, on_delete=models.CASCADE, limit_choices_to={'groupprofile__is_department': True}, verbose_name=_('Department'))
+    participants = models.ManyToManyField(User, related_name='calendar_events', blank=True, verbose_name=_('Participants'))
 
     def __str__(self):
         return self.title

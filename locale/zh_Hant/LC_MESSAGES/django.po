@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 15:29+0800\n"
+"POT-Creation-Date: 2025-07-23 17:13+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -448,11 +448,12 @@ msgstr "動作"
 #: .\comment\models.py:44 .\comment\templates\comment\comment_list.html:33
 #: .\comment\templates\comment\comment_message_list.html:14
 #: .\comment\templates\comment\comment_message_list.html:36
-#: .\comment\templates\comment\message_list.html:26 .\diary\models.py:24
-#: .\diary\templates\diary\diary_list.html:70 .\log\models.py:13
-#: .\log\templates\log\diary_log_list.html:27 .\news\models.py:16
-#: .\reminder\models.py:45 .\reminder\templates\reminder\reminder_list.html:32
-#: .\telecom\models.py:81 .\telecom\models.py:112 .\telecom\models.py:195
+#: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:25
+#: .\diary\models.py:24 .\diary\templates\diary\diary_list.html:70
+#: .\log\models.py:13 .\log\templates\log\diary_log_list.html:27
+#: .\news\models.py:16 .\reminder\models.py:45
+#: .\reminder\templates\reminder\reminder_list.html:32 .\telecom\models.py:81
+#: .\telecom\models.py:112 .\telecom\models.py:195
 #: .\telecom\templates\telecom\archive_list.html:26
 #: .\telecom\templates\telecom\isp_list.html:26
 #: .\telecom\templates\telecom\ispgroup_list.html:26
@@ -584,7 +585,8 @@ msgid "Post type"
 msgstr "貼文類型"
 
 #: .\comment\models.py:18
-#: .\comment\templates\comment\comment_message_list.html:15 .\news\models.py:11
+#: .\comment\templates\comment\comment_message_list.html:15
+#: .\dep_calendar\models.py:20 .\news\models.py:11
 msgid "Title"
 msgstr "標題"
 
@@ -742,7 +744,7 @@ msgstr "最新消息"
 msgid "T00"
 msgstr "網應處"
 
-#: .\core\templates\standard_nav.html:25
+#: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:26
 msgid "Department"
 msgstr "部門"
 
@@ -989,6 +991,22 @@ msgstr "其它"
 #: .\dep_calendar\models.py:21
 msgid "Event type"
 msgstr "事件類型"
+
+#: .\dep_calendar\models.py:22
+msgid "Description"
+msgstr "描述"
+
+#: .\dep_calendar\models.py:23
+msgid "Start time"
+msgstr "開始於"
+
+#: .\dep_calendar\models.py:24
+msgid "End time"
+msgstr "結束於"
+
+#: .\dep_calendar\models.py:27
+msgid "Participants"
+msgstr "參與者"
 
 #: .\dep_calendar\templates\dep_calendar\calendar.html:36
 msgid "today"

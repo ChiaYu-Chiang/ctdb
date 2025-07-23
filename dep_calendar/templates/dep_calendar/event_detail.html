@@ -18,7 +18,7 @@
             
             <div class="row mb-3">
               <div class="col-sm-3"><strong>{% trans "Event type: " %}</strong></div>
-              <div class="col-sm-9">{{ event.event_type }}</div>
+              <div class="col-sm-9">{{ event.get_event_type_display }}</div>
             </div>
 
             <div class="row mb-3">
