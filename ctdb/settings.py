@@ -95,6 +95,7 @@ INSTALLED_APPS += [
     "tool.apps.ToolConfig",
     "pilotadmin.apps.PilotadminConfig",
     "comment.apps.CommentConfig",
+    "dep_calendar.apps.DepCalendarConfig",
 ]
 
 if DEBUG:

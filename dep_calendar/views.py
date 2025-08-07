@@ -29,7 +29,7 @@ def calendar_events_json(request):
     user_department = request.user.profile.activated_role
     events = CalendarEvent.objects.filter(department=user_department)
 
-    color_palette = ['#1abc9c', '#3498db', '#f39c12', '#9b59b6', '#e74c3c']
+    color_palette = ['#1abc9c', '#3498db', '#f39c12', '#9b59b6', '#e74c3c', '#2ecc71', '#e67e22']
 
     data = []
     for e in events:
