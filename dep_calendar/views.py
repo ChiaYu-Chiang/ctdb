@@ -21,7 +21,8 @@ def get_event_queryset(request):
 @login_required
 @permission_required('dep_calendar.view_calendarevent', raise_exception=True, exception=Http404)
 def event_list(request):
-    template_name = 'dep_calendar/calendar.html'
+    template_name = 'dep_calendar' \
+    '/calendar.html'
     return render(request, template_name)
 
 @login_required

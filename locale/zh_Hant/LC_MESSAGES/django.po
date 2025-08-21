@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-21 15:14+0800\n"
+"POT-Creation-Date: 2025-08-21 17:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -448,7 +448,7 @@ msgstr "動作"
 #: .\comment\models.py:44 .\comment\templates\comment\comment_list.html:33
 #: .\comment\templates\comment\comment_message_list.html:14
 #: .\comment\templates\comment\comment_message_list.html:36
-#: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:32
+#: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:33
 #: .\diary\models.py:24 .\diary\templates\diary\diary_list.html:70
 #: .\log\models.py:13 .\log\templates\log\diary_log_list.html:27
 #: .\news\models.py:16 .\reminder\models.py:45
@@ -586,7 +586,7 @@ msgstr "貼文類型"
 
 #: .\comment\models.py:18
 #: .\comment\templates\comment\comment_message_list.html:15
-#: .\dep_calendar\models.py:26 .\news\models.py:11
+#: .\dep_calendar\models.py:27 .\news\models.py:11
 msgid "Title"
 msgstr "標題"
 
@@ -744,7 +744,7 @@ msgstr "最新消息"
 msgid "T00"
 msgstr "網應處"
 
-#: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:33
+#: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:34
 msgid "Department"
 msgstr "部門"
 
@@ -964,59 +964,63 @@ msgstr "語音"
 msgid "Data Service"
 msgstr "傳輸"
 
-#: .\dep_calendar\models.py:12
+#: .\dep_calendar\models.py:9
+msgid "Other Service"
+msgstr "其他"
+
+#: .\dep_calendar\models.py:13
 msgid "field_work"
 msgstr "外勤"
 
-#: .\dep_calendar\models.py:13
+#: .\dep_calendar\models.py:14
 msgid "installation"
 msgstr "申裝"
 
-#: .\dep_calendar\models.py:14
+#: .\dep_calendar\models.py:15
 msgid "maintenance"
 msgstr "障礙"
 
-#: .\dep_calendar\models.py:15
+#: .\dep_calendar\models.py:16
 msgid "termination"
 msgstr "退租"
 
-#: .\dep_calendar\models.py:18
+#: .\dep_calendar\models.py:19
 msgid "other_field"
 msgstr "其他外勤"
 
-#: .\dep_calendar\models.py:19
+#: .\dep_calendar\models.py:20
 msgid "facility_inspection"
 msgstr "外點機房巡檢"
 
-#: .\dep_calendar\models.py:20
+#: .\dep_calendar\models.py:21
 msgid "local_support"
 msgstr "近端支援"
 
-#: .\dep_calendar\models.py:21
+#: .\dep_calendar\models.py:22
 msgid "others"
 msgstr "其它"
 
-#: .\dep_calendar\models.py:27
+#: .\dep_calendar\models.py:28
 msgid "Service type"
 msgstr "服務類型"
 
-#: .\dep_calendar\models.py:28
+#: .\dep_calendar\models.py:29
 msgid "Event type"
 msgstr "事件類型"
 
-#: .\dep_calendar\models.py:29
+#: .\dep_calendar\models.py:30
 msgid "Description"
 msgstr "描述"
 
-#: .\dep_calendar\models.py:30
+#: .\dep_calendar\models.py:31
 msgid "Start time"
 msgstr "開始於"
 
-#: .\dep_calendar\models.py:31
+#: .\dep_calendar\models.py:32
 msgid "End time"
 msgstr "結束於"
 
-#: .\dep_calendar\models.py:34
+#: .\dep_calendar\models.py:35
 msgid "Participants"
 msgstr "參與者"
 
