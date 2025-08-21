@@ -25,7 +25,7 @@ class CalendarEvent(models.Model):
     ]
 
     title = models.CharField(max_length=255, verbose_name=_('Title'))
-    service_type = models.CharField(verbose_name=_('Service type'), max_length=10, choices=SERVICE_TYPE)
+    service_type = models.CharField(blank=True, verbose_name=_('Service type'), max_length=10, choices=SERVICE_TYPE)
     event_type = models.CharField(verbose_name=_('Event type'), max_length=63, choices=EVENT_TYPE)
     description = models.TextField(blank=True, verbose_name=_('Description'))
     start_time = models.DateTimeField(verbose_name=_('Start time'))
