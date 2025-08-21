@@ -29,17 +29,31 @@ def calendar_events_json(request):
     user_department = request.user.profile.activated_role
     events = CalendarEvent.objects.filter(department=user_department)
 
-    color_palette = ['#1abc9c', '#3498db', '#f39c12', '#9b59b6', '#e74c3c', '#2ecc71', '#e67e22']
+    # 定義使用者與顏色的對應
+    user_colors = {
+        'domo_lin': '#FF0000',    # 紅色
+        'rico_hu': '#00FF00',     # 綠色
+        'kenny_jan': '#0000FF',   # 藍色
+        'anson_lien': '#FFA500',  # 橘色
+        'louis_wen': '#800080',   # 紫色
+        'hank_tsai': '#008080',   # 青色
+        'nick_tsai': '#FFD700',   # 金色
+    }
+    
+    # 預設顏色,當使用者不在清單中時使用
+    default_color = '#808080'  # 灰色
 
     data = []
     for e in events:
-        color_index = e.created_by.id % len(color_palette)
+        username = e.created_by.username
+        color = user_colors.get(username, default_color)
         data.append({
             'id': e.id,
             'title': e.title,
             'start': e.start_time.isoformat(),
             'end': e.end_time.isoformat(),
-            'color': color_palette[color_index],
+            'color': color,
+            'created_by': e.created_by.get_full_name() or username,
         })
 
     return JsonResponse(data, safe=False)

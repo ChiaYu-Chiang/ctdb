@@ -4,7 +4,7 @@ from .models import CalendarEvent
 class CalendarEventForm(forms.ModelForm):
     class Meta:
         model = CalendarEvent
-        fields = ['title', 'event_type', 'description', 'start_time', 'end_time', 'participants']
+        fields = ['title', 'service_type', 'event_type', 'description', 'start_time', 'end_time', 'participants']
         widgets = {
             'start_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M',),
             'end_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M',),

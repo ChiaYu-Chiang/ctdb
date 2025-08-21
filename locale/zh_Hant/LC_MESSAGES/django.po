@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 17:13+0800\n"
+"POT-Creation-Date: 2025-08-21 15:14+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -403,7 +403,7 @@ msgstr "搜尋.."
 #: .\core\templates\standard_nav.html:147
 #: .\core\templates\standard_nav.html:174
 #: .\core\templates\standard_nav.html:192
-#: .\dep_calendar\templates\dep_calendar\calendar.html:29
+#: .\dep_calendar\templates\dep_calendar\calendar.html:63
 #: .\dep_calendar\templates\dep_calendar\event_form.html:66
 #: .\diary\templates\diary\diary_list.html:61
 #: .\log\templates\log\diary_log_list.html:18
@@ -448,7 +448,7 @@ msgstr "動作"
 #: .\comment\models.py:44 .\comment\templates\comment\comment_list.html:33
 #: .\comment\templates\comment\comment_message_list.html:14
 #: .\comment\templates\comment\comment_message_list.html:36
-#: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:25
+#: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:32
 #: .\diary\models.py:24 .\diary\templates\diary\diary_list.html:70
 #: .\log\models.py:13 .\log\templates\log\diary_log_list.html:27
 #: .\news\models.py:16 .\reminder\models.py:45
@@ -586,7 +586,7 @@ msgstr "貼文類型"
 
 #: .\comment\models.py:18
 #: .\comment\templates\comment\comment_message_list.html:15
-#: .\dep_calendar\models.py:20 .\news\models.py:11
+#: .\dep_calendar\models.py:26 .\news\models.py:11
 msgid "Title"
 msgstr "標題"
 
@@ -628,7 +628,7 @@ msgstr "選擇"
 #: .\core\templates\standard_action_dropdown.html:10
 #: .\core\templates\standard_form.html:50
 #: .\core\templates\standard_form_with_file.html:68
-#: .\dep_calendar\templates\dep_calendar\event_detail.html:67
+#: .\dep_calendar\templates\dep_calendar\event_detail.html:72
 #: .\dep_calendar\templates\dep_calendar\event_form.html:71
 #: .\diary\templates\diary\diary_action_dropdown.html:10
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_action_dropdown.html:15
@@ -647,7 +647,7 @@ msgstr "變更"
 #: .\core\templates\no_creater_permission_action_dropdown.html:11
 #: .\core\templates\standard_action_dropdown.html:13
 #: .\core\templates\standard_confirm_delete_form.html:7
-#: .\dep_calendar\templates\dep_calendar\event_detail.html:72
+#: .\dep_calendar\templates\dep_calendar\event_detail.html:77
 #: .\diary\templates\diary\diary_action_dropdown.html:13
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_action_dropdown.html:19
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:18
@@ -744,7 +744,7 @@ msgstr "最新消息"
 msgid "T00"
 msgstr "網應處"
 
-#: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:26
+#: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:33
 msgid "Department"
 msgstr "部門"
 
@@ -957,70 +957,82 @@ msgid "Days"
 msgstr "日子"
 
 #: .\dep_calendar\models.py:7
+msgid "Voice Service"
+msgstr "語音"
+
+#: .\dep_calendar\models.py:8
+msgid "Data Service"
+msgstr "傳輸"
+
+#: .\dep_calendar\models.py:12
 msgid "field_work"
 msgstr "外勤"
 
-#: .\dep_calendar\models.py:8
+#: .\dep_calendar\models.py:13
 msgid "installation"
 msgstr "申裝"
 
-#: .\dep_calendar\models.py:9
+#: .\dep_calendar\models.py:14
 msgid "maintenance"
 msgstr "障礙"
 
-#: .\dep_calendar\models.py:10
+#: .\dep_calendar\models.py:15
 msgid "termination"
 msgstr "退租"
 
-#: .\dep_calendar\models.py:13
+#: .\dep_calendar\models.py:18
 msgid "other_field"
 msgstr "其他外勤"
 
-#: .\dep_calendar\models.py:14
+#: .\dep_calendar\models.py:19
 msgid "facility_inspection"
 msgstr "外點機房巡檢"
 
-#: .\dep_calendar\models.py:15
+#: .\dep_calendar\models.py:20
 msgid "local_support"
 msgstr "近端支援"
 
-#: .\dep_calendar\models.py:16
+#: .\dep_calendar\models.py:21
 msgid "others"
 msgstr "其它"
 
-#: .\dep_calendar\models.py:21
+#: .\dep_calendar\models.py:27
+msgid "Service type"
+msgstr "服務類型"
+
+#: .\dep_calendar\models.py:28
 msgid "Event type"
 msgstr "事件類型"
 
-#: .\dep_calendar\models.py:22
+#: .\dep_calendar\models.py:29
 msgid "Description"
 msgstr "描述"
 
-#: .\dep_calendar\models.py:23
+#: .\dep_calendar\models.py:30
 msgid "Start time"
 msgstr "開始於"
 
-#: .\dep_calendar\models.py:24
+#: .\dep_calendar\models.py:31
 msgid "End time"
 msgstr "結束於"
 
-#: .\dep_calendar\models.py:27
+#: .\dep_calendar\models.py:34
 msgid "Participants"
 msgstr "參與者"
 
-#: .\dep_calendar\templates\dep_calendar\calendar.html:36
+#: .\dep_calendar\templates\dep_calendar\calendar.html:70
 msgid "today"
 msgstr "今天"
 
-#: .\dep_calendar\templates\dep_calendar\calendar.html:37
+#: .\dep_calendar\templates\dep_calendar\calendar.html:71
 msgid "month"
 msgstr "月"
 
-#: .\dep_calendar\templates\dep_calendar\calendar.html:38
+#: .\dep_calendar\templates\dep_calendar\calendar.html:72
 msgid "week"
 msgstr "週"
 
-#: .\dep_calendar\templates\dep_calendar\calendar.html:39
+#: .\dep_calendar\templates\dep_calendar\calendar.html:73
 msgid "day"
 msgstr "日"
 
@@ -1029,34 +1041,38 @@ msgid "Title: "
 msgstr "標題"
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:20
+msgid "Service type: "
+msgstr "服務類型："
+
+#: .\dep_calendar\templates\dep_calendar\event_detail.html:25
 msgid "Event type: "
 msgstr "事件類型："
 
-#: .\dep_calendar\templates\dep_calendar\event_detail.html:25
+#: .\dep_calendar\templates\dep_calendar\event_detail.html:30
 msgid "Description: "
 msgstr "描述："
 
-#: .\dep_calendar\templates\dep_calendar\event_detail.html:30
+#: .\dep_calendar\templates\dep_calendar\event_detail.html:35
 msgid "Start time: "
 msgstr "開始於："
 
-#: .\dep_calendar\templates\dep_calendar\event_detail.html:35
+#: .\dep_calendar\templates\dep_calendar\event_detail.html:40
 msgid "End time: "
 msgstr "結束於："
 
-#: .\dep_calendar\templates\dep_calendar\event_detail.html:40
+#: .\dep_calendar\templates\dep_calendar\event_detail.html:45
 msgid "Created by: "
 msgstr "建立者："
 
-#: .\dep_calendar\templates\dep_calendar\event_detail.html:45
+#: .\dep_calendar\templates\dep_calendar\event_detail.html:50
 msgid "Department: "
 msgstr "部門："
 
-#: .\dep_calendar\templates\dep_calendar\event_detail.html:51
+#: .\dep_calendar\templates\dep_calendar\event_detail.html:56
 msgid "Participants: "
 msgstr "參與者："
 
-#: .\dep_calendar\templates\dep_calendar\event_detail.html:77
+#: .\dep_calendar\templates\dep_calendar\event_detail.html:82
 #: .\dep_calendar\templates\dep_calendar\event_form.html:81
 msgid "Return"
 msgstr "返回"
