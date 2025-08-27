@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-21 17:19+0800\n"
+"POT-Creation-Date: 2025-08-27 14:20+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -962,7 +962,7 @@ msgstr "語音"
 
 #: .\dep_calendar\models.py:8
 msgid "Data Service"
-msgstr "傳輸"
+msgstr "數據"
 
 #: .\dep_calendar\models.py:9
 msgid "Other Service"
