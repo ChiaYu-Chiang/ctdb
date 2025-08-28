@@ -38,6 +38,7 @@
                 <p>主旨:[是方電訊] -- Please add new BGP entry for our customer - {{ task.origin_as }} ({{task.subject_warning}})</p>
                 <p>收件人:{{ isp.to }}</p>
                 <p>副本:{{ isp.cc }}</p>
+                <p>IP類型: {{ isp.ip_version|upper }}</p>
                 <p>附件:</p>
                 {% for type, taskfileisps in taskfileisps.items %}
                     <ul>{{ type }}
@@ -62,6 +63,7 @@
                 {% endif %}
                 <p>Recevier:{{ isp.to }}</p>
                 <p>CC:{{ isp.cc }}</p>
+                <p>IP Version: {{ isp.ip_version|upper }}</p>
                 <p>Attachment:</p>
                 {% for type, taskfileisps in taskfileisps.items %}
                     <ul>{{ type }}
@@ -82,6 +84,7 @@
                 {% endif %}
                 <p>收件人:{{ isp.to }}</p>
                 <p>副本:{{ isp.cc }}</p>
+                <p>IP類型: {{ isp.ip_version|upper }}</p>
                 <p>附件:</p>
                 {% for type, taskfileisps in taskfileisps.items %}
                     <ul>{{ type }}

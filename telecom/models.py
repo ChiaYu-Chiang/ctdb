@@ -32,6 +32,12 @@ class File(models.Model):
 
 
 class Isp(models.Model):
+    IP_VERSION_CHOICES = [
+        ('ipv4', 'IPv4'),
+        ('ipv6', 'IPv6'),
+        ('ipv4&ipv6', 'IPv4 & IPv6'),
+    ]
+
     name = models.CharField(verbose_name=_("Name"), max_length=63)
     cname = models.CharField(verbose_name=_("Chinese Name"), max_length=63)
     customer_no = models.CharField(
@@ -57,6 +63,11 @@ class Isp(models.Model):
             validate_semicolon_seperated_email_string,
         ],
     )
+    ip_version = models.CharField(
+        max_length=10,
+        choices=IP_VERSION_CHOICES,
+        verbose_name=_('IP Version')
+    )
     upstream_session_ip = models.TextField(
         verbose_name=_("Upstream Session IP"),
         blank=True,
@@ -77,6 +88,7 @@ class Isp(models.Model):
     content = models.TextField(verbose_name=_("Content"), blank=True)
     remark = models.TextField(verbose_name=_("Remark"), blank=True)
     eng_mail_type = models.BooleanField(verbose_name=_("English format"), default=False)
+
     created_by = models.ForeignKey(
         verbose_name=_("Created by"),
         to=settings.AUTH_USER_MODEL,
@@ -278,5 +290,7 @@ class Archive(models.Model):
         return reverse("telecom:archive_delete", kwargs={"pk": self.pk})
     
     def get_full_filename(self):
+        _, extension = os.path.splitext(self.archive.name)
+        return f"{self.name}{extension}"
         _, extension = os.path.splitext(self.archive.name)
         return f"{self.name}{extension}"

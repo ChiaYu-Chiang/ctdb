@@ -549,7 +549,23 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
     if ispsqs and ispgroupsqs:
         isps = (ispsqs | ispgroupsqs).distinct()
     isps = sorted(isps, key=lambda x: x.to == hinet_mail, reverse=True)
+    
+    # 紀錄 IP version 不符的 ISP
+    skipped_isps = []
+    
     for isp in isps:
+        # 檢查 IP version 相符性
+        if isp.ip_version == 'ipv4' and not instance.ipv4_prefix_list:
+            skipped_isps.append(f"{isp.name}({isp.to}) - 缺少 IPv4 prefix")
+            continue
+        elif isp.ip_version == 'ipv6' and not instance.ipv6_prefix_list:
+            skipped_isps.append(f"{isp.name}({isp.to}) - 缺少 IPv6 prefix")
+            continue
+        elif isp.ip_version == 'ipv4&ipv6' and not (instance.ipv4_prefix_list and instance.ipv6_prefix_list):
+            skipped_isps.append(f"{isp.name}({isp.to}) - 需要同時有 IPv4 與 IPv6 prefix")
+            continue
+            
+        # 原本的寄信邏輯
         roa_files = RoaTaskFileISP.objects.filter(task_id=instance, isp_id=isp)
         loa_files = LoaTaskFileISP.objects.filter(task_id=instance, isp_id=isp)
         extra_files = ExtraFileTaskFileISP.objects.filter(task_id=instance, isp_id=isp)
@@ -586,6 +602,14 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
             print(request, f"Failed to send email to {isp.to}")
         else:
             print(request, f"Successfully sent email to {isp.to}")
+    
+    if skipped_isps:
+        from django.contrib import messages
+        messages.warning(
+            request,
+            f"以下 ISP 因 IP 版本不符未寄出通知:\n" + "\n".join(skipped_isps)
+        )
+    
     time_now = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
     instance.meil_sended_time = time_now
     instance.save()
@@ -676,6 +700,12 @@ def archive_delete(request, pk):
     queryset = get_archive_queryset(request)
     instance = get_object_or_404(klass=queryset, pk=pk, created_by=request.user)
     success_url = reverse("telecom:archive_list")
+    template_name = "telecom/archive_confirm_delete.html"
+    if request.method == "POST":
+        instance.delete()
+        return redirect(success_url)
+    context = {"model": model}
+    return render(request, template_name, context)
     template_name = "telecom/archive_confirm_delete.html"
     if request.method == "POST":
         instance.delete()

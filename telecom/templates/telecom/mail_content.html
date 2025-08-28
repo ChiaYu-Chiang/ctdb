@@ -29,8 +29,7 @@
         {% if isp.content %}
             <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ isp.content|linebreaks }}</p>
         {% else %}
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;這裡是"是方電訊"(AS 17408)，我們有 {{ task.update_type }} {{ ip_type }} 的需求，麻煩您協助設定並請回覆告知，謝謝您
-            </p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;這裡是"是方電訊"(AS 17408)，我們有 {{ task.update_type }} {{ isp.ip_version|upper }} 的需求，麻煩您協助設定並請回覆告知，謝謝您</p>
         {% endif %}
         <p>&nbsp;&nbsp;&nbsp;&nbsp;更新標的:{{ isp.customer_no }}</p>
         <dl style="color: royalblue;">
@@ -38,21 +37,25 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;： {{ task.origin_as }}</dt>
             <dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AS Path
             &nbsp;&nbsp;&nbsp;&nbsp;： {{ task.as_path }}</dt>
-            {% if task.ipv4_prefix_list %}
-            <dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IPv4 Prefix ： </dt>
-            {% for ipv4_content in ipv4_contents %}
-            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {{ ipv4_content }}</dd>
-            {% endfor %}
+            {% if isp.ip_version == 'ipv4' or isp.ip_version == 'ipv4&ipv6' %}
+                {% if task.ipv4_prefix_list %}
+                <dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IPv4 Prefix ： </dt>
+                {% for ipv4_content in ipv4_contents %}
+                <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {{ ipv4_content }}</dd>
+                {% endfor %}
+                {% endif %}
             {% endif %}
-            {% if task.ipv6_prefix_list %}
-            <dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IPv6 Prefix ：</dt>
-            {% for ipv6_content in ipv6_contents %}
-            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {{ ipv6_content }}</dd>
-            {% endfor %}
+            {% if isp.ip_version == 'ipv6' or isp.ip_version == 'ipv4&ipv6' %}
+                {% if task.ipv6_prefix_list %}
+                <dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IPv6 Prefix ：</dt>
+                {% for ipv6_content in ipv6_contents %}
+                <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {{ ipv6_content }}</dd>
+                {% endfor %}
+                {% endif %}
             {% endif %}
             <br>
         </dl>

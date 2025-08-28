@@ -34,22 +34,26 @@
 <body>
     <div id="mail_content" style="font-size: 16px;">
         <p>HiNet 您好,</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;這裡是"是方電訊"(AS 17408)，我們有 {{ task.update_type }} {{ ip_type }} 的需求，麻煩您協助設定並請回覆告知，謝謝您
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;這裡是"是方電訊"(AS 17408)，我們有 {{ task.update_type }} {{ isp.ip_version|upper }} 的需求，麻煩您協助設定並請回覆告知，謝謝您
         </p>
         <br>
         <dl>
             <dt>1.Prefix: </dt>
-            {% if task.ipv4_prefix_list %}
-            {% for ipv4_content in ipv4_contents %}
-            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {{ipv4_content}}</dd>
-            {% endfor %}
+            {% if isp.ip_version == 'ipv4' or isp.ip_version == 'ipv4&ipv6' %}
+                {% if task.ipv4_prefix_list %}
+                {% for ipv4_content in ipv4_contents %}
+                <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {{ipv4_content}}</dd>
+                {% endfor %}
+                {% endif %}
             {% endif %}
-            {% if task.ipv6_prefix_list %}
-            {% for ipv6_content in ipv6_contents %}
-            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {{ipv6_content}}</dd>
-            {% endfor %}
+            {% if isp.ip_version == 'ipv6' or isp.ip_version == 'ipv4&ipv6' %}
+                {% if task.ipv6_prefix_list %}
+                {% for ipv6_content in ipv6_contents %}
+                <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {{ipv6_content}}</dd>
+                {% endfor %}
+                {% endif %}
             {% endif %}
             <br>
             <dt>2.AS-path: {{ task.as_path }}</dt>
