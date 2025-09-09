@@ -561,7 +561,7 @@ def prefixlistupdatetask_sendtaskmail(request, pk):
         elif isp.ip_version == 'ipv6' and not instance.ipv6_prefix_list:
             skipped_isps.append(f"{isp.name}({isp.to}) - 缺少 IPv6 prefix")
             continue
-        elif isp.ip_version == 'ipv4&ipv6' and not (instance.ipv4_prefix_list and instance.ipv6_prefix_list):
+        elif isp.ip_version == 'ipv4&ipv6' and not (instance.ipv4_prefix_list or instance.ipv6_prefix_list):
             skipped_isps.append(f"{isp.name}({isp.to}) - 需要同時有 IPv4 與 IPv6 prefix")
             continue
             
