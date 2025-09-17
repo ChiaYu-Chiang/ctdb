@@ -30,7 +30,17 @@
             <tbody>
               {% for obj in object_list %}
               <tr>
-                <td class="text-nowrap">{% include 'standard_action_dropdown.html' %}</td>
+                <td class="text-nowrap">
+                  {% include 'standard_action_dropdown.html' %}
+                  <!-- 在 dropdown menu 中添加轉換按鈕 -->
+                  {% if obj.is_excel_file %}
+                  <a class="dropdown-item" href="{{ obj.get_convert_to_reminders_url }}" 
+                     onclick="return confirm('確定要將此 Excel 檔案轉換為會議提醒嗎？')">
+                      <i class="fas fa-bell"></i> {% translate 'Convert to Reminders' %}
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  {% endif %}
+                </td>
                 <td class="text-nowrap">{{ obj.created_by }}</td>
                 <td class="text-nowrap"><a href="{{ obj.archive.url }}"	download="{{ obj.get_full_filename }}">{{ obj.name }}</a></td>
               </tr>

@@ -3,8 +3,12 @@ from django.core.paginator import Paginator
 from django.http.response import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+import pandas as pd
+from datetime import timedelta
+from django.contrib import messages
 
 from core.decorators import permission_required
+from reminder.models import Reminder
 
 from .forms import ArchiveModelForm
 from .models import Archive
@@ -55,6 +59,11 @@ def get_announce_queryset(request):
     model = Archive
     queryset = model.objects.filter(type='announce')
     return queryset
+
+
+def get_department_email(department_code):
+    """根據部門代碼取得群組郵件"""
+    return f'{department_code.lower()}@chief.com.tw'
 
 
 @login_required
@@ -229,3 +238,72 @@ def announce_create(request):
     form = form_class()
     context = {'model': model, 'form': form, 'form_buttons': form_buttons}
     return render(request, template_name, context)
+
+
+@login_required
+@permission_required('archive.view_archive', raise_exception=True, exception=Http404)
+def convert_to_reminders(request, pk):
+    """將 Excel 檔案轉換為多個 Reminder"""
+    archive = get_object_or_404(Archive, pk=pk)
+    success_url = reverse('archive:announce_list')  # 轉換後返回 announce 列表
+    
+    # 檢查是否可以轉換為 Reminder
+    if not archive.can_convert_to_reminders():
+        messages.error(request, '此檔案無法轉換為提醒（必須是包含「網應處月會行事曆」的 Excel 檔案）')
+        return redirect(success_url)
+    
+    try:
+        # 讀取 Excel 檔案
+        df = pd.read_excel(archive.archive.path)
+        
+        # 使用iloc選擇B、C、D欄位，並重新命名
+        selected_columns = df.iloc[:, 1:4]
+        selected_columns.columns = ['department', 'meeting_time', 'meeting_room']
+        
+        # 跳過標題列（第一列）
+        selected_columns = selected_columns.iloc[1:]
+        
+        # 轉換會議時間為datetime格式
+        selected_columns['meeting_time'] = pd.to_datetime(selected_columns['meeting_time'])
+        
+        # 新增提醒時間欄位（會議時間前一週）
+        selected_columns['reminder_time'] = selected_columns['meeting_time'] - timedelta(days=7)
+        
+        reminders_created = 0
+        for _, row in selected_columns.iterrows():
+            meeting_date = row['meeting_time']
+            reminder_date = row['reminder_time']
+            department = row['department']
+            meeting_room = row['meeting_room']
+            
+            # 取得參與者郵件
+            recipients = get_department_email(department)
+            
+            # 建立 Reminder
+            Reminder.objects.create(
+                created_by=request.user,
+                event=f'{department} 月會',
+                policy='once',
+                start_at=reminder_date.date(),
+                end_at=reminder_date.date(),
+                email_subject=f'提醒：{department} 月會 ({meeting_date.strftime("%Y-%m-%d %H:%M")})',
+                email_content=f'''親愛的同仁，
+
+提醒您參加以下會議：
+
+• 會議名稱：{department} 月會
+• 會議時間：{meeting_date.strftime("%Y年%m月%d日 %H:%M")}
+• 會議地點：{meeting_room}
+
+請準時參加，謝謝！''',
+                recipients=recipients,
+                is_active=True
+            )
+            reminders_created += 1
+            
+        messages.success(request, f'成功建立 {reminders_created} 個會議提醒')
+        
+    except Exception as e:
+        messages.error(request, f'轉換失敗：{str(e)}')
+    
+    return redirect(success_url)

@@ -6,6 +6,13 @@
     {% translate 'Choose' %}
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    {% if obj.can_convert_to_reminders %}
+    <a class="dropdown-item" href="{{ obj.get_convert_to_reminders_url }}" 
+       onclick="return confirm('確定要將此 Excel 檔案轉換為會議提醒嗎？')">
+        <i class="fas fa-bell"></i> {% translate 'Convert to Reminders' %}
+    </a>
+    <div class="dropdown-divider"></div>
+    {% endif %}
     {% if user|can_change:obj %}
     <a class="dropdown-item" href="{{ obj.get_update_url }}">{% translate 'Change' %}</a>
     {% endif %}

@@ -1,8 +1,16 @@
 from django.urls import path
 
-from .views import archive_create, archive_delete, archive_list, archive_update
-from .views import journals_list, journals_create
-from .views import announce_list, announce_create
+from .views import (
+    archive_create,
+    archive_delete,
+    archive_list,
+    archive_update,
+    journals_list,
+    journals_create,
+    announce_list,
+    announce_create,
+    convert_to_reminders,
+)
 
 app_name = 'archive'
 
@@ -15,4 +23,5 @@ urlpatterns = [
     path('archives/journals/add/', journals_create, name='journals_create'),
     path('archives/announce/', announce_list, name='announce_list'),
     path('archives/announce/add/', announce_create, name='announce_create'),
+    path('archives/<int:pk>/convert-to-reminders/', convert_to_reminders, name='convert_to_reminders'),
 ]

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-27 14:20+0800\n"
+"POT-Creation-Date: 2025-09-17 15:34+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -361,11 +361,11 @@ msgstr "已經有帳號了嗎？"
 #: .\core\templates\standard_nav.html:150
 #: .\core\templates\standard_nav.html:153
 #: .\core\templates\standard_nav.html:156
-#: .\core\templates\standard_nav.html:159 .\telecom\models.py:265
+#: .\core\templates\standard_nav.html:159 .\telecom\models.py:277
 msgid "Archive"
 msgstr "檔案"
 
-#: .\archive\models.py:21 .\telecom\models.py:266
+#: .\archive\models.py:21 .\telecom\models.py:278
 msgid "Archives"
 msgstr "檔案"
 
@@ -403,7 +403,7 @@ msgstr "搜尋.."
 #: .\core\templates\standard_nav.html:147
 #: .\core\templates\standard_nav.html:174
 #: .\core\templates\standard_nav.html:192
-#: .\dep_calendar\templates\dep_calendar\calendar.html:63
+#: .\dep_calendar\templates\dep_calendar\calendar.html:68
 #: .\dep_calendar\templates\dep_calendar\event_form.html:66
 #: .\diary\templates\diary\diary_list.html:61
 #: .\log\templates\log\diary_log_list.html:18
@@ -452,8 +452,8 @@ msgstr "動作"
 #: .\diary\models.py:24 .\diary\templates\diary\diary_list.html:70
 #: .\log\models.py:13 .\log\templates\log\diary_log_list.html:27
 #: .\news\models.py:16 .\reminder\models.py:45
-#: .\reminder\templates\reminder\reminder_list.html:32 .\telecom\models.py:81
-#: .\telecom\models.py:112 .\telecom\models.py:195
+#: .\reminder\templates\reminder\reminder_list.html:32 .\telecom\models.py:93
+#: .\telecom\models.py:124 .\telecom\models.py:207
 #: .\telecom\templates\telecom\archive_list.html:26
 #: .\telecom\templates\telecom\isp_list.html:26
 #: .\telecom\templates\telecom\ispgroup_list.html:26
@@ -465,7 +465,7 @@ msgstr "建立者"
 #: .\archive\templates\archive\announce_list.html:27
 #: .\archive\templates\archive\archive_list.html:27
 #: .\archive\templates\archive\journals_list.html:35 .\telecom\models.py:21
-#: .\telecom\models.py:35 .\telecom\models.py:108
+#: .\telecom\models.py:41 .\telecom\models.py:120
 #: .\telecom\templates\telecom\archive_list.html:28
 #: .\telecom\templates\telecom\isp_list.html:27
 #: .\telecom\templates\telecom\ispgroup_list.html:27
@@ -474,7 +474,7 @@ msgid "Name"
 msgstr "名稱"
 
 #: .\archive\templates\archive\announce_list.html:39
-#: .\archive\templates\archive\archive_list.html:39
+#: .\archive\templates\archive\archive_list.html:49
 #: .\archive\templates\archive\journals_list.html:47
 #: .\comment\templates\comment\comment_list.html:49
 #: .\comment\templates\comment\comment_message_list.html:50
@@ -524,6 +524,11 @@ msgstr "你確定要刪除這個"
 msgid "?"
 msgstr ""
 
+#: .\archive\templates\archive\archive_list.html:39
+#: .\core\templates\standard_action_dropdown.html:12
+msgid "Convert to Reminders"
+msgstr "轉換至Reminder"
+
 #: .\archive\templates\archive\index.html:11 .\diary\models.py:29
 msgid "Diaries"
 msgstr "日誌"
@@ -560,7 +565,7 @@ msgstr ""
 #: .\comment\templates\comment\comment_list.html:32
 #: .\comment\templates\comment\comment_message_list.html:16 .\day\models.py:8
 #: .\diary\models.py:10 .\diary\templates\diary\diary_list.html:71
-#: .\telecom\models.py:256 .\telecom\templates\telecom\archive_list.html:27
+#: .\telecom\models.py:268 .\telecom\templates\telecom\archive_list.html:27
 msgid "Date"
 msgstr "日期"
 
@@ -625,7 +630,7 @@ msgstr "選擇"
 #: .\comment\templates\comment\comment_action_dropdown.html:11
 #: .\comment\templates\comment\message_action_dropdown.html:11
 #: .\core\templates\no_creater_permission_action_dropdown.html:10
-#: .\core\templates\standard_action_dropdown.html:10
+#: .\core\templates\standard_action_dropdown.html:17
 #: .\core\templates\standard_form.html:50
 #: .\core\templates\standard_form_with_file.html:68
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:72
@@ -645,7 +650,7 @@ msgstr "變更"
 #: .\comment\templates\comment\comment_action_dropdown.html:14
 #: .\comment\templates\comment\message_action_dropdown.html:14
 #: .\core\templates\no_creater_permission_action_dropdown.html:11
-#: .\core\templates\standard_action_dropdown.html:13
+#: .\core\templates\standard_action_dropdown.html:20
 #: .\core\templates\standard_confirm_delete_form.html:7
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:77
 #: .\diary\templates\diary\diary_action_dropdown.html:13
@@ -682,7 +687,7 @@ msgstr "回覆訊息內容"
 
 #: .\comment\templates\comment\message_action_dropdown.html:17
 #: .\core\templates\no_creater_permission_action_dropdown.html:13
-#: .\core\templates\standard_action_dropdown.html:17
+#: .\core\templates\standard_action_dropdown.html:24
 #: .\diary\templates\diary\diary_action_dropdown.html:23
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_action_dropdown.html:21
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:39
@@ -790,17 +795,17 @@ msgid "Telecom"
 msgstr "電信"
 
 #: .\core\templates\standard_nav.html:104
-#: .\core\templates\standard_nav.html:107 .\telecom\models.py:88
+#: .\core\templates\standard_nav.html:107 .\telecom\models.py:100
 msgid "ISP"
 msgstr ""
 
 #: .\core\templates\standard_nav.html:110
-#: .\core\templates\standard_nav.html:114 .\telecom\models.py:119
+#: .\core\templates\standard_nav.html:114 .\telecom\models.py:131
 msgid "ISP group"
 msgstr "ISP 群組"
 
 #: .\core\templates\standard_nav.html:119
-#: .\core\templates\standard_nav.html:124 .\telecom\models.py:202
+#: .\core\templates\standard_nav.html:124 .\telecom\models.py:214
 msgid "Prefix-list update task"
 msgstr "Prefix-list 更新任務"
 
@@ -1024,19 +1029,19 @@ msgstr "結束於"
 msgid "Participants"
 msgstr "參與者"
 
-#: .\dep_calendar\templates\dep_calendar\calendar.html:70
+#: .\dep_calendar\templates\dep_calendar\calendar.html:75
 msgid "today"
 msgstr "今天"
 
-#: .\dep_calendar\templates\dep_calendar\calendar.html:71
+#: .\dep_calendar\templates\dep_calendar\calendar.html:76
 msgid "month"
 msgstr "月"
 
-#: .\dep_calendar\templates\dep_calendar\calendar.html:72
+#: .\dep_calendar\templates\dep_calendar\calendar.html:77
 msgid "week"
 msgstr "週"
 
-#: .\dep_calendar\templates\dep_calendar\calendar.html:73
+#: .\dep_calendar\templates\dep_calendar\calendar.html:78
 msgid "day"
 msgstr "日"
 
@@ -1114,8 +1119,8 @@ msgid "To do"
 msgstr "待辦事項"
 
 #: .\diary\models.py:22 .\diary\templates\diary\diary_list.html:75
-#: .\telecom\forms.py:183 .\telecom\models.py:78 .\telecom\models.py:110
-#: .\telecom\models.py:190 .\telecom\templates\telecom\ispgroup_list.html:29
+#: .\telecom\forms.py:183 .\telecom\models.py:89 .\telecom\models.py:122
+#: .\telecom\models.py:202 .\telecom\templates\telecom\ispgroup_list.html:29
 msgid "Remark"
 msgstr "備註"
 
@@ -1150,7 +1155,7 @@ msgstr "建立於"
 msgid "Logs"
 msgstr ""
 
-#: .\news\models.py:12 .\telecom\forms.py:87 .\telecom\models.py:77
+#: .\news\models.py:12 .\telecom\forms.py:87 .\telecom\models.py:88
 msgid "Content"
 msgstr "內容"
 
@@ -1352,22 +1357,22 @@ msgstr "起始日"
 msgid "Stop date"
 msgstr "終止日"
 
-#: .\telecom\forms.py:9 .\telecom\models.py:38
+#: .\telecom\forms.py:9 .\telecom\models.py:44
 #: .\telecom\templates\telecom\isp_list.html:29
 msgid "Customer No."
 msgstr "客戶編號"
 
-#: .\telecom\forms.py:14 .\telecom\models.py:47
+#: .\telecom\forms.py:14 .\telecom\models.py:53
 #: .\telecom\templates\telecom\isp_list.html:33
 msgid "CC"
 msgstr "副本"
 
-#: .\telecom\forms.py:30 .\telecom\models.py:54
+#: .\telecom\forms.py:30 .\telecom\models.py:60
 #: .\telecom\templates\telecom\isp_list.html:34
 msgid "BCC"
 msgstr "密件副本"
 
-#: .\telecom\forms.py:46 .\telecom\models.py:61
+#: .\telecom\forms.py:46 .\telecom\models.py:72
 #: .\telecom\templates\telecom\isp_list.html:35
 msgid "Upstream Session IP"
 msgstr "上游 Session IP"
@@ -1384,12 +1389,12 @@ msgstr ""
 "100.100.100.100/24,\n"
 "100.100.200.100/22 le 24,\n"
 
-#: .\telecom\forms.py:60 .\telecom\models.py:68
+#: .\telecom\forms.py:60 .\telecom\models.py:79
 #: .\telecom\templates\telecom\isp_list.html:36
 msgid "Chief Session IP"
 msgstr "是方 Session IP"
 
-#: .\telecom\forms.py:74 .\telecom\models.py:76
+#: .\telecom\forms.py:74 .\telecom\models.py:87
 msgid "Subject"
 msgstr "主旨"
 
@@ -1409,12 +1414,12 @@ msgstr ""
 "為此ISP聯絡人建立自訂信件內容的描述。\n"
 "若未填寫，則將使用預設模板。\n"
 
-#: .\telecom\forms.py:117 .\telecom\models.py:151
+#: .\telecom\forms.py:117 .\telecom\models.py:163
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:33
 msgid "IPv4-Prefix-list"
 msgstr "IPv4-Prefix-list"
 
-#: .\telecom\forms.py:132 .\telecom\models.py:157
+#: .\telecom\forms.py:132 .\telecom\models.py:169
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:34
 msgid "IPv6-Prefix-list"
 msgstr "IPv6-Prefix-list"
@@ -1436,7 +1441,7 @@ msgstr ""
 "100.100.100.100/24,\n"
 "100.100.200.100/22 le 24,\n"
 
-#: .\telecom\forms.py:146 .\telecom\models.py:166
+#: .\telecom\forms.py:146 .\telecom\models.py:178
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:32
 msgid "Related ticket"
 msgstr "相關派單"
@@ -1457,7 +1462,7 @@ msgstr ""
 msgid "Extra File"
 msgstr ""
 
-#: .\telecom\forms.py:173 .\telecom\models.py:189
+#: .\telecom\forms.py:173 .\telecom\models.py:201
 msgid "Loa Remark"
 msgstr "附件備註"
 
@@ -1471,94 +1476,98 @@ msgid ""
 "notification mail."
 msgstr "僅供該任務描述註記紀錄，內容不會出現在通知信裡"
 
-#: .\telecom\models.py:36
+#: .\telecom\models.py:42
 msgid "Chinese Name"
 msgstr "中文名稱"
 
-#: .\telecom\models.py:40 .\telecom\templates\telecom\isp_list.html:30
+#: .\telecom\models.py:46 .\telecom\templates\telecom\isp_list.html:30
 msgid "Upstream AS"
 msgstr "上游 AS"
 
-#: .\telecom\models.py:41 .\telecom\templates\telecom\isp_list.html:31
+#: .\telecom\models.py:47 .\telecom\templates\telecom\isp_list.html:31
 msgid "Primary contact"
 msgstr "主要聯絡人"
 
-#: .\telecom\models.py:43 .\telecom\templates\telecom\isp_list.html:32
+#: .\telecom\models.py:49 .\telecom\templates\telecom\isp_list.html:32
 msgid "To"
 msgstr "收件者"
 
-#: .\telecom\models.py:44
+#: .\telecom\models.py:50
 msgid "Please enter a valid email address."
 msgstr "請輸入有效的電子郵件地址。"
 
-#: .\telecom\models.py:74
+#: .\telecom\models.py:69
+msgid "IP Version"
+msgstr ""
+
+#: .\telecom\models.py:85
 msgid "Telephone"
 msgstr "電話"
 
-#: .\telecom\models.py:75
+#: .\telecom\models.py:86
 msgid "Cellphone"
 msgstr "手機"
 
-#: .\telecom\models.py:79 .\telecom\templates\telecom\isp_list.html:37
+#: .\telecom\models.py:90 .\telecom\templates\telecom\isp_list.html:37
 msgid "English format"
 msgstr "英文格式"
 
-#: .\telecom\models.py:89 .\telecom\models.py:109 .\telecom\models.py:144
+#: .\telecom\models.py:101 .\telecom\models.py:121 .\telecom\models.py:156
 #: .\telecom\templates\telecom\ispgroup_list.html:28
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:28
 msgid "ISPs"
 msgstr ""
 
-#: .\telecom\models.py:120 .\telecom\models.py:146
+#: .\telecom\models.py:132 .\telecom\models.py:158
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:29
 msgid "ISP groups"
 msgstr "ISP 群組"
 
-#: .\telecom\models.py:137
+#: .\telecom\models.py:149
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:27
 msgid "Update type"
 msgstr "更新類型"
 
-#: .\telecom\models.py:140
+#: .\telecom\models.py:152
 msgid "Add prefix-list"
 msgstr "新增 prefix-list"
 
-#: .\telecom\models.py:141
+#: .\telecom\models.py:153
 msgid "Delete prefix-list"
 msgstr "刪除 prefix-list"
 
-#: .\telecom\models.py:148
+#: .\telecom\models.py:160
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:30
 msgid "Origin AS"
 msgstr ""
 
-#: .\telecom\models.py:149
+#: .\telecom\models.py:161
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:31
 msgid "AS path"
 msgstr "AS path"
 
-#: .\telecom\models.py:163
+#: .\telecom\models.py:175
 msgid "Subject warning"
 msgstr "主旨警語"
 
-#: .\telecom\models.py:169
+#: .\telecom\models.py:181
 msgid "roa"
 msgstr ""
 
-#: .\telecom\models.py:176
+#: .\telecom\models.py:188
 msgid "loa"
 msgstr ""
 
-#: .\telecom\models.py:183
+#: .\telecom\models.py:195
 msgid "extra_file"
 msgstr ""
 
-#: .\telecom\models.py:192
+#: .\telecom\models.py:204
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:35
 msgid "Mail sended time"
 msgstr "郵件寄送時間"
 
-#: .\telecom\models.py:203
+#: .\telecom\models.py:215
 msgid "Prefix-list update tasks"
 msgstr "Prefix-list 更新任務"
 

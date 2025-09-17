@@ -41,4 +41,19 @@ class Archive(models.Model):
     def get_full_filename(self):
         _, extension = os.path.splitext(self.archive.name)
         return f"{self.name}{extension}"
+
+    def get_convert_to_reminders_url(self):
+        """取得轉換為提醒的 URL"""
+        return reverse('archive:convert_to_reminders', kwargs={'pk': self.pk})
+
+    def is_excel_file(self):
+        """檢查是否為 Excel 檔案"""
+        if self.archive and self.archive.name:
+            return self.archive.name.lower().endswith(('.xlsx', '.xls'))
+        return False
     
+    def can_convert_to_reminders(self):
+        """檢查是否可以轉換為提醒（必須是包含網應處月會行事曆的 Excel 檔案）"""
+        return (self.is_excel_file() and 
+                self.name and 
+                '網應處月會行事曆' in self.name)
