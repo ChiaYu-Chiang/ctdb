@@ -63,7 +63,50 @@ def get_announce_queryset(request):
 
 def get_department_email(department_code):
     """根據部門代碼取得群組郵件"""
-    return f'{department_code.lower()}@chief.com.tw'
+    # 部門郵箱對應表
+    department_emails = {
+        'I00': [
+            'i00@chief.com.tw',
+            'i00_manager@chief.com.tw',
+            'gino_kao@chief.com.tw',
+            'kenny_jan@chief.com.tw',
+            'morris_fu@chief.com.tw',
+            'aaron_lin@chief.com.tw',
+            'ryan_hsiao@chief.com.tw',
+            'eric_wu@chief.com.tw',
+            'hank_tsai@chief.com.tw',
+            'louis_wen@chief.com.tw',
+            'ken@chief.com.tw',
+            'brian_chiang@chief.com.tw',
+            'jenny_hung@chief.com.tw'
+        ],
+        'I01': [
+            'i00@chief.com.tw',
+            'i01@chief.com.tw'
+        ],
+        'I02': [
+            'i00@chief.com.tw',
+            'i02@chief.com.tw'
+        ],
+        'I03': [
+            'i00@chief.com.tw',
+            'i03@chief.com.tw'
+        ],
+        'I04': [
+            'i00@chief.com.tw',
+            'i04@chief.com.tw'
+        ],
+        '工程師大會': [
+            'i00@chief.com.tw',
+            'i01@chief.com.tw',
+            'i02@chief.com.tw',
+            'i03@chief.com.tw',
+            'i04@chief.com.tw'
+        ]
+    }
+    
+    # 返回對應的郵箱列表，如果找不到則返回空列表
+    return department_emails.get(department_code, [])
 
 
 @login_required
@@ -277,21 +320,23 @@ def convert_to_reminders(request, pk):
             meeting_room = row['meeting_room']
             
             # 取得參與者郵件
-            recipients = get_department_email(department)
+            recipients_list = get_department_email(department)
+            recipients = ';'.join(recipients_list) if recipients_list else f'{department.lower()}@chief.com.tw'
             
             # 建立 Reminder
+            event_name = department if '工程師大會' in department else f'{department} 月會'
             Reminder.objects.create(
                 created_by=request.user,
-                event=f'{department} 月會',
+                event=event_name,
                 policy='once',
                 start_at=reminder_date.date(),
                 end_at=reminder_date.date(),
-                email_subject=f'提醒：{department} 月會 ({meeting_date.strftime("%Y-%m-%d %H:%M")})',
+                email_subject=f'提醒：{event_name} ({meeting_date.strftime("%Y-%m-%d %H:%M")})',
                 email_content=f'''親愛的同仁，
 
 提醒您參加以下會議：
 
-• 會議名稱：{department} 月會
+• 會議名稱：{event_name}
 • 會議時間：{meeting_date.strftime("%Y年%m月%d日 %H:%M")}
 • 會議地點：{meeting_room}
 
