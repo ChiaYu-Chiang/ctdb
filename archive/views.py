@@ -76,7 +76,7 @@ def get_department_email(department_code):
             'eric_wu@chief.com.tw',
             'hank_tsai@chief.com.tw',
             'louis_wen@chief.com.tw',
-            'ken@chief.com.tw',
+            'rico@chief.com.tw',
             'brian_chiang@chief.com.tw',
             'jenny_hung@chief.com.tw'
         ],
