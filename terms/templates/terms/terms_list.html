@@ -1,0 +1,69 @@
+{% extends 'terms/base.html' %}
+{% load static i18n widget_tweaks custom_templatetags %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/table_toolbar.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="content">
+  <div class="container-fluid max-w-24u">
+    <div class="row pt-navbar pb-footer-foot justify-content-center align-items-center min-vh-100">
+      <div class="col">
+        <div id="blankTop"></div>
+        <div id="toolbar" class="d-flex justify-content-between">
+          <input type="text" id="searchInput" class="form-control shadow-sm" placeholder={% translate 'Search..' %}>
+          {% name model|attr:'_meta'|get_perm_name:'add' as perm_name %}
+          {% if user|has_perm:perm_name %}
+          <a id="addButton" class="btn btn-light border shadow-sm" href="{{ model.get_create_url }}">{% translate 'Add' %}</a>
+          {% endif %}
+        </div>
+        <div class="table-responsive">
+          <table id="searchTable" class="table table-light table-borderless table-solid">
+            <thead>
+              <tr>
+                <th style="width: 1px;">{% translate 'Action' %}</th>
+                <th style="width: 1px;">{% translate 'Created by' %}</th>
+                <th style="width: 1px;">{% translate 'Short Name' %}</th>
+                <th style="width: 1px;">{% translate 'Full Name' %}</th>
+                <th style="width: 1px;">{% translate 'Management Department' %}</th>
+                <th style="width: 100%">{% translate 'Description' %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for obj in object_list %}
+              <tr>
+                <td class="text-nowrap">{% include 'standard_action_dropdown.html' %}</td>
+                <td class="text-nowrap">{{ obj.created_by }}</td>
+                <td class="text-nowrap">{{ obj.short_name }}</td>
+                <td class="text-nowrap">
+                {% if obj.has_external_link %}
+                    <a href="{{ obj.url }}" target="_blank">{{ obj.full_name }}</a>
+                {% else %}
+                    {{ obj.full_name }}
+                {% endif %}
+                </td>
+                <td class="text-nowrap">{{ obj.management_department }}</td>
+                <td class="text-nowrap">{{ obj.description }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td class='text-center text-secondary' colspan="100%">{% translate 'No entries.' %}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% if is_paginated %}
+        {% include 'standard_pagination.html' %}
+        {% endif %}
+        <div id="blankButtom"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extrajs %}
+<script src="{% static 'js/table_search.js' %}"></script>
+{% endblock %}

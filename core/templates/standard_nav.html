@@ -176,6 +176,22 @@
           </div>
           {% endif %}
         </li>
+        </li>
+        <li class="nav-item dropdown">
+          {% if perms.terms.view_terms or perms.terms.add_terms %}
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {% translate 'Terms' %}
+          </a>
+          <div class="dropdown-menu" aria-labelleby="navbarDropdown">
+            {% if perms.terms.view_terms %}
+            <a class="dropdown-item" href="{% url 'terms:terms_list' %}">{% translate 'Terms' %} | {% translate 'List' %}</a>
+            {% endif %}
+            {% if perms.terms.add_terms %}
+            <a class="dropdown-item" href="{% url 'terms:terms_create' %}">{% translate 'Terms' %} | {% translate 'Add' %}</a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </li>
         <li class="nav-item dropdown">
           {% if perms.comment.view_comment or perms.comment.add_comment %}
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
