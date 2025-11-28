@@ -93,6 +93,7 @@ INSTALLED_APPS += [
     "api.apps.ApiConfig",
     "user.apps.UserConfig",
     "tool.apps.ToolConfig",
+    "terms.apps.TermsConfig",
     "pilotadmin.apps.PilotadminConfig",
     "comment.apps.CommentConfig",
     "dep_calendar.apps.DepCalendarConfig",
