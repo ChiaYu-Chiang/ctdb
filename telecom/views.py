@@ -505,11 +505,28 @@ def prefixlistupdatetask_previewmailcontent(request, pk):
     if ispsqs and ispgroupsqs:
         isps = (ispsqs | ispgroupsqs).distinct()
     isps = sorted(isps, key=lambda x: x.to == "unicom@cht.com.tw", reverse=True)
+
+    filtered_isps = []
+    skipped_isps = []
+    
+    for isp in isps:
+        if isp.ip_version == 'ipv4' and not instance.ipv4_prefix_list:
+            skipped_isps.append(f"{isp.name}({isp.to}) - 缺少 IPv4 prefix")
+            continue
+        elif isp.ip_version == 'ipv6' and not instance.ipv6_prefix_list:
+            skipped_isps.append(f"{isp.name}({isp.to}) - 缺少 IPv6 prefix")
+            continue
+        elif isp.ip_version == 'ipv4&ipv6' and not (instance.ipv4_prefix_list or instance.ipv6_prefix_list):
+            skipped_isps.append(f"{isp.name}({isp.to}) - 需要同時有 IPv4 與 IPv6 prefix")
+            continue
+            
+        filtered_isps.append(isp)
+
     template_name = "telecom/mail_content_preview.html"
     context = {
         "model": model,
         "task": instance,
-        "isps": isps,
+        "isps": filtered_isps,
         "ip_type": ip_type,
         "ipv4_contents": ipv4_contents,
         "ipv6_contents": ipv6_contents,
