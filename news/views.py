@@ -93,18 +93,19 @@ def news_create(request):
     if request.method == 'POST':
         form = form_class(data=request.POST, instance=instance)
         if form.is_valid():
-            form.save()
+            news = form.save()
+            news_title = news.title
 
             if success_url == success_url1:
                 active_users = User.objects.filter(is_active=1)
                 recipient_list = [user.email for user in active_users if user.email]
                 send_mail(
-                    subject="TDB最新消息發布通知",
-                    message="請至TDB最新消息專區查看最新發布公告",
+                    subject=f"[TDB] 最新消息：{news_title}",
+                    message=f"TDB最新消息已發布：{news_title}。\n\n請至TDB最新消息專區查看最新發布公告。",
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=recipient_list,
                     fail_silently=False,
-                    html_message='<a href="https://tdb.chief-tech.net/news/">最新消息</a>',
+                    html_message=f"TDB最新消息已發布：{news_title}。\n\n請至<a href='https://tdb.chief-tech.net/news/'>最新消息</a>查看最新發布公告。",
                 )
 
             return redirect(success_url)
