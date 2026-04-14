@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static i18n widget_tweaks custom_templatetags %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/table_toolbar.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="content">
+  <div class="container-fluid max-w-12u">
+    <div class="row pt-navbar pb-footer-foot justify-content-center align-items-center min-vh-100">
+      <div class="col">
+        <div id="blankTop"></div>
+        
+        <div id="toolbar" class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="m-0 text-secondary">
+                <i class="fas fa-clipboard-check"></i> 
+                《{{ news.title }}》 {% translate 'Sign In Report' %}
+            </h5>
+            <div>
+              <a class="btn btn-success border shadow-sm mr-2" href="{% url 'news:news_export_csv' news.pk %}">
+                  <i class="fas fa-file-csv"></i>{% translate 'Export CSV' %}
+              </a>
+              <a class="btn btn-light border shadow-sm" href="javascript:history.back()">
+                  {% translate 'Back' %}
+              </a>
+            </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-light table-borderless table-solid">
+            <thead>
+              <tr>
+                <th style="width: 10%;">#</th>
+                <th style="width: 30%;">{% translate 'Name' %}</th>
+                <th style="width: 30%;">{% translate 'Sign In Time' %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for record in records %}
+              <tr>
+                <td class="p-4 align-middle">{{ forloop.counter }}</td>
+                <td class="p-4 align-middle font-weight-bold">
+                    {{ record.user.username }}
+                </td>
+                <td class="p-4 align-middle text-success">
+                    {{ record.read_at|date:'Y-m-d H:i:s' }}
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td class='text-center text-secondary p-5' colspan="100%">
+                    {% translate 'No entries.' %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <h6 class="mb-2 font-weight-bold text-danger">{% translate 'Not Signed In' %} ({{ unread_users|length }})</h6>
+        <div class="table-responsive">
+          <table class="table table-light table-borderless table-solid">
+            <thead>
+              <tr>
+                <th style="width: 10%;">#</th>
+                <th style="width: 90%;">{% translate 'Name' %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in unread_users %}
+              <tr>
+                <td class="p-4 align-middle text-secondary">{{ forloop.counter }}</td>
+                <td class="p-4 align-middle font-weight-bold text-secondary">
+                    {{ user.username }}
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td class='text-center text-success p-5' colspan="100%">
+                    <i class="fas fa-check-circle"></i> {% translate 'All users have signed in.' %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div id="blankButtom"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

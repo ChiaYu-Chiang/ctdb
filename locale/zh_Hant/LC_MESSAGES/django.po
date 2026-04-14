@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-28 10:46+0800\n"
+"POT-Creation-Date: 2026-04-14 11:34+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,62 +93,70 @@ msgid "I00 member"
 msgstr "I00 成員"
 
 #: .\accounts\i18n.py:14
+msgid "I00 assistant"
+msgstr "I00 幕僚"
+
+#: .\accounts\i18n.py:15
 msgid "I01 member"
 msgstr "I01 成員"
 
-#: .\accounts\i18n.py:15
+#: .\accounts\i18n.py:16
 msgid "I02 member"
 msgstr "I02 成員"
 
-#: .\accounts\i18n.py:16
+#: .\accounts\i18n.py:17
 msgid "I03 member"
 msgstr "I03 成員"
 
-#: .\accounts\i18n.py:17
+#: .\accounts\i18n.py:18
 msgid "I04 member"
 msgstr "I04 成員"
 
-#: .\accounts\i18n.py:18
+#: .\accounts\i18n.py:19
 msgid "T00 supervisor"
 msgstr "T00 主管"
 
-#: .\accounts\i18n.py:19
+#: .\accounts\i18n.py:20
+msgid "T00 assistant"
+msgstr "T00 幕僚"
+
+#: .\accounts\i18n.py:21
 msgid "T11 supervisor"
 msgstr "T11 主管"
 
-#: .\accounts\i18n.py:20
+#: .\accounts\i18n.py:22
 msgid "T12 supervisor"
 msgstr "T12 主管"
 
-#: .\accounts\i18n.py:21
+#: .\accounts\i18n.py:23
 msgid "T13 supervisor"
 msgstr "T13 主管"
 
-#: .\accounts\i18n.py:22
+#: .\accounts\i18n.py:24
 msgid "T15 supervisor"
 msgstr "T15 主管"
 
-#: .\accounts\i18n.py:23
+#: .\accounts\i18n.py:25
 msgid "I00 supervisor"
 msgstr "I00 主管"
 
-#: .\accounts\i18n.py:24
+#: .\accounts\i18n.py:26
 msgid "I01 supervisor"
 msgstr "I01 主管"
 
-#: .\accounts\i18n.py:25
+#: .\accounts\i18n.py:27
 msgid "I02 supervisor"
 msgstr "I02 主管"
 
-#: .\accounts\i18n.py:26
+#: .\accounts\i18n.py:28
 msgid "I03 supervisor"
 msgstr "I03 主管"
 
-#: .\accounts\i18n.py:27
+#: .\accounts\i18n.py:29
 msgid "I04 supervisor"
 msgstr "I04 主管"
 
-#: .\accounts\models.py:10
+#: .\accounts\models.py:10 .\news\models.py:35
 msgid "User"
 msgstr "使用者"
 
@@ -156,7 +164,7 @@ msgstr "使用者"
 msgid "Phone number"
 msgstr "電話號碼"
 
-#: .\accounts\models.py:45 .\core\templates\standard_nav.html:240
+#: .\accounts\models.py:45 .\core\templates\standard_nav.html:246
 msgid "Profile"
 msgstr "個人檔案"
 
@@ -215,7 +223,7 @@ msgstr "© 2020 保留所有權利。"
 #: .\accounts\templates\registration\signup.html:20
 #: .\accounts\templates\registration\signup_with_account_and_password.html:13
 #: .\accounts\templates\registration\signup_with_email.html:13
-#: .\core\templates\standard_nav.html:266
+#: .\core\templates\standard_nav.html:272
 msgid "Login"
 msgstr "登入"
 
@@ -236,6 +244,7 @@ msgstr "建立"
 #: .\core\templates\standard_form.html:8
 #: .\core\templates\standard_form_with_file.html:8
 #: .\dep_calendar\templates\dep_calendar\event_form.html:27
+#: .\ext_calendar\templates\ext_calendar\event_form.html:27
 #: .\reminder\templates\reminder\reminder_form.html:19
 #: .\telecom\templates\telecom\isp_review.html:18
 #: .\telecom\templates\telecom\prefixlistupdatetask_form.html:19
@@ -251,6 +260,7 @@ msgstr ""
 #: .\core\templates\standard_form.html:10
 #: .\core\templates\standard_form_with_file.html:10
 #: .\dep_calendar\templates\dep_calendar\event_form.html:29
+#: .\ext_calendar\templates\ext_calendar\event_form.html:29
 #: .\reminder\templates\reminder\reminder_form.html:21
 #: .\telecom\templates\telecom\isp_review.html:20
 #: .\telecom\templates\telecom\prefixlistupdatetask_form.html:21
@@ -277,7 +287,7 @@ msgid "Back to the homepage."
 msgstr "返回首頁"
 
 #: .\accounts\templates\registration\password_change_form.html:11
-#: .\core\templates\standard_nav.html:241
+#: .\core\templates\standard_nav.html:247
 msgid "Password change"
 msgstr "密碼變更"
 
@@ -324,8 +334,8 @@ msgid "I didn't recieve it."
 msgstr "我沒有收到"
 
 #: .\accounts\templates\registration\password_reset_form.html:11
-#: .\core\templates\standard_nav.html:243
-#: .\core\templates\standard_nav.html:269
+#: .\core\templates\standard_nav.html:249
+#: .\core\templates\standard_nav.html:275
 msgid "Password reset"
 msgstr "密碼重置"
 
@@ -338,7 +348,7 @@ msgstr "重置"
 #: .\accounts\templates\registration\signup_with_account_and_password.html:41
 #: .\accounts\templates\registration\signup_with_email.html:11
 #: .\accounts\templates\registration\signup_with_email.html:44
-#: .\core\templates\standard_nav.html:267
+#: .\core\templates\standard_nav.html:273
 msgid "Sign up"
 msgstr "註冊"
 
@@ -356,13 +366,13 @@ msgstr "以 Chief 電子信箱繼續"
 msgid "Already have an account?"
 msgstr "已經有帳號了嗎？"
 
-#: .\archive\models.py:20 .\core\templates\standard_nav.html:140
-#: .\core\templates\standard_nav.html:144
-#: .\core\templates\standard_nav.html:147
+#: .\archive\models.py:20 .\core\templates\standard_nav.html:146
 #: .\core\templates\standard_nav.html:150
 #: .\core\templates\standard_nav.html:153
 #: .\core\templates\standard_nav.html:156
-#: .\core\templates\standard_nav.html:159 .\telecom\models.py:277
+#: .\core\templates\standard_nav.html:159
+#: .\core\templates\standard_nav.html:162
+#: .\core\templates\standard_nav.html:165 .\telecom\models.py:277
 msgid "Archive"
 msgstr "檔案"
 
@@ -397,18 +407,20 @@ msgstr "搜尋.."
 #: .\core\templates\standard_form.html:47
 #: .\core\templates\standard_form_with_file.html:65
 #: .\core\templates\standard_nav.html:39 .\core\templates\standard_nav.html:55
-#: .\core\templates\standard_nav.html:73 .\core\templates\standard_nav.html:91
-#: .\core\templates\standard_nav.html:107
-#: .\core\templates\standard_nav.html:115
-#: .\core\templates\standard_nav.html:125
+#: .\core\templates\standard_nav.html:61 .\core\templates\standard_nav.html:79
+#: .\core\templates\standard_nav.html:97 .\core\templates\standard_nav.html:113
+#: .\core\templates\standard_nav.html:121
 #: .\core\templates\standard_nav.html:131
-#: .\core\templates\standard_nav.html:147
-#: .\core\templates\standard_nav.html:174
-#: .\core\templates\standard_nav.html:190
-#: .\core\templates\standard_nav.html:208
+#: .\core\templates\standard_nav.html:137
+#: .\core\templates\standard_nav.html:153
+#: .\core\templates\standard_nav.html:180
+#: .\core\templates\standard_nav.html:196
+#: .\core\templates\standard_nav.html:214
 #: .\dep_calendar\templates\dep_calendar\calendar.html:68
 #: .\dep_calendar\templates\dep_calendar\event_form.html:66
-#: .\diary\templates\diary\diary_list.html:61
+#: .\diary\templates\diary\diary_list.html:65
+#: .\ext_calendar\templates\ext_calendar\calendar.html:68
+#: .\ext_calendar\templates\ext_calendar\event_form.html:66
 #: .\log\templates\log\diary_log_list.html:18
 #: .\news\templates\news\dep_news_list.html:27
 #: .\news\templates\news\news_list.html:17
@@ -432,10 +444,10 @@ msgstr "新增"
 #: .\comment\templates\comment\comment_list.html:31
 #: .\comment\templates\comment\comment_message_list.html:34
 #: .\comment\templates\comment\message_list.html:25
-#: .\diary\templates\diary\diary_list.html:69 .\log\models.py:9
+#: .\diary\templates\diary\diary_list.html:73 .\log\models.py:9
 #: .\log\templates\log\diary_log_list.html:25
-#: .\news\templates\news\dep_news_list.html:36
-#: .\news\templates\news\news_list.html:26
+#: .\news\templates\news\dep_news_list.html:35
+#: .\news\templates\news\news_list.html:25
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_list.html:37
 #: .\reminder\templates\reminder\reminder_list.html:31
 #: .\telecom\templates\telecom\archive_list.html:25
@@ -454,11 +466,11 @@ msgstr "動作"
 #: .\comment\templates\comment\comment_message_list.html:14
 #: .\comment\templates\comment\comment_message_list.html:36
 #: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:33
-#: .\diary\models.py:24 .\diary\templates\diary\diary_list.html:70
-#: .\log\models.py:13 .\log\templates\log\diary_log_list.html:27
-#: .\news\models.py:16 .\reminder\models.py:45
-#: .\reminder\templates\reminder\reminder_list.html:32 .\telecom\models.py:93
-#: .\telecom\models.py:124 .\telecom\models.py:207
+#: .\diary\models.py:24 .\diary\templates\diary\diary_list.html:74
+#: .\ext_calendar\models.py:76 .\log\models.py:13
+#: .\log\templates\log\diary_log_list.html:27 .\news\models.py:16
+#: .\reminder\models.py:45 .\reminder\templates\reminder\reminder_list.html:32
+#: .\telecom\models.py:93 .\telecom\models.py:124 .\telecom\models.py:207
 #: .\telecom\templates\telecom\archive_list.html:26
 #: .\telecom\templates\telecom\isp_list.html:26
 #: .\telecom\templates\telecom\ispgroup_list.html:26
@@ -470,7 +482,9 @@ msgstr "建立者"
 
 #: .\archive\templates\archive\announce_list.html:27
 #: .\archive\templates\archive\archive_list.html:27
-#: .\archive\templates\archive\journals_list.html:35 .\telecom\models.py:21
+#: .\archive\templates\archive\journals_list.html:35
+#: .\news\templates\news\read_report.html:34
+#: .\news\templates\news\read_report.html:65 .\telecom\models.py:21
 #: .\telecom\models.py:41 .\telecom\models.py:120
 #: .\telecom\templates\telecom\archive_list.html:28
 #: .\telecom\templates\telecom\isp_list.html:27
@@ -485,10 +499,11 @@ msgstr "名稱"
 #: .\comment\templates\comment\comment_list.html:49
 #: .\comment\templates\comment\comment_message_list.html:50
 #: .\comment\templates\comment\message_list.html:45
-#: .\diary\templates\diary\diary_list.html:93
+#: .\diary\templates\diary\diary_list.html:97
 #: .\log\templates\log\diary_log_list.html:45
-#: .\news\templates\news\dep_news_list.html:51
-#: .\news\templates\news\news_list.html:41
+#: .\news\templates\news\dep_news_list.html:73
+#: .\news\templates\news\news_list.html:60
+#: .\news\templates\news\read_report.html:52
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_list.html:51
 #: .\reminder\templates\reminder\reminder_list.html:62
 #: .\telecom\templates\telecom\archive_list.html:41
@@ -504,6 +519,7 @@ msgstr "沒有條目"
 #: .\comment\templates\comment\comment_confirm_delete.html:13
 #: .\dep_calendar\templates\dep_calendar\event_confirm_delete.html:13
 #: .\diary\templates\diary\diary_confirm_delete.html:13
+#: .\ext_calendar\templates\ext_calendar\event_confirm_delete.html:13
 #: .\news\templates\news\news_confirm_delete.html:10
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_confirm_delete.html:13
 #: .\reminder\templates\reminder\reminder_confirm_delete.html:13
@@ -521,6 +537,7 @@ msgstr "你確定要刪除這個"
 #: .\core\templates\404.html:17
 #: .\dep_calendar\templates\dep_calendar\event_confirm_delete.html:13
 #: .\diary\templates\diary\diary_confirm_delete.html:13
+#: .\ext_calendar\templates\ext_calendar\event_confirm_delete.html:13
 #: .\news\templates\news\news_confirm_delete.html:10
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_confirm_delete.html:13
 #: .\reminder\templates\reminder\reminder_confirm_delete.html:13
@@ -573,7 +590,7 @@ msgstr ""
 #: .\comment\models.py:10 .\comment\models.py:41
 #: .\comment\templates\comment\comment_list.html:32
 #: .\comment\templates\comment\comment_message_list.html:16 .\day\models.py:8
-#: .\diary\models.py:10 .\diary\templates\diary\diary_list.html:71
+#: .\diary\models.py:10 .\diary\templates\diary\diary_list.html:75
 #: .\telecom\models.py:268 .\telecom\templates\telecom\archive_list.html:27
 msgid "Date"
 msgstr "日期"
@@ -600,7 +617,7 @@ msgstr "貼文類型"
 
 #: .\comment\models.py:18
 #: .\comment\templates\comment\comment_message_list.html:15
-#: .\dep_calendar\models.py:27 .\news\models.py:11
+#: .\dep_calendar\models.py:27 .\ext_calendar\models.py:68 .\news\models.py:11
 msgid "Title"
 msgstr "標題"
 
@@ -612,7 +629,7 @@ msgstr "貼文"
 #: .\comment\templates\comment\comment_action_dropdown.html:17
 #: .\comment\templates\comment\comment_action_dropdown.html:20
 #: .\diary\models.py:23 .\diary\templates\diary\diary_action_dropdown.html:19
-#: .\diary\templates\diary\diary_list.html:76
+#: .\diary\templates\diary\diary_list.html:80
 msgid "Comment"
 msgstr "評論"
 
@@ -629,6 +646,8 @@ msgstr "回文"
 #: .\core\templates\no_creater_permission_action_dropdown.html:6
 #: .\core\templates\standard_action_dropdown.html:6
 #: .\diary\templates\diary\diary_action_dropdown.html:6
+#: .\news\templates\news\dep_news_list.html:46
+#: .\news\templates\news\news_list.html:36
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_action_dropdown.html:6
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:6
 #: .\telecom\templates\telecom\isp_list.html:47
@@ -645,6 +664,10 @@ msgstr "選擇"
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:72
 #: .\dep_calendar\templates\dep_calendar\event_form.html:71
 #: .\diary\templates\diary\diary_action_dropdown.html:10
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:72
+#: .\ext_calendar\templates\ext_calendar\event_form.html:71
+#: .\news\templates\news\dep_news_list.html:59
+#: .\news\templates\news\news_list.html:47
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_action_dropdown.html:15
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:11
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:13
@@ -663,6 +686,9 @@ msgstr "變更"
 #: .\core\templates\standard_confirm_delete_form.html:7
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:77
 #: .\diary\templates\diary\diary_action_dropdown.html:13
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:77
+#: .\news\templates\news\dep_news_list.html:60
+#: .\news\templates\news\news_list.html:48
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_action_dropdown.html:19
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:18
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:20
@@ -733,6 +759,7 @@ msgstr ""
 #: .\core\templates\standard_form_with_file.html:31
 #: .\core\templates\standard_form_with_file.html:40
 #: .\dep_calendar\templates\dep_calendar\event_form.html:44
+#: .\ext_calendar\templates\ext_calendar\event_form.html:44
 #: .\reminder\templates\reminder\reminder_form.html:36
 #: .\telecom\templates\telecom\isp_review.html:37
 #: .\telecom\templates\telecom\prefixlistupdatetask_form.html:32
@@ -749,8 +776,8 @@ msgstr ""
 
 #: .\core\templates\standard_nav.html:21 .\core\templates\standard_nav.html:24
 #: .\core\templates\standard_nav.html:25 .\news\models.py:21
-#: .\news\templates\news\dep_news_list.html:37
-#: .\news\templates\news\news_list.html:27
+#: .\news\models.py:34 .\news\templates\news\dep_news_list.html:36
+#: .\news\templates\news\news_list.html:26
 msgid "News"
 msgstr "最新消息"
 
@@ -759,121 +786,128 @@ msgid "T00"
 msgstr "網應處"
 
 #: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:34
+#: .\ext_calendar\models.py:77
 msgid "Department"
 msgstr "部門"
 
 #: .\core\templates\standard_nav.html:32 .\core\templates\standard_nav.html:36
-#: .\core\templates\standard_nav.html:39 .\core\templates\standard_nav.html:221
+#: .\core\templates\standard_nav.html:39 .\core\templates\standard_nav.html:227
 #: .\diary\models.py:28
 msgid "Diary"
 msgstr "日誌"
 
 #: .\core\templates\standard_nav.html:36 .\core\templates\standard_nav.html:52
-#: .\core\templates\standard_nav.html:69 .\core\templates\standard_nav.html:87
-#: .\core\templates\standard_nav.html:104
-#: .\core\templates\standard_nav.html:111
-#: .\core\templates\standard_nav.html:120
-#: .\core\templates\standard_nav.html:128
-#: .\core\templates\standard_nav.html:144
-#: .\core\templates\standard_nav.html:171
-#: .\core\templates\standard_nav.html:187
-#: .\core\templates\standard_nav.html:204
-#: .\core\templates\standard_nav.html:222
-#: .\core\templates\standard_nav.html:226
+#: .\core\templates\standard_nav.html:58 .\core\templates\standard_nav.html:75
+#: .\core\templates\standard_nav.html:93 .\core\templates\standard_nav.html:110
+#: .\core\templates\standard_nav.html:117
+#: .\core\templates\standard_nav.html:126
+#: .\core\templates\standard_nav.html:134
+#: .\core\templates\standard_nav.html:150
+#: .\core\templates\standard_nav.html:177
+#: .\core\templates\standard_nav.html:193
+#: .\core\templates\standard_nav.html:210
+#: .\core\templates\standard_nav.html:228
+#: .\core\templates\standard_nav.html:232
 msgid "List"
 msgstr "列表"
 
 #: .\core\templates\standard_nav.html:48 .\core\templates\standard_nav.html:52
-#: .\core\templates\standard_nav.html:55
-#: .\diary\templates\diary\diary_list.html:56
+#: .\core\templates\standard_nav.html:55 .\core\templates\standard_nav.html:58
+#: .\core\templates\standard_nav.html:61
+#: .\diary\templates\diary\diary_list.html:60
 msgid "Calendar"
 msgstr "行事曆"
 
-#: .\core\templates\standard_nav.html:64 .\core\templates\standard_nav.html:68
-#: .\core\templates\standard_nav.html:72 .\reminder\models.py:49
+#: .\core\templates\standard_nav.html:58 .\core\templates\standard_nav.html:61
+#: .\diary\templates\diary\diary_list.html:56
+msgid "External Support"
+msgstr "外部支援"
+
+#: .\core\templates\standard_nav.html:70 .\core\templates\standard_nav.html:74
+#: .\core\templates\standard_nav.html:78 .\reminder\models.py:49
 msgid "Reminder"
 msgstr ""
 
-#: .\core\templates\standard_nav.html:82 .\core\templates\standard_nav.html:86
-#: .\core\templates\standard_nav.html:90 .\pilotadmin\models.py:16
+#: .\core\templates\standard_nav.html:88 .\core\templates\standard_nav.html:92
+#: .\core\templates\standard_nav.html:96 .\pilotadmin\models.py:16
 #: .\pilotadmin\models.py:17
 msgid "Pilot Admin"
 msgstr "維運CPBX 專用"
 
-#: .\core\templates\standard_nav.html:100
+#: .\core\templates\standard_nav.html:106
 msgid "Telecom"
 msgstr "電信"
 
-#: .\core\templates\standard_nav.html:104
-#: .\core\templates\standard_nav.html:107 .\telecom\models.py:100
+#: .\core\templates\standard_nav.html:110
+#: .\core\templates\standard_nav.html:113 .\telecom\models.py:100
 msgid "ISP"
 msgstr ""
 
-#: .\core\templates\standard_nav.html:110
-#: .\core\templates\standard_nav.html:114 .\telecom\models.py:131
+#: .\core\templates\standard_nav.html:116
+#: .\core\templates\standard_nav.html:120 .\telecom\models.py:131
 msgid "ISP group"
 msgstr "ISP 群組"
 
-#: .\core\templates\standard_nav.html:119
-#: .\core\templates\standard_nav.html:124 .\telecom\models.py:214
+#: .\core\templates\standard_nav.html:125
+#: .\core\templates\standard_nav.html:130 .\telecom\models.py:214
 msgid "Prefix-list update task"
 msgstr "Prefix-list 更新任務"
 
-#: .\core\templates\standard_nav.html:128
-#: .\core\templates\standard_nav.html:131
+#: .\core\templates\standard_nav.html:134
+#: .\core\templates\standard_nav.html:137
 msgid "Example archive"
 msgstr "範例檔案"
 
-#: .\core\templates\standard_nav.html:150
+#: .\core\templates\standard_nav.html:156
 msgid "journals List"
 msgstr "月刊列表"
 
-#: .\core\templates\standard_nav.html:153
+#: .\core\templates\standard_nav.html:159
 msgid "journals Add"
 msgstr "新增月刊"
 
-#: .\core\templates\standard_nav.html:156
+#: .\core\templates\standard_nav.html:162
 msgid "announce List"
 msgstr "處級佈達列表"
 
-#: .\core\templates\standard_nav.html:159
+#: .\core\templates\standard_nav.html:165
 msgid "announce Add"
 msgstr "新增處級佈達"
 
-#: .\core\templates\standard_nav.html:167
-#: .\core\templates\standard_nav.html:171
-#: .\core\templates\standard_nav.html:174 .\tool\models.py:14
+#: .\core\templates\standard_nav.html:173
+#: .\core\templates\standard_nav.html:177
+#: .\core\templates\standard_nav.html:180 .\tool\models.py:14
 msgid "Tool"
 msgstr "工具"
 
-#: .\core\templates\standard_nav.html:183
-#: .\core\templates\standard_nav.html:187
-#: .\core\templates\standard_nav.html:190 .\terms\models.py:17
+#: .\core\templates\standard_nav.html:189
+#: .\core\templates\standard_nav.html:193
+#: .\core\templates\standard_nav.html:196 .\terms\models.py:17
 #: .\terms\models.py:18
 msgid "Terms"
 msgstr "專有名詞對照表"
 
-#: .\core\templates\standard_nav.html:199
-#: .\core\templates\standard_nav.html:203
-#: .\core\templates\standard_nav.html:207
+#: .\core\templates\standard_nav.html:205
+#: .\core\templates\standard_nav.html:209
+#: .\core\templates\standard_nav.html:213
 msgid "Post Board"
 msgstr "留言討論版"
 
-#: .\core\templates\standard_nav.html:217
-#: .\core\templates\standard_nav.html:221
-#: .\core\templates\standard_nav.html:225 .\log\models.py:18
+#: .\core\templates\standard_nav.html:223
+#: .\core\templates\standard_nav.html:227
+#: .\core\templates\standard_nav.html:231 .\log\models.py:18
 msgid "Log"
 msgstr ""
 
-#: .\core\templates\standard_nav.html:239
+#: .\core\templates\standard_nav.html:245
 msgid "Logout"
 msgstr "登出"
 
-#: .\core\templates\standard_nav.html:255
+#: .\core\templates\standard_nav.html:261
 msgid "No available roles"
 msgstr "沒有可用的角色"
 
-#: .\core\templates\standard_nav.html:263
+#: .\core\templates\standard_nav.html:269
 msgid "Guest"
 msgstr "訪客"
 
@@ -1030,85 +1064,102 @@ msgstr "服務類型"
 msgid "Event type"
 msgstr "事件類型"
 
-#: .\dep_calendar\models.py:30 .\terms\models.py:12
+#: .\dep_calendar\models.py:30 .\ext_calendar\models.py:73 .\terms\models.py:12
 #: .\terms\templates\terms\terms_list.html:30
 msgid "Description"
 msgstr "描述"
 
-#: .\dep_calendar\models.py:31
+#: .\dep_calendar\models.py:31 .\ext_calendar\models.py:74
 msgid "Start time"
 msgstr "開始於"
 
-#: .\dep_calendar\models.py:32
+#: .\dep_calendar\models.py:32 .\ext_calendar\models.py:75
 msgid "End time"
 msgstr "結束於"
 
-#: .\dep_calendar\models.py:35
+#: .\dep_calendar\models.py:35 .\ext_calendar\models.py:78
 msgid "Participants"
 msgstr "參與者"
 
 #: .\dep_calendar\templates\dep_calendar\calendar.html:75
+#: .\ext_calendar\templates\ext_calendar\calendar.html:75
 msgid "today"
 msgstr "今天"
 
 #: .\dep_calendar\templates\dep_calendar\calendar.html:76
+#: .\ext_calendar\templates\ext_calendar\calendar.html:76
 msgid "month"
 msgstr "月"
 
 #: .\dep_calendar\templates\dep_calendar\calendar.html:77
+#: .\ext_calendar\templates\ext_calendar\calendar.html:77
 msgid "week"
 msgstr "週"
 
 #: .\dep_calendar\templates\dep_calendar\calendar.html:78
+#: .\ext_calendar\templates\ext_calendar\calendar.html:78
 msgid "day"
 msgstr "日"
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:15
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:15
 msgid "Title: "
 msgstr "標題"
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:20
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:20
 msgid "Service type: "
 msgstr "服務類型："
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:25
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:25
 msgid "Event type: "
 msgstr "事件類型："
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:30
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:30
 msgid "Description: "
 msgstr "描述："
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:35
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:35
 msgid "Start time: "
 msgstr "開始於："
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:40
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:40
 msgid "End time: "
 msgstr "結束於："
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:45
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:45
 msgid "Created by: "
 msgstr "建立者："
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:50
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:50
 msgid "Department: "
 msgstr "部門："
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:56
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:56
 msgid "Participants: "
 msgstr "參與者："
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:82
 #: .\dep_calendar\templates\dep_calendar\event_form.html:81
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:82
+#: .\ext_calendar\templates\ext_calendar\event_form.html:81
 msgid "Return"
 msgstr "返回"
 
 #: .\dep_calendar\templates\dep_calendar\event_form.html:15
+#: .\ext_calendar\templates\ext_calendar\event_form.html:15
 msgid "Add event"
 msgstr "新增事件"
 
 #: .\dep_calendar\templates\dep_calendar\event_form.html:17
+#: .\ext_calendar\templates\ext_calendar\event_form.html:17
 msgid "Change event"
 msgstr "變更事件"
 
@@ -1116,7 +1167,7 @@ msgstr "變更事件"
 msgid "The diary with this date has already existed."
 msgstr "這個日期的日誌已經存在。"
 
-#: .\diary\models.py:12 .\diary\templates\diary\diary_list.html:72
+#: .\diary\models.py:12 .\diary\templates\diary\diary_list.html:76
 msgid "Daily check"
 msgstr "日檢核"
 
@@ -1128,15 +1179,15 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: .\diary\models.py:20 .\diary\templates\diary\diary_list.html:73
+#: .\diary\models.py:20 .\diary\templates\diary\diary_list.html:77
 msgid "Daily record"
 msgstr "日常紀錄"
 
-#: .\diary\models.py:21 .\diary\templates\diary\diary_list.html:74
+#: .\diary\models.py:21 .\diary\templates\diary\diary_list.html:78
 msgid "To do"
 msgstr "待辦事項"
 
-#: .\diary\models.py:22 .\diary\templates\diary\diary_list.html:75
+#: .\diary\models.py:22 .\diary\templates\diary\diary_list.html:79
 #: .\telecom\forms.py:183 .\telecom\models.py:89 .\telecom\models.py:122
 #: .\telecom\models.py:202 .\telecom\templates\telecom\ispgroup_list.html:29
 msgid "Remark"
@@ -1152,6 +1203,42 @@ msgstr "複製"
 #: .\diary\templates\diary\diary_list.html:49
 msgid "Search"
 msgstr "搜尋"
+
+#: .\ext_calendar\models.py:12
+msgid "S11"
+msgstr ""
+
+#: .\ext_calendar\models.py:19
+msgid "S12"
+msgstr ""
+
+#: .\ext_calendar\models.py:25
+msgid "S21"
+msgstr ""
+
+#: .\ext_calendar\models.py:36
+msgid "S23"
+msgstr ""
+
+#: .\ext_calendar\models.py:45
+msgid "D11"
+msgstr ""
+
+#: .\ext_calendar\models.py:69
+msgid "Support Group"
+msgstr "支援單位"
+
+#: .\ext_calendar\models.py:70
+msgid "Support Consultant"
+msgstr "詢問人"
+
+#: .\ext_calendar\models.py:71
+msgid "Client Name"
+msgstr "客戶名稱"
+
+#: .\ext_calendar\models.py:72
+msgid "Product Type"
+msgstr "產品類型"
 
 #: .\log\models.py:10
 msgid "APP label"
@@ -1192,6 +1279,60 @@ msgstr "到"
 #: .\news\models.py:20
 msgid "New"
 msgstr "最新消息"
+
+#: .\news\models.py:36
+msgid "Read at"
+msgstr "簽到於"
+
+#: .\news\models.py:40
+msgid "News Read Record"
+msgstr "簽到名單"
+
+#: .\news\models.py:41
+msgid "News Read Records"
+msgstr "簽到名單"
+
+#: .\news\templates\news\dep_news_list.html:50
+#: .\news\templates\news\news_list.html:40
+msgid "Sign In"
+msgstr "簽到"
+
+#: .\news\templates\news\dep_news_list.html:54
+#: .\news\templates\news\news_list.html:43
+msgid "View Report"
+msgstr "查看簽到名單"
+
+#: .\news\templates\news\read_report.html:18
+msgid "Sign In Report"
+msgstr "簽到名單"
+
+#: .\news\templates\news\read_report.html:22
+msgid "Export CSV"
+msgstr "匯出 CSV"
+
+#: .\news\templates\news\read_report.html:25
+msgid "Back"
+msgstr "返回"
+
+#: .\news\templates\news\read_report.html:35
+msgid "Sign In Time"
+msgstr "簽到時間"
+
+#: .\news\templates\news\read_report.html:59
+msgid "Not Signed In"
+msgstr "尚未簽到"
+
+#: .\news\templates\news\read_report.html:79
+msgid "All users have signed in."
+msgstr "所有成員已簽到。"
+
+#: .\news\views.py:181 .\news\views.py:210
+msgid "You have no permission to read this list."
+msgstr "你沒有權限讀取這個列表。"
+
+#: .\news\views.py:227 .\news\views.py:243
+msgid "You have no permission to export this list."
+msgstr "你沒有權限匯出這個列表。"
 
 #: .\pilotadmin\models.py:9
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_content.html:18
@@ -1632,6 +1773,29 @@ msgstr "工具"
 #: .\user\serializers.py:53
 msgid "Unable to authenticate with provided credentials"
 msgstr ""
+
+#~ msgid "Department/Group"
+#~ msgstr "部門"
+
+#, fuzzy
+#~| msgid "others"
+#~ msgid "Esther"
+#~ msgstr "其它"
+
+#, fuzzy
+#~| msgid "Day"
+#~ msgid "May"
+#~ msgstr "日子"
+
+#, fuzzy
+#~| msgid "Clone"
+#~ msgid "Stallone"
+#~ msgstr "複製"
+
+#, fuzzy
+#~| msgid "CC"
+#~ msgid "CCX"
+#~ msgstr "副本"
 
 #~ msgid "return"
 #~ msgstr "返回"

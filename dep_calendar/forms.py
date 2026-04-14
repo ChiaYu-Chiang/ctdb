@@ -19,6 +19,6 @@ class CalendarEventForm(forms.ModelForm):
 
         department = user.profile.activated_role
         if department:
-            self.fields['participants'].queryset = department.user_set.filter(is_active=True)
+            self.fields['participants'].queryset = department.user_set.all()
         else:
             self.fields['participants'].queryset = self.fields['participants'].queryset.none()

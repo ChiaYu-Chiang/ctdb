@@ -14,7 +14,7 @@ REPO_ROOT = d['REPO_ROOT']
 def calld_django_send_diary_user_email():
     time_string = time.strftime('%Y%m%d%H%M%S')
     print(time_string)
-    print('start..')
+    print('start send_diary_user_email..')
     cmd = f'{PYTHONPATH_ABS} {REPO_ROOT}\\manage.py senddiaryuseremail'
     os.system(cmd)
 
@@ -22,10 +22,19 @@ def calld_django_send_diary_user_email():
 def calld_django_send_reminder_email():
     time_string = time.strftime('%Y%m%d%H%M%S')
     print(time_string)
-    print('start..')
+    print('start send_reminder_email..')
     cmd = f'{PYTHONPATH_ABS} {REPO_ROOT}\\manage.py sendreminderemail'
+    os.system(cmd)
+
+
+def calld_django_check_news_signatures():
+    time_string = time.strftime('%Y%m%d%H%M%S')
+    print(time_string)
+    print('start check_news_signatures..')
+    cmd = f'{PYTHONPATH_ABS} {REPO_ROOT}\\manage.py check_news_signatures'
     os.system(cmd)
 
 
 calld_django_send_diary_user_email()
 calld_django_send_reminder_email()
+calld_django_check_news_signatures()

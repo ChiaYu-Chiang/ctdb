@@ -23,28 +23,50 @@
           </div>
           {% endif %}
           {% name model|attr:'_meta'|get_perm_name:'add' as add_perm %}
-          {% if user|has_perm:add_perm and request.user.username != 'Apple_Lai' or 'jill_ko' or 'Brian_Chiang' %}
+          {% if user|has_perm:add_perm and request.user.username != 'Apple_Lai' and request.user.username != 'jill_ko' and request.user.username != 'Brian_Chiang' %}
           <a id="addButton" class="btn btn-light border shadow-sm" href="{{ model.get_create_url }}">{% translate 'Add' %}</a>
           {% endif %}
         </div>
         <div class="table-responsive">
           <table id="searchTable" class="table table-light table-borderless table-solid">
             {% name model|attr:'_meta'|get_perm_name:'change' as change_perm %}
-            {% if user|has_perm:change_perm and request.user.username != 'Apple_Lai' or 'jill_ko' or 'Brian_Chiang' %}
             <thead>
               <tr>
                 <th style="width: 1px;">{% translate 'Action' %}</th>
                 <th>{% translate 'News' %}</th>
               </tr>
             </thead>
-            {% endif %}
             <tbody>
               {% for obj in object_list %}
               <tr>
-                {% if user|has_perm:change_perm and request.user.username != 'Apple_Lai' or 'jill_ko' or 'Brian_Chiang' %}
-                <td class="text-nowrap">{% include 'standard_action_dropdown.html' %}</td>
-                {% endif %}
-                <td class="p-4 text-break"><h5>{{ obj.title }}</h5><hr><p>{{ obj.content|safe|linebreaks }}</p><small class="text-secondary text-right d-block">{{ obj.at|date:'Y-m-d A H:i' }}</small></td>
+                <td class="text-nowrap">
+                  <div class="dropdown show">
+                    <button class="btn btn-light bg-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink-{{ obj.id }}"
+                      data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
+                      {% translate 'Choose' %}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-{{ obj.id }}">
+                      <a class="dropdown-item" href="{% url 'news:news_sign_in' obj.pk %}">
+                        {% translate 'Sign In' %} 
+                      </a>
+                      {% if request.user.profile.activated_role.groupprofile.supervise_roles.all or request.user.username == 'Apple_Lai' or request.user.username == 'jill_ko' or request.user.username == 'Brian_Chiang' %}
+                      <a class="dropdown-item" href="{% url 'news:news_read_report' obj.pk %}">
+                        {% translate 'View Report' %} 
+                      </a>
+                      {% endif %}
+                      {% if user|has_perm:change_perm and request.user.username != 'Apple_Lai' and request.user.username != 'jill_ko' and request.user.username != 'Brian_Chiang' %}
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{{ obj.get_update_url }}">{% translate 'Change' %}</a>
+                      <a class="dropdown-item" href="{{ obj.get_delete_url }}">{% translate 'Delete' %}</a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </td>
+                <td class="p-4 text-break">
+                  <h5>{{ obj.title }}</h5><hr>
+                  <p>{{ obj.content|safe|linebreaks }}</p>
+                  <small class="text-secondary text-right d-block">{{ obj.at|date:'Y-m-d A H:i' }}</small>
+                </td>
               </tr>
               {% empty %}
               <tr>

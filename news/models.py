@@ -28,3 +28,17 @@ class News(models.Model):
 
     def get_delete_url(self):
         return reverse('news:news_delete', kwargs={'pk': self.pk})
+
+
+class NewsReadRecord(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE, related_name='read_records', verbose_name=_('News'))
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('User'))
+    read_at = models.DateTimeField(verbose_name=_('Read at'), auto_now_add=True)
+
+    class Meta:
+        unique_together = ('news', 'user')
+        verbose_name = _('News Read Record')
+        verbose_name_plural = _('News Read Records')
+
+    def __str__(self):
+        return f"{self.user.username} already read news: {self.news.title}"

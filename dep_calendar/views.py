@@ -15,7 +15,7 @@ def get_event_queryset(request):
     user_department = request.user.profile.activated_role
     queryset = model.objects.all()
     if not user_department:
-        return queryset.fileter(created_by=request.user)
+        return queryset.filter(created_by=request.user)
     return queryset.filter(department=user_department)
 
 @login_required
