@@ -10,7 +10,6 @@ urlpatterns = [
     path('', include('core.urls')),
     path('', include('diary.urls')),
     path('', include('dep_calendar.urls')),
-    path('', include('ext_calendar.urls')),
     path('', include('reminder.urls')),
     path('', include('telecom.urls')),
     path('', include('archive.urls')),
