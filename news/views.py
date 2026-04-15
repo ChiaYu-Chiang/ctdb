@@ -18,6 +18,7 @@ from .models import News, NewsReadRecord
 from django.contrib.auth.models import User
 
 SPECIAL_USERS = ['Apple_Lai', 'jill_ko', 'Brian_Chiang']
+GLOBAL_REPORT_VIEWERS = ['Brian_Chiang']
 
 def get_dep_news_queryset(request):
     """
@@ -187,7 +188,7 @@ def news_read_report(request, pk):
     # 1. 先取得這篇公告「已簽到」的使用者 ID 列表
     read_user_ids = NewsReadRecord.objects.filter(news=news).values_list('user_id', flat=True)
     
-    if request.user.username in SPECIAL_USERS:
+    if request.user.username in GLOBAL_REPORT_VIEWERS:
         # 特權帳號：看全部的已簽到與未簽到紀錄
         records = NewsReadRecord.objects.filter(news=news).select_related('user__profile')
         # 排除已簽到的人，即為未簽到的人 (建議加上 is_active=True 排除已離職或停用的帳號)
@@ -233,7 +234,7 @@ def news_export_csv(request, pk):
     # 2. 撈取資料 (與 read_report 完全相同)
     read_user_ids = NewsReadRecord.objects.filter(news=news).values_list('user_id', flat=True)
     
-    if request.user.username in SPECIAL_USERS:
+    if request.user.username in GLOBAL_REPORT_VIEWERS:
         records = NewsReadRecord.objects.filter(news=news).select_related('user__profile')
         unread_users = User.objects.filter(is_active=True).exclude(id__in=read_user_ids).select_related('profile')
     elif supervise_roles.exists():
