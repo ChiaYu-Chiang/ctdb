@@ -8,8 +8,8 @@ MANAGE_PY="/home/jimub/repos/ctdb/manage.py"
 echo "========================================="
 echo "排程執行時間: $(date +'%Y%m%d%H%M%S')"
 
-echo "start send_diary_user_email.."
-$PYTHON_BIN $MANAGE_PY senddiaryuseremail
+# echo "start send_diary_user_email.."
+# $PYTHON_BIN $MANAGE_PY senddiaryuseremail
 
 echo "start send_reminder_email.."
 $PYTHON_BIN $MANAGE_PY sendreminderemail

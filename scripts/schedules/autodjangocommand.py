@@ -35,6 +35,6 @@ def calld_django_check_news_signatures():
     os.system(cmd)
 
 
-calld_django_send_diary_user_email()
+# calld_django_send_diary_user_email()
 calld_django_send_reminder_email()
 calld_django_check_news_signatures()
