@@ -37,7 +37,17 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-{{ obj.id }}">
                       <a class="dropdown-item" href="{% url 'news:news_sign_in' obj.pk %}">
-                        {% translate 'Sign In' %} </a>
+                        {% translate 'Sign In' %}
+                        {% if obj.id in read_news_ids %}
+                          <span class="text-success font-weight-bold">
+                            <i class="fas fa-check"></i> ({% translate 'Signed' %})
+                            </span>
+                        {% else %}
+                          <span class="text-danger font-weight-bold">
+                            <i class="fas fa-exclamation-circle"></i> ({% translate 'Unsigned' %})
+                          </span>
+                        {% endif %}
+                      </a>
                       {% if request.user.profile.activated_role.groupprofile.supervise_roles.all or request.user.username == 'Apple_Lai' or request.user.username == 'jill_ko' or request.user.username == 'Brian_Chiang' %}
                       <a class="dropdown-item" href="{% url 'news:news_read_report' obj.pk %}">
                         {% translate 'View Report' %} </a>

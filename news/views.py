@@ -49,12 +49,14 @@ def news_list(request):
     paginator = Paginator(qs, paginate_by)
     page_obj = paginator.get_page(page_number)
     is_paginated = page_number.lower() != 'all' and page_obj.has_other_pages()
+    read_news_ids = NewsReadRecord.objects.filter(user=request.user, news__in=qs).values_list('news_id', flat=True)
     context = {
         'model': model,
         'page_obj': page_obj,
         'object_list': page_obj if is_paginated else qs,
         'is_paginated': is_paginated,
         'is_supervisor': is_supervisor,
+        'read_news_ids': list(read_news_ids),
     }
     return render(request, template_name, context)
 
@@ -74,6 +76,7 @@ def dep_news_list(request):
     paginator = Paginator(qs, paginate_by)
     page_obj = paginator.get_page(page_number)
     is_paginated = page_number.lower() != 'all' and page_obj.has_other_pages()
+    read_news_ids = NewsReadRecord.objects.filter(user=request.user, news__in=qs).values_list('news_id', flat=True)
     context = {
         'model': model,
         'page_obj': page_obj,
@@ -81,6 +84,7 @@ def dep_news_list(request):
         'is_paginated': is_paginated,
         'is_supervisor': is_supervisor,
         'supervise_roles': supervise_roles,
+        'read_news_ids': list(read_news_ids)
     }
     return render(request, template_name, context)
 
