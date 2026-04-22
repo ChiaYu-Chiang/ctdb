@@ -48,15 +48,6 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-{{ obj.id }}">
                       <a class="dropdown-item" href="{% url 'news:news_sign_in' obj.pk %}">
                         {% translate 'Sign In' %}
-                        {% if obj.id in read_news_ids %}
-                          <span class="text-success font-weight-bold">
-                            <i class="fas fa-check"></i> ({% translate 'Signed' %})
-                            </span>
-                        {% else %}
-                          <span class="text-danger font-weight-bold">
-                            <i class="fas fa-exclamation-circle"></i> ({% translate 'Unsigned' %})
-                          </span>
-                        {% endif %}
                       </a>
                       {% if request.user.profile.activated_role.groupprofile.supervise_roles.all or request.user.username == 'Apple_Lai' or request.user.username == 'jill_ko' or request.user.username == 'Brian_Chiang' %}
                       <a class="dropdown-item" href="{% url 'news:news_read_report' obj.pk %}">
@@ -72,7 +63,18 @@
                   </div>
                 </td>
                 <td class="p-4 text-break">
-                  <h5>{{ obj.title }}</h5><hr><p>{{ obj.content|safe|linebreaks }}</p>
+                  <h5>
+                    {% if obj.id in read_news_ids %}
+                      <span class="badge badge-pill badge-light border text-secondary mr-2" style="font-size: 0.6em; vertical-align: middle;">
+                        <i class="fas fa-check-circle text-success"></i> {% translate 'Signed' %}
+                      </span>
+                    {% else %}
+                      <span class="badge badge-pill badge-danger mr-2" style="font-size: 0.6em; vertical-align: middle;">
+                        <i class="fas fa-exclamation-circle"></i> {% translate 'Unsigned' %}
+                      </span>
+                    {% endif %}
+                    {{ obj.title }}
+                  </h5><hr><p>{{ obj.content|safe|linebreaks }}</p>
                   <small class="text-secondary text-right d-block">{{ obj.at|date:'Y-m-d A H:i' }}</small>
                 </td>
               </tr>
