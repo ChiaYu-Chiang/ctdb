@@ -1305,7 +1305,7 @@ msgstr "已簽到"
 #: .\news\templates\news\dep_news_list.html:57
 #: .\news\templates\news\news_list.html:47
 msgid "Unsigned"
-msgstr "尚未簽到"
+msgstr "未簽到"
 
 #: .\news\templates\news\dep_news_list.html:63
 #: .\news\templates\news\news_list.html:53
