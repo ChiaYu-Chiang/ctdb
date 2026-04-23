@@ -41,7 +41,7 @@
           </div>
           {% endif %}
         </li>
-        {% if perms.dep_calendar.view_calendarevent or perms.dep_calendar.add_calendarevent %}
+        {% if perms.dep_calendar.view_calendarevent or perms.ext_calendar.view_calendarevent %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="true">
@@ -53,6 +53,12 @@
             {% endif %}
             {% if perms.dep_calendar.add_calendarevent %}
             <a class="dropdown-item" href="{% url 'dep_calendar:event_create' %}">{% translate 'Calendar' %} | {% translate 'Add' %}</a>
+            {% endif %}
+            {% if perms.ext_calendar.view_calendarevent %}
+            <a class="dropdown-item" href="{% url 'ext_calendar:event_list' %}">{% translate 'External Support' %}{% translate 'Calendar' %} | {% translate 'List' %}</a>
+            {% endif %}
+            {% if perms.ext_calendar.add_calendarevent %}
+            <a class="dropdown-item" href="{% url 'ext_calendar:event_create' %}">{% translate 'External Support' %}{% translate 'Calendar' %} | {% translate 'Add' %}</a>
             {% endif %}
           </div>
           {% endif %}
