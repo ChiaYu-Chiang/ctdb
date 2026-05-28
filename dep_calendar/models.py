@@ -3,10 +3,23 @@ from django.contrib.auth.models import User, Group
 from django.utils.translation import gettext_lazy as _
 
 class CalendarEvent(models.Model):
-    SERVICE_TYPE = [
-        ('voice', _('Voice Service')),  # 語音服務，包含電話、語音交換等服務
-        ('data', _('Data Service')),    # 數據服務，包含網路、專線等服務
-        ('other', _('Other Service')),  # 其他服務
+    PRODUCT_TYPE = [
+        (_('Data Service'), (
+            ('IDC', 'IDC'),
+            ('Internet', 'Internet'),
+            ('MPLS', 'MPLS'),
+            ('MPLS-SDWAN', 'MPLS-SDWAN'),
+            ('IEPL/IPLC', 'IEPL/IPLC'),
+            ('TPIX', 'TPIX'),
+            ('IPT', 'IPT'),
+            ('CIX', 'CIX'),
+            ('CCX', 'CCX'),
+        )),
+        (_('Voice Service'), (
+            ('VOIP', 'VOIP'),
+            ('060/070', '060/070'),
+            ('Cloud PBX', 'Cloud PBX'),
+        )),
     ]
 
     EVENT_TYPE = [
@@ -25,7 +38,7 @@ class CalendarEvent(models.Model):
     ]
 
     title = models.CharField(max_length=255, verbose_name=_('Title'))
-    service_type = models.CharField(verbose_name=_('Service type'), max_length=10, choices=SERVICE_TYPE)
+    product_type = models.CharField(verbose_name=_('Product Type'), max_length=63, choices=PRODUCT_TYPE)
     event_type = models.CharField(verbose_name=_('Event type'), max_length=63, choices=EVENT_TYPE)
     description = models.TextField(blank=True, verbose_name=_('Description'))
     start_time = models.DateTimeField(verbose_name=_('Start time'))

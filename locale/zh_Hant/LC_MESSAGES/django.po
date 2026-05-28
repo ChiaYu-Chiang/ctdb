@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-17 18:24+0800\n"
+"POT-Creation-Date: 2026-05-28 15:24+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -465,9 +465,9 @@ msgstr "動作"
 #: .\comment\models.py:44 .\comment\templates\comment\comment_list.html:33
 #: .\comment\templates\comment\comment_message_list.html:14
 #: .\comment\templates\comment\comment_message_list.html:36
-#: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:33
+#: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:46
 #: .\diary\models.py:24 .\diary\templates\diary\diary_list.html:74
-#: .\ext_calendar\models.py:76 .\log\models.py:13
+#: .\ext_calendar\models.py:77 .\log\models.py:13
 #: .\log\templates\log\diary_log_list.html:27 .\news\models.py:16
 #: .\reminder\models.py:45 .\reminder\templates\reminder\reminder_list.html:32
 #: .\telecom\models.py:93 .\telecom\models.py:124 .\telecom\models.py:207
@@ -501,8 +501,8 @@ msgstr "名稱"
 #: .\comment\templates\comment\message_list.html:45
 #: .\diary\templates\diary\diary_list.html:97
 #: .\log\templates\log\diary_log_list.html:45
-#: .\news\templates\news\dep_news_list.html:81
-#: .\news\templates\news\news_list.html:70
+#: .\news\templates\news\dep_news_list.html:83
+#: .\news\templates\news\news_list.html:72
 #: .\news\templates\news\read_report.html:52
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_list.html:51
 #: .\reminder\templates\reminder\reminder_list.html:62
@@ -617,7 +617,7 @@ msgstr "貼文類型"
 
 #: .\comment\models.py:18
 #: .\comment\templates\comment\comment_message_list.html:15
-#: .\dep_calendar\models.py:27 .\ext_calendar\models.py:68 .\news\models.py:11
+#: .\dep_calendar\models.py:40 .\ext_calendar\models.py:69 .\news\models.py:11
 msgid "Title"
 msgstr "標題"
 
@@ -666,8 +666,8 @@ msgstr "選擇"
 #: .\diary\templates\diary\diary_action_dropdown.html:10
 #: .\ext_calendar\templates\ext_calendar\event_detail.html:72
 #: .\ext_calendar\templates\ext_calendar\event_form.html:71
-#: .\news\templates\news\dep_news_list.html:68
-#: .\news\templates\news\news_list.html:57
+#: .\news\templates\news\dep_news_list.html:59
+#: .\news\templates\news\news_list.html:48
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_action_dropdown.html:15
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:11
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:13
@@ -687,8 +687,8 @@ msgstr "變更"
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:77
 #: .\diary\templates\diary\diary_action_dropdown.html:13
 #: .\ext_calendar\templates\ext_calendar\event_detail.html:77
-#: .\news\templates\news\dep_news_list.html:69
-#: .\news\templates\news\news_list.html:58
+#: .\news\templates\news\dep_news_list.html:60
+#: .\news\templates\news\news_list.html:49
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_action_dropdown.html:19
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:18
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:20
@@ -785,8 +785,8 @@ msgstr "最新消息"
 msgid "T00"
 msgstr "網應處"
 
-#: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:34
-#: .\ext_calendar\models.py:77
+#: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:47
+#: .\ext_calendar\models.py:78
 msgid "Department"
 msgstr "部門"
 
@@ -1013,71 +1013,67 @@ msgid "Days"
 msgstr "日子"
 
 #: .\dep_calendar\models.py:7
-msgid "Voice Service"
-msgstr "語音"
-
-#: .\dep_calendar\models.py:8
 msgid "Data Service"
 msgstr "數據"
 
-#: .\dep_calendar\models.py:9
-msgid "Other Service"
-msgstr "其他"
+#: .\dep_calendar\models.py:18
+msgid "Voice Service"
+msgstr "語音"
 
-#: .\dep_calendar\models.py:13
+#: .\dep_calendar\models.py:26
 msgid "field_work"
 msgstr "外勤"
 
-#: .\dep_calendar\models.py:14
+#: .\dep_calendar\models.py:27
 msgid "installation"
 msgstr "申裝"
 
-#: .\dep_calendar\models.py:15
+#: .\dep_calendar\models.py:28
 msgid "maintenance"
 msgstr "障礙"
 
-#: .\dep_calendar\models.py:16
+#: .\dep_calendar\models.py:29
 msgid "termination"
 msgstr "退租"
 
-#: .\dep_calendar\models.py:19
+#: .\dep_calendar\models.py:32
 msgid "other_field"
 msgstr "其他外勤"
 
-#: .\dep_calendar\models.py:20
+#: .\dep_calendar\models.py:33
 msgid "facility_inspection"
 msgstr "外點機房巡檢"
 
-#: .\dep_calendar\models.py:21
+#: .\dep_calendar\models.py:34
 msgid "local_support"
 msgstr "近端支援"
 
-#: .\dep_calendar\models.py:22
+#: .\dep_calendar\models.py:35
 msgid "others"
 msgstr "其它"
 
-#: .\dep_calendar\models.py:28
-msgid "Service type"
-msgstr "服務類型"
+#: .\dep_calendar\models.py:41 .\ext_calendar\models.py:73
+msgid "Product Type"
+msgstr "產品類型"
 
-#: .\dep_calendar\models.py:29
+#: .\dep_calendar\models.py:42
 msgid "Event type"
 msgstr "事件類型"
 
-#: .\dep_calendar\models.py:30 .\ext_calendar\models.py:73 .\terms\models.py:12
+#: .\dep_calendar\models.py:43 .\ext_calendar\models.py:74 .\terms\models.py:12
 #: .\terms\templates\terms\terms_list.html:30
 msgid "Description"
 msgstr "描述"
 
-#: .\dep_calendar\models.py:31 .\ext_calendar\models.py:74
+#: .\dep_calendar\models.py:44 .\ext_calendar\models.py:75
 msgid "Start time"
 msgstr "開始於"
 
-#: .\dep_calendar\models.py:32 .\ext_calendar\models.py:75
+#: .\dep_calendar\models.py:45 .\ext_calendar\models.py:76
 msgid "End time"
 msgstr "結束於"
 
-#: .\dep_calendar\models.py:35 .\ext_calendar\models.py:78
+#: .\dep_calendar\models.py:48 .\ext_calendar\models.py:79
 msgid "Participants"
 msgstr "參與者"
 
@@ -1224,21 +1220,17 @@ msgstr ""
 msgid "D11"
 msgstr ""
 
-#: .\ext_calendar\models.py:69
+#: .\ext_calendar\models.py:70
 msgid "Support Group"
 msgstr "支援單位"
 
-#: .\ext_calendar\models.py:70
+#: .\ext_calendar\models.py:71
 msgid "Support Consultant"
 msgstr "詢問人"
 
-#: .\ext_calendar\models.py:71
+#: .\ext_calendar\models.py:72
 msgid "Client Name"
 msgstr "客戶名稱"
-
-#: .\ext_calendar\models.py:72
-msgid "Product Type"
-msgstr "產品類型"
 
 #: .\log\models.py:10
 msgid "APP label"
@@ -1297,20 +1289,20 @@ msgstr "簽到名單"
 msgid "Sign In"
 msgstr "簽到"
 
-#: .\news\templates\news\dep_news_list.html:53
-#: .\news\templates\news\news_list.html:43
+#: .\news\templates\news\dep_news_list.html:54
+#: .\news\templates\news\news_list.html:44
+msgid "View Report"
+msgstr "查看簽到名單"
+
+#: .\news\templates\news\dep_news_list.html:69
+#: .\news\templates\news\news_list.html:58
 msgid "Signed"
 msgstr "已簽到"
 
-#: .\news\templates\news\dep_news_list.html:57
-#: .\news\templates\news\news_list.html:47
+#: .\news\templates\news\dep_news_list.html:73
+#: .\news\templates\news\news_list.html:62
 msgid "Unsigned"
 msgstr "未簽到"
-
-#: .\news\templates\news\dep_news_list.html:63
-#: .\news\templates\news\news_list.html:53
-msgid "View Report"
-msgstr "查看簽到名單"
 
 #: .\news\templates\news\read_report.html:18
 msgid "Sign In Report"
@@ -1783,6 +1775,12 @@ msgstr "工具"
 #: .\user\serializers.py:53
 msgid "Unable to authenticate with provided credentials"
 msgstr ""
+
+#~ msgid "Other Service"
+#~ msgstr "其他"
+
+#~ msgid "Service type"
+#~ msgstr "服務類型"
 
 #~ msgid "Department/Group"
 #~ msgstr "部門"
