@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-28 15:24+0800\n"
+"POT-Creation-Date: 2026-05-28 16:24+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -465,7 +465,7 @@ msgstr "動作"
 #: .\comment\models.py:44 .\comment\templates\comment\comment_list.html:33
 #: .\comment\templates\comment\comment_message_list.html:14
 #: .\comment\templates\comment\comment_message_list.html:36
-#: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:46
+#: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:49
 #: .\diary\models.py:24 .\diary\templates\diary\diary_list.html:74
 #: .\ext_calendar\models.py:77 .\log\models.py:13
 #: .\log\templates\log\diary_log_list.html:27 .\news\models.py:16
@@ -617,7 +617,7 @@ msgstr "貼文類型"
 
 #: .\comment\models.py:18
 #: .\comment\templates\comment\comment_message_list.html:15
-#: .\dep_calendar\models.py:40 .\ext_calendar\models.py:69 .\news\models.py:11
+#: .\dep_calendar\models.py:43 .\ext_calendar\models.py:69 .\news\models.py:11
 msgid "Title"
 msgstr "標題"
 
@@ -785,7 +785,7 @@ msgstr "最新消息"
 msgid "T00"
 msgstr "網應處"
 
-#: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:47
+#: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:50
 #: .\ext_calendar\models.py:78
 msgid "Department"
 msgstr "部門"
@@ -1020,60 +1020,64 @@ msgstr "數據"
 msgid "Voice Service"
 msgstr "語音"
 
-#: .\dep_calendar\models.py:26
+#: .\dep_calendar\models.py:23
+msgid "Other Service"
+msgstr "其他"
+
+#: .\dep_calendar\models.py:29
 msgid "field_work"
 msgstr "外勤"
 
-#: .\dep_calendar\models.py:27
+#: .\dep_calendar\models.py:30
 msgid "installation"
 msgstr "申裝"
 
-#: .\dep_calendar\models.py:28
+#: .\dep_calendar\models.py:31
 msgid "maintenance"
 msgstr "障礙"
 
-#: .\dep_calendar\models.py:29
+#: .\dep_calendar\models.py:32
 msgid "termination"
 msgstr "退租"
 
-#: .\dep_calendar\models.py:32
+#: .\dep_calendar\models.py:35
 msgid "other_field"
 msgstr "其他外勤"
 
-#: .\dep_calendar\models.py:33
+#: .\dep_calendar\models.py:36
 msgid "facility_inspection"
 msgstr "外點機房巡檢"
 
-#: .\dep_calendar\models.py:34
+#: .\dep_calendar\models.py:37
 msgid "local_support"
 msgstr "近端支援"
 
-#: .\dep_calendar\models.py:35
+#: .\dep_calendar\models.py:38
 msgid "others"
 msgstr "其它"
 
-#: .\dep_calendar\models.py:41 .\ext_calendar\models.py:73
+#: .\dep_calendar\models.py:44 .\ext_calendar\models.py:73
 msgid "Product Type"
 msgstr "產品類型"
 
-#: .\dep_calendar\models.py:42
+#: .\dep_calendar\models.py:45
 msgid "Event type"
 msgstr "事件類型"
 
-#: .\dep_calendar\models.py:43 .\ext_calendar\models.py:74 .\terms\models.py:12
+#: .\dep_calendar\models.py:46 .\ext_calendar\models.py:74 .\terms\models.py:12
 #: .\terms\templates\terms\terms_list.html:30
 msgid "Description"
 msgstr "描述"
 
-#: .\dep_calendar\models.py:44 .\ext_calendar\models.py:75
+#: .\dep_calendar\models.py:47 .\ext_calendar\models.py:75
 msgid "Start time"
 msgstr "開始於"
 
-#: .\dep_calendar\models.py:45 .\ext_calendar\models.py:76
+#: .\dep_calendar\models.py:48 .\ext_calendar\models.py:76
 msgid "End time"
 msgstr "結束於"
 
-#: .\dep_calendar\models.py:48 .\ext_calendar\models.py:79
+#: .\dep_calendar\models.py:51 .\ext_calendar\models.py:79
 msgid "Participants"
 msgstr "參與者"
 
@@ -1775,9 +1779,6 @@ msgstr "工具"
 #: .\user\serializers.py:53
 msgid "Unable to authenticate with provided credentials"
 msgstr ""
-
-#~ msgid "Other Service"
-#~ msgstr "其他"
 
 #~ msgid "Service type"
 #~ msgstr "服務類型"

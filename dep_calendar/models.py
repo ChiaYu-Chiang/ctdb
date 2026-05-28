@@ -20,6 +20,9 @@ class CalendarEvent(models.Model):
             ('060/070', '060/070'),
             ('Cloud PBX', 'Cloud PBX'),
         )),
+        (_('Other Service'), (
+            ('other', _('Other Service')),
+        )),
     ]
 
     EVENT_TYPE = [
