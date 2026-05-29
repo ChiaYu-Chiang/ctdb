@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-28 16:24+0800\n"
+"POT-Creation-Date: 2026-05-29 15:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1020,7 +1020,7 @@ msgstr "數據"
 msgid "Voice Service"
 msgstr "語音"
 
-#: .\dep_calendar\models.py:23
+#: .\dep_calendar\models.py:23 .\dep_calendar\models.py:24
 msgid "Other Service"
 msgstr "其他"
 
@@ -1107,9 +1107,8 @@ msgid "Title: "
 msgstr "標題"
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:20
-#: .\ext_calendar\templates\ext_calendar\event_detail.html:20
-msgid "Service type: "
-msgstr "服務類型："
+msgid "Product type: "
+msgstr "產品類型："
 
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:25
 #: .\ext_calendar\templates\ext_calendar\event_detail.html:25
@@ -1235,6 +1234,10 @@ msgstr "詢問人"
 #: .\ext_calendar\models.py:72
 msgid "Client Name"
 msgstr "客戶名稱"
+
+#: .\ext_calendar\templates\ext_calendar\event_detail.html:20
+msgid "Service type: "
+msgstr "服務類型："
 
 #: .\log\models.py:10
 msgid "APP label"
