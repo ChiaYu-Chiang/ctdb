@@ -14,6 +14,7 @@ class CalendarEvent(models.Model):
             ('IPT', 'IPT'),
             ('CIX', 'CIX'),
             ('CCX', 'CCX'),
+            ('轉售/代收代付', '轉售/代收代付')
         )),
         (_('Voice Service'), (
             ('VOIP', 'VOIP'),
