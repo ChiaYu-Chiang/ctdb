@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-29 15:39+0800\n"
+"POT-Creation-Date: 2026-06-03 13:34+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -433,7 +433,7 @@ msgstr "搜尋.."
 #: .\telecom\templates\telecom\ispgroup_list.html:18
 #: .\telecom\templates\telecom\prefixlistupdatetask_form.html:114
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:18
-#: .\terms\templates\terms\terms_list.html:18
+#: .\terms\templates\terms\terms_list.html:23
 #: .\tool\templates\tool\tool_list.html:18
 msgid "Add"
 msgstr "新增"
@@ -454,7 +454,7 @@ msgstr "新增"
 #: .\telecom\templates\telecom\isp_list.html:25
 #: .\telecom\templates\telecom\ispgroup_list.html:25
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:25
-#: .\terms\templates\terms\terms_list.html:25
+#: .\terms\templates\terms\terms_list.html:31
 #: .\tool\templates\tool\tool_list.html:25
 msgid "Action"
 msgstr "動作"
@@ -465,7 +465,7 @@ msgstr "動作"
 #: .\comment\models.py:44 .\comment\templates\comment\comment_list.html:33
 #: .\comment\templates\comment\comment_message_list.html:14
 #: .\comment\templates\comment\comment_message_list.html:36
-#: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:49
+#: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:50
 #: .\diary\models.py:24 .\diary\templates\diary\diary_list.html:74
 #: .\ext_calendar\models.py:77 .\log\models.py:13
 #: .\log\templates\log\diary_log_list.html:27 .\news\models.py:16
@@ -475,7 +475,7 @@ msgstr "動作"
 #: .\telecom\templates\telecom\isp_list.html:26
 #: .\telecom\templates\telecom\ispgroup_list.html:26
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:26
-#: .\terms\models.py:13 .\terms\templates\terms\terms_list.html:26
+#: .\terms\models.py:13 .\terms\templates\terms\terms_list.html:32
 #: .\tool\models.py:10 .\tool\templates\tool\tool_list.html:26
 msgid "Created by"
 msgstr "建立者"
@@ -510,7 +510,7 @@ msgstr "名稱"
 #: .\telecom\templates\telecom\isp_list.html:75
 #: .\telecom\templates\telecom\ispgroup_list.html:45
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:57
-#: .\terms\templates\terms\terms_list.html:51
+#: .\terms\templates\terms\terms_list.html:57
 #: .\tool\templates\tool\tool_list.html:39
 msgid "No entries."
 msgstr "沒有條目"
@@ -617,7 +617,7 @@ msgstr "貼文類型"
 
 #: .\comment\models.py:18
 #: .\comment\templates\comment\comment_message_list.html:15
-#: .\dep_calendar\models.py:43 .\ext_calendar\models.py:69 .\news\models.py:11
+#: .\dep_calendar\models.py:44 .\ext_calendar\models.py:69 .\news\models.py:11
 msgid "Title"
 msgstr "標題"
 
@@ -785,7 +785,7 @@ msgstr "最新消息"
 msgid "T00"
 msgstr "網應處"
 
-#: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:50
+#: .\core\templates\standard_nav.html:25 .\dep_calendar\models.py:51
 #: .\ext_calendar\models.py:78
 msgid "Department"
 msgstr "部門"
@@ -1016,68 +1016,68 @@ msgstr "日子"
 msgid "Data Service"
 msgstr "數據"
 
-#: .\dep_calendar\models.py:18
+#: .\dep_calendar\models.py:19
 msgid "Voice Service"
 msgstr "語音"
 
-#: .\dep_calendar\models.py:23 .\dep_calendar\models.py:24
+#: .\dep_calendar\models.py:24 .\dep_calendar\models.py:25
 msgid "Other Service"
 msgstr "其他"
 
-#: .\dep_calendar\models.py:29
+#: .\dep_calendar\models.py:30
 msgid "field_work"
 msgstr "外勤"
 
-#: .\dep_calendar\models.py:30
+#: .\dep_calendar\models.py:31
 msgid "installation"
 msgstr "申裝"
 
-#: .\dep_calendar\models.py:31
+#: .\dep_calendar\models.py:32
 msgid "maintenance"
 msgstr "障礙"
 
-#: .\dep_calendar\models.py:32
+#: .\dep_calendar\models.py:33
 msgid "termination"
 msgstr "退租"
 
-#: .\dep_calendar\models.py:35
+#: .\dep_calendar\models.py:36
 msgid "other_field"
 msgstr "其他外勤"
 
-#: .\dep_calendar\models.py:36
+#: .\dep_calendar\models.py:37
 msgid "facility_inspection"
 msgstr "外點機房巡檢"
 
-#: .\dep_calendar\models.py:37
+#: .\dep_calendar\models.py:38
 msgid "local_support"
 msgstr "近端支援"
 
-#: .\dep_calendar\models.py:38
+#: .\dep_calendar\models.py:39
 msgid "others"
 msgstr "其它"
 
-#: .\dep_calendar\models.py:44 .\ext_calendar\models.py:73
+#: .\dep_calendar\models.py:45 .\ext_calendar\models.py:73
 msgid "Product Type"
 msgstr "產品類型"
 
-#: .\dep_calendar\models.py:45
+#: .\dep_calendar\models.py:46
 msgid "Event type"
 msgstr "事件類型"
 
-#: .\dep_calendar\models.py:46 .\ext_calendar\models.py:74 .\terms\models.py:12
-#: .\terms\templates\terms\terms_list.html:30
+#: .\dep_calendar\models.py:47 .\ext_calendar\models.py:74 .\terms\models.py:12
+#: .\terms\templates\terms\terms_list.html:36
 msgid "Description"
 msgstr "描述"
 
-#: .\dep_calendar\models.py:47 .\ext_calendar\models.py:75
+#: .\dep_calendar\models.py:48 .\ext_calendar\models.py:75
 msgid "Start time"
 msgstr "開始於"
 
-#: .\dep_calendar\models.py:48 .\ext_calendar\models.py:76
+#: .\dep_calendar\models.py:49 .\ext_calendar\models.py:76
 msgid "End time"
 msgstr "結束於"
 
-#: .\dep_calendar\models.py:51 .\ext_calendar\models.py:79
+#: .\dep_calendar\models.py:52 .\ext_calendar\models.py:79
 msgid "Participants"
 msgstr "參與者"
 
@@ -1759,11 +1759,11 @@ msgstr ""
 "<b>複選</b>多個項目 或要 <b>取消</b>已選取項目，請<b>按住 Ctrl</b> 後再點選即"
 "可。"
 
-#: .\terms\models.py:8 .\terms\templates\terms\terms_list.html:27
+#: .\terms\models.py:8 .\terms\templates\terms\terms_list.html:33
 msgid "Short Name"
 msgstr "簡稱"
 
-#: .\terms\models.py:9 .\terms\templates\terms\terms_list.html:28
+#: .\terms\models.py:9 .\terms\templates\terms\terms_list.html:34
 msgid "Full Name"
 msgstr "全名"
 
@@ -1771,9 +1771,36 @@ msgstr "全名"
 msgid "URL"
 msgstr "URL"
 
-#: .\terms\models.py:11 .\terms\templates\terms\terms_list.html:29
+#: .\terms\models.py:11 .\terms\templates\terms\terms_list.html:35
 msgid "Management Department"
 msgstr "管理部門"
+
+#: .\terms\templates\terms\terms_list.html:21
+#: .\terms\templates\terms\terms_list.html:74
+msgid "Import"
+msgstr "匯入"
+
+#: .\terms\templates\terms\terms_list.html:83
+msgid "Select Excel file"
+msgstr "選擇 Excel 檔案"
+
+#: .\terms\templates\terms\terms_list.html:88
+msgid ""
+"Please fill in the data according to the standard format provided by the "
+"system before uploading to avoid import failure."
+msgstr "請依照系統提供的標準格式填寫資料後再行上傳，以免匯入失敗。"
+
+#: .\terms\templates\terms\terms_list.html:89
+msgid "Download Excel Template"
+msgstr "下載 Excel 範本"
+
+#: .\terms\templates\terms\terms_list.html:93
+msgid "Cancel"
+msgstr "取消"
+
+#: .\terms\templates\terms\terms_list.html:94
+msgid "Confirm Import"
+msgstr "確認匯入"
 
 #: .\tool\models.py:15
 msgid "Tools"
