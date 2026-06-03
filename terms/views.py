@@ -9,6 +9,8 @@ from core.decorators import permission_required
 from .forms import TermsModelForm
 from .models import Terms
 
+from pypinyin import lazy_pinyin, Style
+
 def get_all_terms_queryset(request):
     """
     The queryset of model `Terms` with filter depending on user's role/identity/group.
@@ -20,21 +22,38 @@ def get_all_terms_queryset(request):
     return queryset
 
 
+def generate_sort_key(term):
+    if not term.short_name:
+        return ""
+
+    first_char = term.short_name.strip()[0]
+
+    if '\u4e00' <= first_char <= '\u9fff':
+        bopomofo_list = lazy_pinyin(term.short_name, style=Style.BOPOMOFO)
+        bopomofo_str = "".join(bopomofo_list)
+        return f"z_{bopomofo_str}"
+    else:
+        return f"a_{term.short_name.lower()}"
+
+
 @login_required
 @permission_required('terms.view_terms', raise_exception=True, exception=Http404)
 def terms_list(request):
     model = Terms
     queryset = get_all_terms_queryset(request)
+
+    sorted_terms_list = sorted(queryset, key=generate_sort_key)
+
     paginate_by = 5
     template_name = 'terms/terms_list.html'
     page_number = request.GET.get('page', '')
-    paginator = Paginator(queryset, paginate_by)
+    paginator = Paginator(sorted_terms_list, paginate_by)
     page_obj = paginator.get_page(page_number)
     is_paginated = page_number.lower() != 'all' and page_obj.has_other_pages()
     context = {
         'model': model,
         'page_obj': page_obj,
-        'object_list': page_obj if is_paginated else queryset,
+        'object_list': page_obj if is_paginated else sorted_terms_list,
         'is_paginated': is_paginated,
     }
     return render(request, template_name, context)

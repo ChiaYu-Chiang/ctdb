@@ -13,7 +13,7 @@ class Terms(models.Model):
     created_by = models.ForeignKey(verbose_name=_('Created by'), to=settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['short_name']
         verbose_name = _('Terms')
         verbose_name_plural = _('Terms')
     def __str__(self):
