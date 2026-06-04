@@ -14,6 +14,9 @@ class Archive(models.Model):
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
     created_by = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    is_permanent = models.BooleanField(verbose_name=_('Is permanent'), default=True)
+    visible_at = models.DateTimeField(verbose_name=_('Visible Start'), null=True, blank=True)
+    visible_due = models.DateTimeField(verbose_name=_('Visible Due'), null=True, blank=True)
 
     class Meta:
         ordering = ['-id']

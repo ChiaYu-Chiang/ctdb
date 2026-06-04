@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.db.models import Q
 
 
 from core.decorators import permission_required
@@ -27,7 +28,9 @@ def get_dep_news_queryset(request):
     accidentally see or touch those they shouldn't.
     """
     model = News
-    queryset = model.objects.exclude(created_by__username__in=SPECIAL_USERS)
+    now = timezone.now()
+    valid_condition = Q(is_permanent=True) | Q(is_permanent=False, visible_at__lte=now, visible_due__gte=now)
+    queryset = model.objects.exclude(created_by__username__in=SPECIAL_USERS).filter(valid_condition)
     role = request.user.profile.activated_role
     deps = request.user.groups.filter(groupprofile__is_department=True)
     if not role:
@@ -44,7 +47,9 @@ def news_list(request):
     paginate_by = 5
     template_name = 'news/news_list.html'
     is_supervisor = True
-    qs = News.objects.filter(created_by__username__in=SPECIAL_USERS)
+    now = timezone.now()
+    valid_condition = Q(is_permanent=True) | Q(is_permanent=False, visible_at__lte=now, visible_due__gte=now)
+    qs = News.objects.filter(created_by__username__in=SPECIAL_USERS).filter(valid_condition)
     page_number = request.GET.get('page', '')
     paginator = Paginator(qs, paginate_by)
     page_obj = paginator.get_page(page_number)
@@ -109,14 +114,14 @@ def news_create(request):
             if success_url == success_url1:
                 active_users = User.objects.filter(is_active=1)
                 recipient_list = [user.email for user in active_users if user.email]
-                send_mail(
-                    subject=f"[TDB] 最新消息：{news_title}",
-                    message=f"TDB最新消息已發布：{news_title}。\n\n請至TDB最新消息專區查看最新發布公告。",
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=recipient_list,
-                    fail_silently=False,
-                    html_message=f"TDB最新消息已發布：{news_title}。\n\n請至<a href='https://tdb.chief-tech.net/news/'>最新消息</a>查看最新發布公告。",
-                )
+                # send_mail(
+                #     subject=f"[TDB] 最新消息：{news_title}",
+                #     message=f"TDB最新消息已發布：{news_title}。\n\n請至TDB最新消息專區查看最新發布公告。",
+                #     from_email=settings.DEFAULT_FROM_EMAIL,
+                #     recipient_list=recipient_list,
+                #     fail_silently=False,
+                #     html_message=f"TDB最新消息已發布：{news_title}。\n\n請至<a href='https://tdb.chief-tech.net/news/'>最新消息</a>查看最新發布公告。",
+                # )
 
             return redirect(success_url)
         context = {'model': model, 'form': form, 'form_buttons': form_buttons}

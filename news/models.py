@@ -13,6 +13,9 @@ class News(models.Model):
     is_pinned = models.BooleanField(verbose_name=_('Is pinned'), default=False)
     at = models.DateTimeField(verbose_name=_('at'), default=now)
     due = models.DateTimeField(verbose_name=_('Due'), null=True, blank=True)
+    is_permanent = models.BooleanField(verbose_name=_('Is permanent'), default=True)
+    visible_at = models.DateTimeField(verbose_name=_('Visible Start'), null=True, blank=True)
+    visible_due = models.DateTimeField(verbose_name=_('Visible Due'), null=True, blank=True)
     created_by = models.ForeignKey(verbose_name=_('Created by'), to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:

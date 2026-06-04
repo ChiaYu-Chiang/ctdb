@@ -7,6 +7,9 @@ import pandas as pd
 from datetime import timedelta
 from django.contrib import messages
 
+from django.utils import timezone
+from django.db.models import Q
+
 from core.decorators import permission_required
 from reminder.models import Reminder
 
@@ -21,7 +24,9 @@ def get_all_archive_queryset(request):
     accidentally see or touch those they shouldn't.
     """
     model = Archive
-    queryset = model.objects.all()
+    now = timezone.now()
+    valid_condition = Q(is_permanent=True) | Q(is_permanent=False, visible_at__lte=now, visible_due__gte=now)
+    queryset = model.objects.filter(valid_condition)
     return queryset
 
 
@@ -33,7 +38,9 @@ def get_archive_queryset(request):
     accidentally see or touch those they shouldn't.
     """
     model = Archive
-    queryset = model.objects.filter(type="files")
+    now = timezone.now()
+    valid_condition = Q(is_permanent=True) | Q(is_permanent=False, visible_at__lte=now, visible_due__gte=now)
+    queryset = model.objects.filter(type="files").filter(valid_condition)
     return queryset
 
 
@@ -45,7 +52,9 @@ def get_journals_queryset(request):
     accidentally see or touch those they shouldn't.
     """
     model = Archive
-    queryset = model.objects.filter(type='journals')
+    now = timezone.now()
+    valid_condition = Q(is_permanent=True) | Q(is_permanent=False, visible_at__lte=now, visible_due__gte=now)
+    queryset = model.objects.filter(type='journals').filter(valid_condition)
     return queryset
 
 
@@ -57,7 +66,9 @@ def get_announce_queryset(request):
     accidentally see or touch those they shouldn't.
     """
     model = Archive
-    queryset = model.objects.filter(type='announce')
+    now = timezone.now()
+    valid_condition = Q(is_permanent=True) | Q(is_permanent=False, visible_at__lte=now, visible_due__gte=now)
+    queryset = model.objects.filter(type='announce').filter(valid_condition)
     return queryset
 
 
