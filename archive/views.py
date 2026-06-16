@@ -178,7 +178,7 @@ def archive_update(request, pk):
     form_buttons = ['update']
     template_name = 'archive/archive_form.html'
     if request.method == 'POST':
-        form = form_class(data=request.POST, instance=instance)
+        form = form_class(data=request.POST, files=request.FILES, instance=instance)
         if form.is_valid():
             form.save()
             return redirect(success_url)
