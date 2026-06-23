@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-04 13:54+0800\n"
+"POT-Creation-Date: 2026-06-23 13:12+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -418,7 +418,6 @@ msgstr "檔案"
 #: .\telecom\templates\telecom\isp_list.html:15
 #: .\telecom\templates\telecom\ispgroup_list.html:15
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:15
-#: .\terms\templates\terms\terms_list.html:15
 #: .\tool\templates\tool\tool_list.html:15
 msgid "Search.."
 msgstr "搜尋.."
@@ -458,7 +457,7 @@ msgstr "搜尋.."
 #: .\telecom\templates\telecom\ispgroup_list.html:18
 #: .\telecom\templates\telecom\prefixlistupdatetask_form.html:114
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:18
-#: .\terms\templates\terms\terms_list.html:23
+#: .\terms\templates\terms\terms_list.html:206
 #: .\tool\templates\tool\tool_list.html:18
 msgid "Add"
 msgstr "新增"
@@ -479,7 +478,6 @@ msgstr "新增"
 #: .\telecom\templates\telecom\isp_list.html:25
 #: .\telecom\templates\telecom\ispgroup_list.html:25
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:25
-#: .\terms\templates\terms\terms_list.html:31
 #: .\tool\templates\tool\tool_list.html:25
 msgid "Action"
 msgstr "動作"
@@ -500,8 +498,8 @@ msgstr "動作"
 #: .\telecom\templates\telecom\isp_list.html:26
 #: .\telecom\templates\telecom\ispgroup_list.html:26
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:26
-#: .\terms\models.py:13 .\terms\templates\terms\terms_list.html:32
-#: .\tool\models.py:10 .\tool\templates\tool\tool_list.html:26
+#: .\terms\models.py:14 .\tool\models.py:10
+#: .\tool\templates\tool\tool_list.html:26
 msgid "Created by"
 msgstr "建立者"
 
@@ -535,7 +533,6 @@ msgstr "名稱"
 #: .\telecom\templates\telecom\isp_list.html:75
 #: .\telecom\templates\telecom\ispgroup_list.html:45
 #: .\telecom\templates\telecom\prefixlistupdatetask_list.html:57
-#: .\terms\templates\terms\terms_list.html:57
 #: .\tool\templates\tool\tool_list.html:39
 msgid "No entries."
 msgstr "沒有條目"
@@ -604,6 +601,8 @@ msgstr "範例"
 #: .\news\templates\news\news_pagination.html:23
 #: .\reminder\templates\reminder\reminder_list.html:18
 #: .\reminder\templates\reminder\reminder_pagination.html:23
+#: .\terms\templates\terms\terms_list.html:215
+#: .\terms\templates\terms\terms_list.html:311
 msgid "All"
 msgstr ""
 
@@ -906,8 +905,8 @@ msgstr "工具"
 
 #: .\core\templates\standard_nav.html:189
 #: .\core\templates\standard_nav.html:193
-#: .\core\templates\standard_nav.html:196 .\terms\models.py:17
-#: .\terms\models.py:18
+#: .\core\templates\standard_nav.html:196 .\terms\models.py:18
+#: .\terms\models.py:19
 msgid "Terms"
 msgstr "專有名詞對照表"
 
@@ -943,6 +942,8 @@ msgstr "訪客"
 #: .\news\templates\news\news_pagination.html:10
 #: .\reminder\templates\reminder\reminder_pagination.html:6
 #: .\reminder\templates\reminder\reminder_pagination.html:10
+#: .\terms\templates\terms\terms_list.html:292
+#: .\terms\templates\terms\terms_list.html:295
 msgid "Previous"
 msgstr "上一頁"
 
@@ -954,6 +955,8 @@ msgstr "上一頁"
 #: .\news\templates\news\news_pagination.html:19
 #: .\reminder\templates\reminder\reminder_pagination.html:15
 #: .\reminder\templates\reminder\reminder_pagination.html:19
+#: .\terms\templates\terms\terms_list.html:304
+#: .\terms\templates\terms\terms_list.html:307
 msgid "Next"
 msgstr "下一頁"
 
@@ -1088,8 +1091,7 @@ msgstr "產品類型"
 msgid "Event type"
 msgstr "事件類型"
 
-#: .\dep_calendar\models.py:47 .\ext_calendar\models.py:74 .\terms\models.py:12
-#: .\terms\templates\terms\terms_list.html:36
+#: .\dep_calendar\models.py:47 .\ext_calendar\models.py:74 .\terms\models.py:13
 msgid "Description"
 msgstr "描述"
 
@@ -1224,6 +1226,7 @@ msgid "Clone"
 msgstr "複製"
 
 #: .\diary\templates\diary\diary_list.html:49
+#: .\terms\templates\terms\terms_list.html:194
 msgid "Search"
 msgstr "搜尋"
 
@@ -1783,11 +1786,11 @@ msgstr ""
 "<b>複選</b>多個項目 或要 <b>取消</b>已選取項目，請<b>按住 Ctrl</b> 後再點選即"
 "可。"
 
-#: .\terms\models.py:8 .\terms\templates\terms\terms_list.html:33
+#: .\terms\models.py:8
 msgid "Short Name"
 msgstr "簡稱"
 
-#: .\terms\models.py:9 .\terms\templates\terms\terms_list.html:34
+#: .\terms\models.py:9
 msgid "Full Name"
 msgstr "全名"
 
@@ -1795,34 +1798,76 @@ msgstr "全名"
 msgid "URL"
 msgstr "URL"
 
-#: .\terms\models.py:11 .\terms\templates\terms\terms_list.html:35
+#: .\terms\models.py:11
 msgid "Management Department"
 msgstr "管理部門"
 
-#: .\terms\templates\terms\terms_list.html:21
-#: .\terms\templates\terms\terms_list.html:74
+#: .\terms\models.py:12
+msgid "Domain Category"
+msgstr "領域分類"
+
+#: .\terms\templates\terms\terms_list.html:183
+msgid "Specialized Terminology Database"
+msgstr "專有名詞對照表"
+
+#: .\terms\templates\terms\terms_list.html:192
+msgid ""
+"Enter terminology, abbreviation, or keyword (e.g., Cybersecurity, SD-WAN)"
+msgstr "輸入專有名詞、縮寫或關鍵字（例如：資安、SD-WAN）"
+
+#: .\terms\templates\terms\terms_list.html:204
+#: .\terms\templates\terms\terms_list.html:330
 msgid "Import"
 msgstr "匯入"
 
-#: .\terms\templates\terms\terms_list.html:83
+#: .\terms\templates\terms\terms_list.html:212
+msgid "A–Z Quick Letter Index"
+msgstr "A–Z 快速字母索引"
+
+#: .\terms\templates\terms\terms_list.html:213
+msgid "Filter by first letter"
+msgstr "按首字母過濾"
+
+#: .\terms\templates\terms\terms_list.html:231
+#, python-format
+msgid "Filtered: Terms Starting with %(letter)s (%(count)s)"
+msgstr "過濾結果：以 %(letter)s 開頭的專有名詞 (%(count)s)"
+
+#: .\terms\templates\terms\terms_list.html:233
+#, python-format
+msgid "Search results for \"%(q)s\" (%(count)s)"
+msgstr "搜尋 \"%(q)s\" 的結果 (%(count)s)"
+
+#: .\terms\templates\terms\terms_list.html:235
+#, python-format
+msgid "All Terms (%(count)s)"
+msgstr "所有專有名詞 (%(count)s)"
+
+#: .\terms\templates\terms\terms_list.html:281
+#, fuzzy
+#| msgid "No entries."
+msgid "No entries found."
+msgstr "沒有條目"
+
+#: .\terms\templates\terms\terms_list.html:340
 msgid "Select Excel file"
 msgstr "選擇 Excel 檔案"
 
-#: .\terms\templates\terms\terms_list.html:88
+#: .\terms\templates\terms\terms_list.html:346
 msgid ""
 "Please fill in the data according to the standard format provided by the "
 "system before uploading to avoid import failure."
 msgstr "請依照系統提供的標準格式填寫資料後再行上傳，以免匯入失敗。"
 
-#: .\terms\templates\terms\terms_list.html:89
+#: .\terms\templates\terms\terms_list.html:349
 msgid "Download Excel Template"
 msgstr "下載 Excel 範本"
 
-#: .\terms\templates\terms\terms_list.html:93
+#: .\terms\templates\terms\terms_list.html:354
 msgid "Cancel"
 msgstr "取消"
 
-#: .\terms\templates\terms\terms_list.html:94
+#: .\terms\templates\terms\terms_list.html:355
 msgid "Confirm Import"
 msgstr "確認匯入"
 

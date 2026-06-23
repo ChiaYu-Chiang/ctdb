@@ -9,6 +9,7 @@ class Terms(models.Model):
     full_name = models.CharField(max_length=255, verbose_name=_('Full Name'))
     url = models.URLField(max_length=255, blank=True, null=True, verbose_name=_('URL'))
     management_department = models.CharField(max_length=255, verbose_name=_('Management Department'))
+    domain_category = models.CharField(max_length=255, default="", verbose_name=_('Domain Category'))
     description = models.TextField(verbose_name=_('Description'))
     created_by = models.ForeignKey(verbose_name=_('Created by'), to=settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
