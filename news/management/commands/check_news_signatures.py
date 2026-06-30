@@ -23,6 +23,8 @@ class Command(BaseCommand):
         today = timezone.localdate()
         # 只有發布者是 SPECIAL_USERS ('Apple_Lai', 'jill_ko', 'Brian_Chiang') 的公告，才算是「全公司最新消息 (news)」，才會套用簽到罰則
         active_news = News.objects.filter(created_by__username__in=SPECIAL_USERS)
+        # 只取於visible_at <= today <= visible_due 或 is_permanent=True 的公告
+        active_news = active_news.filter(is_permanent=True) | active_news.filter(visible_at__date__lte=today, visible_due__date__gte=today)
 
         for news in active_news:
             news_date = timezone.localtime(news.at).date()
