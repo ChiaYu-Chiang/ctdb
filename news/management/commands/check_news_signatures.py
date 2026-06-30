@@ -67,7 +67,7 @@ class Command(BaseCommand):
                     # 找出管轄這個員工所屬群組的所有「主管/幕僚」帳號
                     supervisors = User.objects.filter(
                         is_active=True,
-                        profile__groupprofile__supervise_roles__in=user_groups
+                        groups__groupprofile__supervise_roles__in=user_groups
                     ).exclude(email='').distinct()
 
                     for supervisor in supervisors:
