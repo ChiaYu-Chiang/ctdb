@@ -22,7 +22,7 @@ class CalendarEvent(models.Model):
             ('Cloud PBX', 'Cloud PBX'),
         )),
         (_('Other Service'), (
-            ('other', _('Other Service')),
+            ('其他', _('Other Service')),
         )),
     ]
 
