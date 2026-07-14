@@ -204,8 +204,14 @@ def terms_import(request):
                 return redirect('terms:terms_list')
             df = df.fillna('')
             terms_to_create = []
+            failed_count = 0
             for index, row in df.iterrows():
-                if row['Short Name'] and row['Full Name']:
+                if (
+                    row['Short Name']
+                    and row['Full Name']
+                    and row['Management Department']
+                    and row['Domain Category']
+                    and row['Description']):
                     terms_to_create.append(
                         Terms(
                             short_name=str(row['Short Name']).strip(),
@@ -217,9 +223,14 @@ def terms_import(request):
                             created_by=request.user
                         )
                     )
+                else:
+                    failed_count += 1
             if terms_to_create:
                 Terms.objects.bulk_create(terms_to_create)
-                messages.success(request, f'成功匯入 {len(terms_to_create)} 筆專有名詞！')
+                if failed_count:
+                    messages.success(request, f'成功匯入 {len(terms_to_create)} 筆專有名詞，{failed_count} 筆因缺少必填欄位而未匯入。')
+                else:
+                    messages.success(request, f'成功匯入 {len(terms_to_create)} 筆專有名詞！')
             else:
                 messages.warning(request, '沒有找到有效的資料可以匯入，請確認 Excel 內容。')
         except Exception as e:
