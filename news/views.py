@@ -1,5 +1,6 @@
 import csv
 from django.conf import settings
+from datetime import timedelta
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
@@ -276,3 +277,162 @@ def news_export_csv(request, pk):
         writer.writerow(['未簽到', user.username, ''])
 
     return response
+
+
+def get_news_deadline(news):
+    """
+    計算一篇公告的簽閱截止日。
+    類型2（時效性）：visible_due
+    類型1（標準/永久）：at + 15天
+    """
+    is_urgent = (
+        not news.is_permanent
+        and news.visible_at is not None
+        and news.visible_due is not None
+        and news.visible_due.date() < (news.visible_at.date() + timedelta(days=15))
+    )
+    if is_urgent:
+        return news.visible_due  # DateTimeField
+    return news.at + timedelta(days=15)  # DateTimeField
+ 
+ 
+@login_required
+def news_dashboard(request):
+    template_name = 'news/dashboard.html'
+    role = request.user.profile.activated_role
+    is_global = request.user.username in GLOBAL_REPORT_VIEWERS
+ 
+    # ── 權限檢查（與 news_read_report 相同）──────────────────
+    is_authorized = is_global or (
+        role is not None and (
+            role.name.endswith('supervisor') or
+            role.name.endswith('assistant')
+        )
+    )
+    if not is_authorized:
+        return HttpResponseForbidden(_('You have no permission to view this page.'))
+ 
+    supervise_roles = []
+    if role:
+        supervise_roles = list(role.groupprofile.supervise_roles.all())
+ 
+    # ── 基礎：只看 SPECIAL_USERS 發的公告 ───────────────────
+    now = timezone.now()
+    year_start = now.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+ 
+    all_special_news = News.objects.filter(created_by__username__in=SPECIAL_USERS)
+ 
+    # ── 決定「應簽人員」的 User queryset ─────────────────────
+    if is_global:
+        target_users = User.objects.filter(is_active=True)
+    else:
+        target_users = User.objects.filter(is_active=True, groups__in=supervise_roles).distinct()
+ 
+    target_user_ids = list(target_users.values_list('id', flat=True))
+ 
+    # ── 計算每篇公告的截止時間，篩出今年內截止的公告 ─────────
+    # 為了讓後面的邏輯可以用，先把 deadline 標注在 news 物件上
+    news_with_deadline = []
+    for news in all_special_news:
+        deadline = get_news_deadline(news)
+        news.deadline = deadline
+        news_with_deadline.append(news)
+ 
+    # 年度範圍：發布時間落在今年 1/1 之後的公告
+    current_year = now.year
+    yearly_news = [n for n in news_with_deadline if n.at.year == current_year]
+ 
+    # ── 1-1. 待處理逾期公告數 ────────────────────────────────
+    # 截止日已過，且轄下仍有人未簽到
+    overdue_news_list = []
+    for news in news_with_deadline:
+        if news.deadline >= now:
+            continue  # 尚未逾期，跳過
+        signed_ids = set(
+            NewsReadRecord.objects.filter(news=news, user_id__in=target_user_ids)
+            .values_list('user_id', flat=True)
+        )
+        unsigned_count = len([uid for uid in target_user_ids if uid not in signed_ids])
+        if unsigned_count > 0:
+            news.unsigned_count = unsigned_count
+            overdue_news_list.append(news)
+ 
+    pending_overdue_count = len(overdue_news_list)
+ 
+    # ── 1-2. 各部門年度簽閱率 ───────────────────────────────
+    # 找出目標部門群組
+    from django.contrib.auth.models import Group
+    if is_global:
+        dept_groups = Group.objects.filter(name__in=['I00', 'I01', 'I02', 'I03', 'I04'])
+    else:
+        dept_groups = Group.objects.filter(id__in=[g.id for g in supervise_roles])
+ 
+    dept_stats = []
+    for dept in dept_groups.order_by('name'):
+        dept_users = User.objects.filter(is_active=True, groups=dept)
+        dept_user_ids = list(dept_users.values_list('id', flat=True))
+ 
+        total_should_sign = 0   # 總應簽人次
+        total_on_time = 0       # 期限內完成人次
+ 
+        for news in yearly_news:
+            deadline = news.deadline
+            if deadline < year_start:
+                continue
+            # 這篇公告，這個部門有幾人應簽
+            total_should_sign += len(dept_user_ids)
+            # 幾人在期限內完成
+            on_time_count = NewsReadRecord.objects.filter(
+                news=news,
+                user_id__in=dept_user_ids,
+                read_at__lte=deadline,
+            ).count()
+            total_on_time += on_time_count
+ 
+        rate = round(total_on_time / total_should_sign * 100) if total_should_sign > 0 else None
+        dept_stats.append({
+            'name': dept.name.replace(' member', '').replace(' supervisor', '').replace(' assistant', ''),
+            'rate': rate,
+            'total_should_sign': total_should_sign,
+            'total_on_time': total_on_time,
+        })
+ 
+    # ── 3. 底部逾期未簽閱次數統計 ───────────────────────────
+    # 對每位目標使用者，計算兩種逾期次數
+    user_overdue_stats = []
+    for user in target_users.select_related('profile').order_by('username'):
+        late_signed = 0      # 已補簽但當初超時
+        never_signed = 0     # 至今完全沒簽且已過期
+ 
+        for news in news_with_deadline:
+            deadline = news.deadline
+            if deadline >= now:
+                continue  # 尚未逾期的公告不計入
+            try:
+                record = NewsReadRecord.objects.get(news=news, user=user)
+                # 有簽到紀錄，但簽到時間超過截止日
+                if record.read_at > deadline:
+                    late_signed += 1
+            except NewsReadRecord.DoesNotExist:
+                # 截止日已過，完全沒簽
+                never_signed += 1
+ 
+        if late_signed > 0 or never_signed > 0:
+            user_overdue_stats.append({
+                'user': user,
+                'late_signed': late_signed,
+                'never_signed': never_signed,
+                'total_overdue': late_signed + never_signed,
+            })
+ 
+    context = {
+        'pending_overdue_count': pending_overdue_count,
+        'dept_stats': dept_stats,
+        'overdue_news_list': overdue_news_list,
+        'user_overdue_stats': user_overdue_stats,
+        'is_global': is_global,
+        'supervise_roles': supervise_roles,
+    }
+    return render(request, template_name, context)
+
+ 

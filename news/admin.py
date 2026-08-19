@@ -12,6 +12,10 @@ admin.site.register(News, NewsAdmin)
 
 @admin.register(NewsReadRecord)
 class NewsReadRecordAdmin(admin.ModelAdmin):
-    list_display = ('news', 'user', 'read_at')
+    list_display = ('id', 'news', 'user', 'read_at')
     list_filter = ('news', 'user')
     search_fields = ('news__title', 'user__username')
+
+    list_display_links = ('id', 'news', 'user', 'read_at')
+
+    list_per_page = 50
