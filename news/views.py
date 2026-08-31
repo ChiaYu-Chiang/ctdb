@@ -289,10 +289,14 @@ def get_news_deadline(news):
         not news.is_permanent
         and news.visible_at is not None
         and news.visible_due is not None
-        and news.visible_due.date() < (news.visible_at.date() + timedelta(days=15))
+        and timezone.localtime(news.visible_due).date() < (timezone.localtime(news.visible_at).date() + timedelta(days=15))
     )
     if is_urgent:
         return news.visible_due  # DateTimeField
+
+    if not news.is_permanent and news.visible_at is not None:
+        return news.visible_at + timedelta(days=15)  # DateTimeField
+    
     return news.at + timedelta(days=15)  # DateTimeField
  
  
@@ -318,7 +322,8 @@ def news_dashboard(request):
  
     # ── 基礎：只看 SPECIAL_USERS 發的公告 ───────────────────
     now = timezone.now()
-    year_start = now.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+    local_now_dt = timezone.localtime(now)
+    year_start = local_now_dt.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
  
     all_special_news = News.objects.filter(created_by__username__in=SPECIAL_USERS)
  
@@ -339,8 +344,8 @@ def news_dashboard(request):
         news_with_deadline.append(news)
  
     # 年度範圍：發布時間落在今年 1/1 之後的公告
-    current_year = now.year
-    yearly_news = [n for n in news_with_deadline if n.at.year == current_year]
+    current_year = local_now_dt.year
+    yearly_news = [n for n in news_with_deadline if timezone.localtime(n.at).year == current_year]
  
     # ── 1-1. 待處理逾期公告數 ────────────────────────────────
     # 截止日已過，且轄下仍有人未簽到

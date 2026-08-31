@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-31 14:17+0800\n"
+"POT-Creation-Date: 2026-08-31 14:04+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -507,8 +507,8 @@ msgstr "建立者"
 #: .\archive\templates\archive\announce_list.html:27
 #: .\archive\templates\archive\archive_list.html:27
 #: .\archive\templates\archive\journals_list.html:35
-#: .\news\templates\news\read_report.html:34
-#: .\news\templates\news\read_report.html:65 .\telecom\models.py:21
+#: .\news\templates\news\read_report.html:36
+#: .\news\templates\news\read_report.html:64 .\telecom\models.py:21
 #: .\telecom\models.py:41 .\telecom\models.py:120
 #: .\telecom\templates\telecom\archive_list.html:28
 #: .\telecom\templates\telecom\isp_list.html:27
@@ -527,7 +527,7 @@ msgstr "名稱"
 #: .\log\templates\log\diary_log_list.html:45
 #: .\news\templates\news\dep_news_list.html:83
 #: .\news\templates\news\news_list.html:72
-#: .\news\templates\news\read_report.html:52
+#: .\news\templates\news\read_report.html:82
 #: .\pilotadmin\templates\pilotadmin\pilotadmin_list.html:51
 #: .\reminder\templates\reminder\reminder_list.html:62
 #: .\telecom\templates\telecom\archive_list.html:41
@@ -1436,17 +1436,21 @@ msgstr "匯出 CSV"
 msgid "Back"
 msgstr "返回"
 
-#: .\news\templates\news\read_report.html:35
-msgid "Sign In Time"
-msgstr "簽到時間"
-
-#: .\news\templates\news\read_report.html:59
+#: .\news\templates\news\read_report.html:30
 msgid "Not Signed In"
 msgstr "尚未簽到"
 
-#: .\news\templates\news\read_report.html:79
+#: .\news\templates\news\read_report.html:50
 msgid "All users have signed in."
 msgstr "所有成員已簽到。"
+
+#: .\news\templates\news\read_report.html:58
+msgid "Signed In"
+msgstr "已簽到"
+
+#: .\news\templates\news\read_report.html:65
+msgid "Sign In Time"
+msgstr "簽到時間"
 
 #: .\news\views.py:192 .\news\views.py:221
 msgid "You have no permission to read this list."
@@ -1456,7 +1460,7 @@ msgstr "你沒有權限讀取這個列表。"
 msgid "You have no permission to export this list."
 msgstr "你沒有權限匯出這個列表。"
 
-#: .\news\views.py:306
+#: .\news\views.py:317
 msgid "You have no permission to view this page."
 msgstr "你沒有權限查看這個頁面。"
 
