@@ -38,6 +38,9 @@
               <a class="dropdown-item" href="{% url 'news:dep_news_list' %}">
                 {% translate 'News' %} | {% translate 'Department' %}
               </a>
+              <a class="dropdown-item" href="{% url 'news:news_dashboard' %}">
+                {% translate 'News' %} | {% translate 'Overdue Statistics' %}
+              </a>
             {% endif %}
           </div>
         </li>
