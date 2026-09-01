@@ -115,14 +115,14 @@ def news_create(request):
             if success_url == success_url1:
                 active_users = User.objects.filter(is_active=1)
                 recipient_list = [user.email for user in active_users if user.email]
-                # send_mail(
-                #     subject=f"[TDB] 最新消息：{news_title}",
-                #     message=f"TDB最新消息已發布：{news_title}。\n\n請至TDB最新消息專區查看最新發布公告。",
-                #     from_email=settings.DEFAULT_FROM_EMAIL,
-                #     recipient_list=recipient_list,
-                #     fail_silently=False,
-                #     html_message=f"TDB最新消息已發布：{news_title}。\n\n請至<a href='https://tdb.chief-tech.net/news/'>最新消息</a>查看最新發布公告。",
-                # )
+                send_mail(
+                    subject=f"[TDB] 最新消息：{news_title}",
+                    message=f"TDB最新消息已發布：{news_title}。\n\n請至TDB最新消息專區查看最新發布公告。",
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=recipient_list,
+                    fail_silently=False,
+                    html_message=f"TDB最新消息已發布：{news_title}。\n\n請至<a href='https://tdb.chief-tech.net/news/'>最新消息</a>查看最新發布公告。",
+                )
 
             return redirect(success_url)
         context = {'model': model, 'form': form, 'form_buttons': form_buttons}
@@ -337,33 +337,41 @@ def news_dashboard(request):
  
     # ── 計算每篇公告的截止時間，篩出今年內截止的公告 ─────────
     # 為了讓後面的邏輯可以用，先把 deadline 標注在 news 物件上
-    news_with_deadline = []
-    for news in all_special_news:
-        deadline = get_news_deadline(news)
-        news.deadline = deadline
-        news_with_deadline.append(news)
- 
+    news_with_deadline = list(all_special_news)
+    for news in news_with_deadline:
+        news.deadline = get_news_deadline(news)
+
     # 年度範圍：發布時間落在今年 1/1 之後的公告
     current_year = local_now_dt.year
     yearly_news = [n for n in news_with_deadline if timezone.localtime(n.at).year == current_year]
- 
+
+    # ── 一次撈出所有相關的簽到紀錄，之後全部在記憶體查表 ─────
+    # 這是效能的關鍵：原本在下面三段迴圈中，每一次疊代都各自
+    # 對資料庫下一次查詢（N+1，甚至 N×M），資料一多就會非常慢。
+    # 改成先用「一次」查詢把需要的 (news_id, user_id) -> read_at
+    # 全部撈出來，之後查詢都在 Python dict 裡做，不再打資料庫。
+    news_ids = [n.id for n in news_with_deadline]
+    read_lookup = {}  # {(news_id, user_id): read_at}
+    for news_id, user_id, read_at in NewsReadRecord.objects.filter(
+        news_id__in=news_ids
+    ).values_list('news_id', 'user_id', 'read_at'):
+        read_lookup[(news_id, user_id)] = read_at
+
     # ── 1-1. 待處理逾期公告數 ────────────────────────────────
     # 截止日已過，且轄下仍有人未簽到
     overdue_news_list = []
     for news in news_with_deadline:
         if news.deadline >= now:
             continue  # 尚未逾期，跳過
-        signed_ids = set(
-            NewsReadRecord.objects.filter(news=news, user_id__in=target_user_ids)
-            .values_list('user_id', flat=True)
+        unsigned_count = sum(
+            1 for uid in target_user_ids if (news.id, uid) not in read_lookup
         )
-        unsigned_count = len([uid for uid in target_user_ids if uid not in signed_ids])
         if unsigned_count > 0:
             news.unsigned_count = unsigned_count
             overdue_news_list.append(news)
- 
+
     pending_overdue_count = len(overdue_news_list)
- 
+
     # ── 1-2. 各部門年度簽閱率 ───────────────────────────────
     # 找出目標部門群組
     from django.contrib.auth.models import Group
@@ -371,29 +379,35 @@ def news_dashboard(request):
         dept_groups = Group.objects.filter(name__in=['I00', 'I01', 'I02', 'I03', 'I04'])
     else:
         dept_groups = Group.objects.filter(id__in=[g.id for g in supervise_roles])
- 
+
+    # 一次把「部門 -> 該部門使用者 id 清單」撈出來，避免每個部門各查一次
+    dept_groups = list(dept_groups.order_by('name'))
+    dept_user_ids_map = {}
+    for dept in dept_groups:
+        dept_user_ids_map[dept.id] = list(
+            User.objects.filter(is_active=True, groups=dept).values_list('id', flat=True)
+        )
+
     dept_stats = []
-    for dept in dept_groups.order_by('name'):
-        dept_users = User.objects.filter(is_active=True, groups=dept)
-        dept_user_ids = list(dept_users.values_list('id', flat=True))
- 
+    for dept in dept_groups:
+        dept_user_ids = dept_user_ids_map[dept.id]
+
         total_should_sign = 0   # 總應簽人次
         total_on_time = 0       # 期限內完成人次
- 
+
         for news in yearly_news:
             deadline = news.deadline
             if deadline < year_start:
                 continue
             # 這篇公告，這個部門有幾人應簽
             total_should_sign += len(dept_user_ids)
-            # 幾人在期限內完成
-            on_time_count = NewsReadRecord.objects.filter(
-                news=news,
-                user_id__in=dept_user_ids,
-                read_at__lte=deadline,
-            ).count()
+            # 幾人在期限內完成（改用 read_lookup 查表，不再打資料庫）
+            on_time_count = sum(
+                1 for uid in dept_user_ids
+                if (news.id, uid) in read_lookup and read_lookup[(news.id, uid)] <= deadline
+            )
             total_on_time += on_time_count
- 
+
         rate = round(total_on_time / total_should_sign * 100) if total_should_sign > 0 else None
         dept_stats.append({
             'name': dept.name.replace(' member', '').replace(' supervisor', '').replace(' assistant', ''),
@@ -401,27 +415,27 @@ def news_dashboard(request):
             'total_should_sign': total_should_sign,
             'total_on_time': total_on_time,
         })
- 
+
     # ── 3. 底部逾期未簽閱次數統計 ───────────────────────────
-    # 對每位目標使用者，計算兩種逾期次數
+    # 對每位目標使用者，計算兩種逾期次數（改用 read_lookup 查表，
+    # 原本這裡是 使用者數 × 公告數 次的 .get() 查詢，是最大瓶頸）
+    overdue_news_only = [n for n in news_with_deadline if n.deadline < now]
+
     user_overdue_stats = []
     for user in target_users.select_related('profile').order_by('username'):
         late_signed = 0      # 已補簽但當初超時
         never_signed = 0     # 至今完全沒簽且已過期
- 
-        for news in news_with_deadline:
+
+        for news in overdue_news_only:
             deadline = news.deadline
-            if deadline >= now:
-                continue  # 尚未逾期的公告不計入
-            try:
-                record = NewsReadRecord.objects.get(news=news, user=user)
-                # 有簽到紀錄，但簽到時間超過截止日
-                if record.read_at > deadline:
-                    late_signed += 1
-            except NewsReadRecord.DoesNotExist:
+            read_at = read_lookup.get((news.id, user.id))
+            if read_at is None:
                 # 截止日已過，完全沒簽
                 never_signed += 1
- 
+            elif read_at > deadline:
+                # 有簽到紀錄，但簽到時間超過截止日
+                late_signed += 1
+
         if late_signed > 0 or never_signed > 0:
             user_overdue_stats.append({
                 'user': user,
@@ -439,5 +453,3 @@ def news_dashboard(request):
         'supervise_roles': supervise_roles,
     }
     return render(request, template_name, context)
-
- 
