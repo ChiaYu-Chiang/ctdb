@@ -79,6 +79,9 @@
     border-bottom: 2px solid #1a73e8;
     display: inline-block;
   }
+  .overdue-table {
+    table-layout: fixed;
+  }
   .overdue-table th {
     background: #f1f3f5;
     font-size: 0.85rem;
@@ -89,6 +92,29 @@
   .overdue-table td {
     vertical-align: middle;
     font-size: 0.875rem;
+  }
+  .overdue-table .col-title {
+    width: 45%;
+  }
+  .overdue-table .col-date {
+    width: 13%;
+  }
+  .overdue-table .col-unsigned {
+    width: 10%;
+  }
+  .overdue-table .col-action {
+    width: 19%;
+    white-space: nowrap;
+  }
+  .overdue-table td.col-title {
+    word-break: break-word;
+  }
+  .overdue-table .title-clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
   }
   .badge-late {
     background: #fff3cd;
@@ -204,21 +230,23 @@
 							<table class="table overdue-table table-hover mb-0">
 								<thead>
 									<tr>
-										<th>{% translate 'Title' %}</th>
-										<th class="text-nowrap text-center">{% translate 'Published' %}</th>
-										<th class="text-nowrap text-center">{% translate 'Deadline' %}</th>
-										<th class="text-center text-danger text-nowrap">{% translate 'Unsigned' %}</th>
-										<th class="text-center">{% translate 'Action' %}</th>
+										<th class="col-title">{% translate 'Title' %}</th>
+										<th class="col-date text-nowrap text-center">{% translate 'Published' %}</th>
+										<th class="col-date text-nowrap text-center">{% translate 'Deadline' %}</th>
+										<th class="col-unsigned text-center text-danger text-nowrap">{% translate 'Unsigned' %}</th>
+										<th class="col-action text-center">{% translate 'Action' %}</th>
 									</tr>
 								</thead>
 								<tbody>
 									{% for news in overdue_news_list %}
 									<tr>
-										<td>{{ news.title }}</td>
-										<td class="text-center text-muted small">{{ news.at|date:"Y/m/d" }}</td>
-										<td class="text-center text-muted small">{{ news.deadline|date:"Y/m/d" }}</td>
-										<td class="text-center font-weight-bold text-danger">{{ news.unsigned_count }}</td>
-										<td class="text-center">
+										<td class="col-title">
+											<span class="title-clamp" title="{{ news.title }}">{{ news.title }}</span>
+										</td>
+										<td class="col-date text-center text-muted small">{{ news.at|date:"Y/m/d" }}</td>
+										<td class="col-date text-center text-muted small">{{ news.deadline|date:"Y/m/d" }}</td>
+										<td class="col-unsigned text-center font-weight-bold text-danger">{{ news.unsigned_count }}</td>
+										<td class="col-action text-center">
 											<a href="{% url 'news:news_read_report' news.pk %}"
 												class="btn btn-sm btn-outline-primary">
 												{% translate 'Show Unsigned List' %}
