@@ -1,6 +1,6 @@
 import csv
 from django.conf import settings
-from datetime import timedelta
+from datetime import timedelta, datetime
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
@@ -21,6 +21,11 @@ from django.contrib.auth.models import User
 
 SPECIAL_USERS = ['Apple_Lai', 'jill_ko', 'Brian_Chiang']
 GLOBAL_REPORT_VIEWERS = ['Brian_Chiang']
+
+# Dashboard 統計起始日：正式環境於 2026/09/15 開始統計，
+# 此日期之前發佈（at）的公告一律不列入 news_dashboard 的任何統計
+# （代處理逾期數、逾期公告列表、年度簽閱率、底部逾期統計）。
+DASHBOARD_STATS_START_DATE = timezone.make_aware(datetime(2026, 9, 15))
 
 def get_dep_news_queryset(request):
     """
@@ -325,7 +330,10 @@ def news_dashboard(request):
     local_now_dt = timezone.localtime(now)
     year_start = local_now_dt.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
  
-    all_special_news = News.objects.filter(created_by__username__in=SPECIAL_USERS)
+    all_special_news = News.objects.filter(
+        created_by__username__in=SPECIAL_USERS,
+        at__gte=DASHBOARD_STATS_START_DATE,
+    )
  
     # ── 決定「應簽人員」的 User queryset ─────────────────────
     if is_global:
@@ -335,15 +343,19 @@ def news_dashboard(request):
  
     target_user_ids = list(target_users.values_list('id', flat=True))
  
-    # ── 計算每篇公告的截止時間，篩出今年內截止的公告 ─────────
+    # ── 計算每篇公告的截止時間，篩出今年內的公告 ─────────
     # 為了讓後面的邏輯可以用，先把 deadline 標注在 news 物件上
     news_with_deadline = list(all_special_news)
     for news in news_with_deadline:
         news.deadline = get_news_deadline(news)
 
-    # 年度範圍：發布時間落在今年 1/1 之後的公告
+    # 只保留「發佈時間落在今年」的公告 —— 這一步讓代處理逾期數、
+    # 逾期公告列表、底部逾期未簽閱次數統計，都跟年度簽閱率一樣
+    # 只計算當年度的公告，不會累積到跨年的舊資料。
     current_year = local_now_dt.year
-    yearly_news = [n for n in news_with_deadline if timezone.localtime(n.at).year == current_year]
+    news_with_deadline = [n for n in news_with_deadline if timezone.localtime(n.at).year == current_year]
+
+    yearly_news = news_with_deadline  # 目前兩者範圍相同，保留變數名稱以利閱讀
 
     # ── 一次撈出所有相關的簽到紀錄，之後全部在記憶體查表 ─────
     # 這是效能的關鍵：原本在下面三段迴圈中，每一次疊代都各自
