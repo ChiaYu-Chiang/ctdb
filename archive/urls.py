@@ -9,6 +9,8 @@ from .views import (
     journals_create,
     announce_list,
     announce_create,
+    manual_list,
+    manual_create,
     convert_to_reminders,
 )
 
@@ -23,5 +25,7 @@ urlpatterns = [
     path('archives/journals/add/', journals_create, name='journals_create'),
     path('archives/announce/', announce_list, name='announce_list'),
     path('archives/announce/add/', announce_create, name='announce_create'),
+    path('archives/manual/', manual_list, name='manual_list'),
+    path('archives/manual/add/', manual_create, name='manual_create'),
     path('archives/<int:pk>/convert-to-reminders/', convert_to_reminders, name='convert_to_reminders'),
 ]

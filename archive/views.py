@@ -72,6 +72,15 @@ def get_announce_queryset(request):
     return queryset
 
 
+# 操作說明
+def get_manual_queryset(request):
+    model = Archive
+    now = timezone.now()
+    valid_condition = Q(is_permanent=True) | Q(is_permanent=False, visible_at__lte=now, visible_due__gte=now)
+    queryset = model.objects.filter(type='manual').filter(valid_condition)
+    return queryset
+
+
 def get_department_email(department_code):
     """根據部門代碼取得群組郵件"""
     # 部門郵箱對應表
@@ -162,19 +171,26 @@ def archive_create(request):
 
 
 @login_required
-@permission_required('archive.change_archive', raise_exception=True, exception=Http404)
 def archive_update(request, pk):
     model = Archive
     queryset = get_all_archive_queryset(request)
     instance = get_object_or_404(klass=queryset, pk=pk, created_by=request.user)
-    form_class = ArchiveModelForm
     type = instance.type
-    if type == 'files':
-        success_url = reverse('archive:archive_list')
+    if type == 'manual':
+        required_perm = 'archive.change_manual'
+        success_url = reverse('archive:manual_list')
     elif type == 'journals':
+        required_perm = 'archive.change_archive'
         success_url = reverse('archive:journals_list')
     elif type == 'announce':
+        required_perm = 'archive.change_archive'
         success_url = reverse('archive:announce_list')
+    else:
+        required_perm = 'archive.change_archive'
+        success_url = reverse('archive:archive_list')
+    if not request.user.has_perm(required_perm):
+        raise Http404
+    form_class = ArchiveModelForm
     form_buttons = ['update']
     template_name = 'archive/archive_form.html'
     if request.method == 'POST':
@@ -190,18 +206,25 @@ def archive_update(request, pk):
 
 
 @login_required
-@permission_required('archive.delete_archive', raise_exception=True, exception=Http404)
 def archive_delete(request, pk):
     model = Archive
     queryset = get_all_archive_queryset(request)
     instance = get_object_or_404(klass=queryset, pk=pk, created_by=request.user)
     type = instance.type
-    if type == 'files':
-        success_url = reverse('archive:archive_list')
+    if type == 'manual':
+        required_perm = 'archive.delete_manual'
+        success_url = reverse('archive:manual_list')
     elif type == 'journals':
+        required_perm = 'archive.delete_archive'
         success_url = reverse('archive:journals_list')
     elif type == 'announce':
+        required_perm = 'archive.delete_archive'
         success_url = reverse('archive:announce_list')
+    else:
+        required_perm = 'archive.delete_archive'
+        success_url = reverse('archive:archive_list')
+    if not request.user.has_perm(required_perm):
+        raise Http404
     template_name = 'archive/archive_confirm_delete.html'
     if request.method == 'POST':
         instance.delete()
@@ -280,6 +303,47 @@ def announce_create(request):
     instance = model(created_by=request.user, type='announce')
     form_class = ArchiveModelForm
     success_url = reverse('archive:announce_list')
+    form_buttons = ['create']
+    template_name = 'archive/archive_form.html'
+    if request.method == 'POST':
+        form = form_class(data=request.POST, files=request.FILES, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect(success_url)
+        context = {'model': model, 'form': form, 'form_buttons': form_buttons}
+        return render(request, template_name, context)
+    form = form_class()
+    context = {'model': model, 'form': form, 'form_buttons': form_buttons}
+    return render(request, template_name, context)
+
+
+@login_required
+@permission_required('archive.view_manual', raise_exception=True, exception=Http404)
+def manual_list(request):
+    model = Archive
+    queryset = get_manual_queryset(request)
+    paginate_by = 12
+    template_name = 'archive/manual_list.html'
+    page_number = 'all'
+    paginator = Paginator(queryset, paginate_by)
+    page_obj = paginator.get_page(page_number)
+    is_paginated = page_number.lower() != 'all' and page_obj.has_other_pages()
+    context = {
+        'model': model,
+        'page_obj': page_obj,
+        'object_list': page_obj if is_paginated else queryset,
+        'is_paginated': is_paginated,
+    }
+    return render(request, template_name, context)
+
+
+@login_required
+@permission_required('archive.add_manual', raise_exception=True, exception=Http404)
+def manual_create(request):
+    model = Archive
+    instance = model(created_by=request.user, type='manual')
+    form_class = ArchiveModelForm
+    success_url = reverse('archive:manual_list')
     form_buttons = ['create']
     template_name = 'archive/archive_form.html'
     if request.method == 'POST':

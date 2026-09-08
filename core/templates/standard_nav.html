@@ -199,7 +199,7 @@
         {% endif %}
         {% if not is_t00_user %}
         <li class="nav-item dropdown">
-          {% if perms.archive.view_archive or perms.archive.add_archive %}
+          {% if perms.archive.view_archive or perms.archive.add_archive or perms.archive.view_manual or perms.archive.add_manual %}
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="true">
             {% translate 'Archive' %}
@@ -222,6 +222,12 @@
             {% endif %}
             {% if perms.archive.add_archive %}
             <a class="dropdown-item" href="{% url 'archive:announce_create' %}">{% translate 'Archive' %} | {% translate 'announce Add' %}</a>
+            {% endif %}
+            {% if perms.archive.view_manual %}
+            <a class="dropdown-item" href="{% url 'archive:manual_list' %}">{% translate 'Archive' %} | {% translate 'manual List' %}</a>
+            {% endif %}
+            {% if perms.archive.add_manual %}
+            <a class="dropdown-item" href="{% url 'archive:manual_create' %}">{% translate 'Archive' %} | {% translate 'manual Add' %}</a>
             {% endif %}
           </div>
           {% endif %}

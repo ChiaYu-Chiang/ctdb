@@ -17,6 +17,7 @@ from core.decorators import permission_required
 
 from .forms import NewsModelForm
 from .models import News, NewsReadRecord
+from archive.models import Archive
 from django.contrib.auth.models import User
 
 SPECIAL_USERS = ['Apple_Lai', 'jill_ko', 'Brian_Chiang']
@@ -455,6 +456,12 @@ def news_dashboard(request):
                 'never_signed': never_signed,
                 'total_overdue': late_signed + never_signed,
             })
+
+    # ── 儀表板置頂手冊連結 ────────────────────────────────
+    DASHBOARD_MANUAL_NAME = 'TDB-簽閱逾期統計區使用說明書'
+    dashboard_manual = Archive.objects.filter(
+        type='manual', name=DASHBOARD_MANUAL_NAME
+    ).order_by('-id').first()
  
     context = {
         'pending_overdue_count': pending_overdue_count,
@@ -463,5 +470,6 @@ def news_dashboard(request):
         'user_overdue_stats': user_overdue_stats,
         'is_global': is_global,
         'supervise_roles': supervise_roles,
+        'dashboard_manual': dashboard_manual,
     }
     return render(request, template_name, context)

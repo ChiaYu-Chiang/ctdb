@@ -22,6 +22,12 @@ class Archive(models.Model):
         ordering = ['-id']
         verbose_name = _('Archive')
         verbose_name_plural = _('Archives')
+        permissions = [
+            ('view_manual', 'Can view manual'),
+            ('add_manual', 'Can add manual'),
+            ('change_manual', 'Can change manual'),
+            ('delete_manual', 'Can delete manual'),
+        ]
 
     def __str__(self):
         return self.name
@@ -40,6 +46,9 @@ class Archive(models.Model):
 
     def get_create_announce_url(self):
         return reverse('archive:announce_create')
+
+    def get_create_manual_url(self):
+        return reverse('archive:manual_create')
 
     def get_full_filename(self):
         _, extension = os.path.splitext(self.archive.name)

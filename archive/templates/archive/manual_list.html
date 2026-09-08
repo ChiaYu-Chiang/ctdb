@@ -1,0 +1,56 @@
+{% extends 'archive/base.html' %}
+{% load static i18n widget_tweaks custom_templatetags %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/table_toolbar.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="content">
+  <div class="container-fluid max-w-24u">
+    <div class="row pt-navbar pb-footer-foot justify-content-center align-items-center min-vh-100">
+      <div class="col">
+        <div id="blankTop"></div>
+        <div id="toolbar" class="d-flex justify-content-between">
+          <input type="text" id="searchInput" class="form-control shadow-sm" placeholder={% translate 'Search..' %}>
+          {% if perms.archive.add_manual %}
+          <a id="addButton" class="btn btn-light border shadow-sm" href="{{ model.get_create_manual_url }}">{% translate 'Add' %}</a>
+          {% endif %}
+        </div>
+        <div class="table-responsive">
+          <table id="searchTable" class="table table-light table-borderless table-solid">
+            <thead>
+              <tr>
+                <th style="width: 1px;">{% translate 'Action' %}</th>
+                <th style="width: 1px;">{% translate 'Created by' %}</th>
+                <th style="width: 100%">{% translate 'Name' %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for obj in object_list %}
+              <tr>
+                <td class="text-nowrap">{% include 'standard_action_dropdown.html' %}</td>
+                <td class="text-nowrap">{{ obj.created_by }}</td>
+                <td class="text-nowrap"><a href="{{ obj.archive.url }}" download="{{ obj.get_full_filename }}">{{ obj.name }}</a></td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td class='text-center text-secondary' colspan="100%">{% translate 'No entries.' %}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% if is_paginated %}
+        {% include 'standard_pagination.html' %}
+        {% endif %}
+        <div id="blankButtom"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extrajs %}
+<script src="{% static 'js/table_search.js' %}"></script>
+{% endblock %}

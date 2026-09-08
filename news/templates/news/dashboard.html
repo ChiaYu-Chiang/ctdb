@@ -3,17 +3,48 @@
 
 {% block content %}
 <style>
-  .dashboard-header {
-    background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-  .dashboard-header h5 {
-    margin: 0;
-    font-weight: 600;
-    letter-spacing: 0.03em;
+  .dashboard-header {  
+    background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);  
+    color: white;  
+    padding: 1rem 1.5rem;  
+    border-radius: 0.5rem;  
+    margin-bottom: 1.5rem;  
+    display: flex;  
+    align-items: center;  
+    justify-content: space-between;  
+    flex-wrap: wrap;  
+    gap: 0.75rem;  
+  }  
+  .dashboard-header h5 {  
+    margin: 0;  
+    font-weight: 600;  
+    letter-spacing: 0.03em;  
+  }  
+  .btn-manual {  
+    display: inline-flex;  
+    align-items: center;  
+    gap: 0.4rem;  
+    padding: 0.4rem 0.9rem;  
+    background: rgba(255, 255, 255, 0.15);  
+    border: 1px solid rgba(255, 255, 255, 0.45);  
+    border-radius: 999px;  
+    color: #fff;  
+    font-size: 0.8rem;  
+    font-weight: 600;  
+    letter-spacing: 0.02em;  
+    text-decoration: none;  
+    white-space: nowrap;  
+    transition: background 0.2s ease, border-color 0.2s ease;  
+  }  
+  .btn-manual:hover,  
+  .btn-manual:focus {  
+    background: rgba(255, 255, 255, 0.28);  
+    border-color: rgba(255, 255, 255, 0.75);  
+    color: #fff;  
+    text-decoration: none;  
+  }  
+  .btn-manual i {  
+    font-size: 0.85rem;  
   }
   .stat-card {
     border: none;
@@ -152,6 +183,11 @@
 			{# ── 頁首 Banner ─────────────────────────────────────── #}
 			<div class="dashboard-header">
 				<h5>{% translate 'News' %} | {% translate 'Overdue Statistics' %}</h5>
+				{% if dashboard_manual %}
+				<a href="{{ dashboard_manual.archive.url }}" target="_blank" rel="noopener" class="btn-manual">
+					<i class="fas fa-book"></i>{% translate 'Manuals' %}
+				</a>
+				{% endif %}
 			</div>
 
 			{# ══ 1. 頂部儀表板 ══════════════════════════════════════ #}
