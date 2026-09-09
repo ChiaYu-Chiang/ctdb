@@ -1,11 +1,12 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from .models import CalendarEvent
 
 class CalendarEventForm(forms.ModelForm):
     support_consultant = forms.MultipleChoiceField(
         choices=CalendarEvent.SUPPORT_CONSULTANT,
         widget=forms.SelectMultiple(attrs={'class': 'form-control'}),
-        label="Support Consultant"
+        label=_('Support Consultant')
     )
 
     class Meta:

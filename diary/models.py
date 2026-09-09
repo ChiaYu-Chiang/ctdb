@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from core.utils import today
+from ext_calendar.models import CalendarEvent
 
 
 class Diary(models.Model):
@@ -75,8 +76,16 @@ class DiaryWorkHour(models.Model):
     diary = models.ForeignKey(Diary, verbose_name=_('Diary'), related_name='work_hours', on_delete=models.CASCADE)
     order_number = models.CharField(verbose_name=_('Order number'), max_length=100, blank=True)
     customer_name = models.CharField(verbose_name=_('Customer name'), max_length=100, blank=True)
-    sales_rep = models.CharField(verbose_name=_('Sales rep'), max_length=100, blank=True)
-    product_category = models.CharField(verbose_name=_('Product category'), max_length=100, blank=True)
+    # Choices intentionally reused from ext_calendar.CalendarEvent so the two dropdowns
+    # always stay in sync — do not hardcode a separate copy of these lists here.
+    sales_rep = models.CharField(
+        verbose_name=_('Sales rep'), max_length=100, blank=True,
+        choices=CalendarEvent.SUPPORT_CONSULTANT,
+    )
+    product_category = models.CharField(
+        verbose_name=_('Product category'), max_length=100, blank=True,
+        choices=CalendarEvent.PRODUCT_TYPE,
+    )
     requirement = models.CharField(verbose_name=_('Requirement'), max_length=255, blank=True)
     handling_content = models.TextField(verbose_name=_('Handling content'), blank=True)
     hours = models.DecimalField(verbose_name=_('Hours'), max_digits=5, decimal_places=1)

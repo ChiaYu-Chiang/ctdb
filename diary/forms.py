@@ -53,7 +53,7 @@ class DiaryWorkHourForm(forms.ModelForm):
     so that e.g. "客戶A" and "客戶A " (trailing space) aren't silently
     treated as different values once this data gets aggregated/reported on.
     """
-    STRIPPED_FIELDS = ('order_number', 'customer_name', 'sales_rep', 'product_category', 'requirement', 'handling_content')
+    STRIPPED_FIELDS = ('order_number', 'customer_name', 'requirement', 'handling_content')
 
     class Meta:
         model = DiaryWorkHour
@@ -61,8 +61,8 @@ class DiaryWorkHourForm(forms.ModelForm):
         widgets = {
             'order_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Order number')}),
             'customer_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Customer name')}),
-            'sales_rep': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Sales rep')}),
-            'product_category': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Product category')}),
+            'sales_rep': forms.Select(attrs={'class': 'form-control'}),
+            'product_category': forms.Select(attrs={'class': 'form-control'}),
             'requirement': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Requirement')}),
             'handling_content': forms.Textarea(attrs={'class': 'form-control', 'rows': 2, 'placeholder': _('Handling content')}),
             'hours': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.5', 'min': '0', 'placeholder': _('Hours')}),
