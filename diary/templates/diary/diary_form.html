@@ -21,4 +21,7 @@
 
 {% block extrajs %}
 <script src="{% static 'js/ckeditor_init.js' %}"></script>
+{% if is_i02 %}
+<script src="{% static 'diary/js/diary_work_hours_formset.js' %}"></script>
+{% endif %}
 {% endblock %}

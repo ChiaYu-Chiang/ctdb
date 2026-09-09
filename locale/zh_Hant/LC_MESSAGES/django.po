@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-08 17:37+0800\n"
+"POT-Creation-Date: 2026-09-09 16:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -432,7 +432,7 @@ msgstr "搜尋.."
 #: .\comment\templates\comment\comment_list.html:24
 #: .\comment\templates\comment\comment_message_list.html:25
 #: .\comment\templates\comment\message_list.html:18
-#: .\core\templates\standard_form.html:47
+#: .\core\templates\standard_form.html:142
 #: .\core\templates\standard_form_with_file.html:65
 #: .\core\templates\standard_nav.html:76 .\core\templates\standard_nav.html:93
 #: .\core\templates\standard_nav.html:99 .\core\templates\standard_nav.html:132
@@ -497,7 +497,7 @@ msgstr "動作"
 #: .\comment\templates\comment\comment_message_list.html:14
 #: .\comment\templates\comment\comment_message_list.html:36
 #: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:50
-#: .\diary\models.py:24 .\diary\templates\diary\diary_list.html:74
+#: .\diary\models.py:25 .\diary\templates\diary\diary_list.html:74
 #: .\ext_calendar\models.py:77 .\log\models.py:13
 #: .\log\templates\log\diary_log_list.html:27 .\news\models.py:19
 #: .\reminder\models.py:45 .\reminder\templates\reminder\reminder_list.html:32
@@ -532,7 +532,7 @@ msgstr "名稱"
 #: .\comment\templates\comment\comment_list.html:49
 #: .\comment\templates\comment\comment_message_list.html:50
 #: .\comment\templates\comment\message_list.html:45
-#: .\diary\templates\diary\diary_list.html:97
+#: .\diary\templates\diary\diary_list.html:123
 #: .\log\templates\log\diary_log_list.html:45
 #: .\news\templates\news\dep_news_list.html:83
 #: .\news\templates\news\news_list.html:72
@@ -582,7 +582,7 @@ msgstr "你確定要刪除這個"
 msgid "?"
 msgstr ""
 
-#: .\archive\templates\archive\index.html:11 .\diary\models.py:29
+#: .\archive\templates\archive\index.html:11 .\diary\models.py:30
 msgid "Diaries"
 msgstr "日誌"
 
@@ -619,7 +619,7 @@ msgstr ""
 #: .\comment\models.py:10 .\comment\models.py:41
 #: .\comment\templates\comment\comment_list.html:32
 #: .\comment\templates\comment\comment_message_list.html:16 .\day\models.py:8
-#: .\diary\models.py:10 .\diary\templates\diary\diary_list.html:75
+#: .\diary\models.py:11 .\diary\templates\diary\diary_list.html:75
 #: .\telecom\models.py:268 .\telecom\templates\telecom\archive_list.html:27
 msgid "Date"
 msgstr "日期"
@@ -658,8 +658,8 @@ msgstr "貼文"
 #: .\comment\models.py:24
 #: .\comment\templates\comment\comment_action_dropdown.html:17
 #: .\comment\templates\comment\comment_action_dropdown.html:20
-#: .\diary\models.py:23 .\diary\templates\diary\diary_action_dropdown.html:19
-#: .\diary\templates\diary\diary_list.html:80
+#: .\diary\models.py:24 .\diary\templates\diary\diary_action_dropdown.html:19
+#: .\diary\templates\diary\diary_list.html:85
 msgid "Comment"
 msgstr "評論"
 
@@ -689,7 +689,7 @@ msgstr "選擇"
 #: .\comment\templates\comment\message_action_dropdown.html:11
 #: .\core\templates\no_creater_permission_action_dropdown.html:10
 #: .\core\templates\standard_action_dropdown.html:17
-#: .\core\templates\standard_form.html:50
+#: .\core\templates\standard_form.html:145
 #: .\core\templates\standard_form_with_file.html:68
 #: .\dep_calendar\templates\dep_calendar\event_detail.html:72
 #: .\dep_calendar\templates\dep_calendar\event_form.html:71
@@ -790,6 +790,7 @@ msgid "Convert to Reminders"
 msgstr "轉換至Reminder"
 
 #: .\core\templates\standard_form.html:27
+#: .\core\templates\standard_form.html:49
 #: .\core\templates\standard_form_with_file.html:31
 #: .\core\templates\standard_form_with_file.html:40
 #: .\dep_calendar\templates\dep_calendar\event_form.html:44
@@ -803,10 +804,67 @@ msgstr "轉換至Reminder"
 msgid ":"
 msgstr ""
 
-#: .\core\templates\standard_form.html:53
+#: .\core\templates\standard_form.html:49
+#: .\diary\templates\diary\diary_list.html:80
+#: .\diary\templates\diary\diary_list.html:142
+msgid "Work hours"
+msgstr "作業時數"
+
+#: .\core\templates\standard_form.html:57
+#: .\core\templates\standard_form.html:105
+msgid "Remove"
+msgstr "移除"
+
+#: .\core\templates\standard_form.html:60
+#: .\core\templates\standard_form.html:108 .\diary\forms.py:62
+#: .\diary\models.py:76 .\diary\templates\diary\diary_list.html:149
+msgid "Order number"
+msgstr "單號"
+
+#: .\core\templates\standard_form.html:65
+#: .\core\templates\standard_form.html:112 .\diary\forms.py:63
+#: .\diary\models.py:77 .\diary\templates\diary\diary_list.html:151
+msgid "Customer name"
+msgstr "客戶名稱"
+
+#: .\core\templates\standard_form.html:70
+#: .\core\templates\standard_form.html:116 .\diary\forms.py:64
+#: .\diary\models.py:78 .\diary\templates\diary\diary_list.html:153
+msgid "Sales rep"
+msgstr "業務同仁"
+
+#: .\core\templates\standard_form.html:75
+#: .\core\templates\standard_form.html:120 .\diary\forms.py:65
+#: .\diary\models.py:79 .\diary\templates\diary\diary_list.html:155
+msgid "Product category"
+msgstr "產品類別"
+
+#: .\core\templates\standard_form.html:80
+#: .\core\templates\standard_form.html:124 .\diary\forms.py:66
+#: .\diary\models.py:80 .\diary\templates\diary\diary_list.html:157
+msgid "Requirement"
+msgstr "需求"
+
+#: .\core\templates\standard_form.html:85
+#: .\core\templates\standard_form.html:128 .\diary\forms.py:67
+#: .\diary\models.py:81 .\diary\templates\diary\diary_list.html:159
+msgid "Handling content"
+msgstr "處理內容"
+
+#: .\core\templates\standard_form.html:90
+#: .\core\templates\standard_form.html:132 .\diary\forms.py:68
+#: .\diary\models.py:82 .\diary\templates\diary\diary_list.html:161
+msgid "Hours"
+msgstr "時數"
+
+#: .\core\templates\standard_form.html:98
+msgid "Add item"
+msgstr "新增項目"
+
+#: .\core\templates\standard_form.html:148
 #: .\telecom\templates\telecom\isp_review.html:63
 msgid "Save and continue editing"
-msgstr ""
+msgstr "儲存並繼續編輯"
 
 #: .\core\templates\standard_nav.html:21 .\core\templates\standard_nav.html:29
 #: .\core\templates\standard_nav.html:32
@@ -847,7 +905,7 @@ msgstr "各部回報"
 
 #: .\core\templates\standard_nav.html:55 .\core\templates\standard_nav.html:64
 #: .\core\templates\standard_nav.html:74 .\core\templates\standard_nav.html:297
-#: .\diary\models.py:28
+#: .\diary\models.py:29 .\diary\models.py:75
 msgid "Diary"
 msgstr "日誌"
 
@@ -1237,35 +1295,47 @@ msgstr "新增事件"
 msgid "Change event"
 msgstr "變更事件"
 
-#: .\diary\forms.py:24 .\diary\forms.py:46
+#: .\diary\forms.py:25 .\diary\forms.py:47
 msgid "The diary with this date has already existed."
 msgstr "這個日期的日誌已經存在。"
 
-#: .\diary\models.py:12 .\diary\templates\diary\diary_list.html:76
+#: .\diary\models.py:13 .\diary\templates\diary\diary_list.html:76
 msgid "Daily check"
 msgstr "日檢核"
 
-#: .\diary\models.py:15 .\reminder\templates\reminder\reminder_list.html:50
+#: .\diary\models.py:16 .\reminder\templates\reminder\reminder_list.html:50
 msgid "Yes"
 msgstr ""
 
-#: .\diary\models.py:16 .\reminder\templates\reminder\reminder_list.html:50
+#: .\diary\models.py:17 .\reminder\templates\reminder\reminder_list.html:50
 msgid "No"
 msgstr ""
 
-#: .\diary\models.py:20 .\diary\templates\diary\diary_list.html:77
+#: .\diary\models.py:21 .\diary\templates\diary\diary_list.html:77
 msgid "Daily record"
 msgstr "日常紀錄"
 
-#: .\diary\models.py:21 .\diary\templates\diary\diary_list.html:78
+#: .\diary\models.py:22 .\diary\templates\diary\diary_list.html:78
 msgid "To do"
 msgstr "待辦事項"
 
-#: .\diary\models.py:22 .\diary\templates\diary\diary_list.html:79
+#: .\diary\models.py:23 .\diary\templates\diary\diary_list.html:82
 #: .\telecom\forms.py:183 .\telecom\models.py:89 .\telecom\models.py:122
 #: .\telecom\models.py:202 .\telecom\templates\telecom\ispgroup_list.html:29
 msgid "Remark"
 msgstr "備註"
+
+#: .\diary\models.py:83
+msgid "Order"
+msgstr ""
+
+#: .\diary\models.py:87
+msgid "Diary work hour"
+msgstr ""
+
+#: .\diary\models.py:88
+msgid "Diary work hours"
+msgstr ""
 
 #: .\diary\templates\diary\diary_action_dropdown.html:16
 #: .\reminder\templates\reminder\reminder_action_dropdown.html:25
@@ -1278,6 +1348,10 @@ msgstr "複製"
 #: .\terms\templates\terms\terms_list.html:190
 msgid "Search"
 msgstr "搜尋"
+
+#: .\diary\templates\diary\diary_list.html:143
+msgid "Close"
+msgstr "關閉"
 
 #: .\ext_calendar\models.py:12
 msgid "S11"
@@ -2016,6 +2090,9 @@ msgstr "工具"
 #: .\user\serializers.py:53
 msgid "Unable to authenticate with provided credentials"
 msgstr ""
+
+#~ msgid "Item"
+#~ msgstr "項目"
 
 #, python-format
 #~ msgid "Dept. rate = (on-time sign-ins ÷ total required sign-ins) × 100%%"

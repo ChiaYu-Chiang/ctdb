@@ -76,8 +76,14 @@
                 <th style="width: 1px;">{% translate 'Daily check' %}</th>
                 <th style="width: 37.5%">{% translate 'Daily record' %}</th>
                 <th style="width: 37.5%">{% translate 'To do' %}</th>
+                {% if show_work_hours %}
+                <th style="width: 25%">{% translate 'Work hours' %}</th>
+                {% else %}
                 <th style="width: 12.5%">{% translate 'Remark' %}</th>
+                {% endif %}
+                {% if not show_work_hours %}
                 <th style="width: 12.5%">{% translate 'Comment' %}</th>
+                {% endif %}
               </tr>
             </thead>
             <tbody>
@@ -89,8 +95,28 @@
                 <td class="text-nowrap">{{ obj.get_daily_check_display }}</td>
                 <td>{{ obj.daily_record|safe|linebreaks }}</td>
                 <td>{{ obj.todo|safe|linebreaks }}</td>
+                {% if show_work_hours %}
+                <td>
+                  {% for work_hour in obj.work_hours.all %}
+                  <button type="button" class="btn btn-link btn-sm p-0 d-block text-left workHoursItem"
+                    data-toggle="modal" data-target="#workHoursDetailModal"
+                    data-order-number="{{ work_hour.order_number }}"
+                    data-customer-name="{{ work_hour.customer_name }}"
+                    data-sales-rep="{{ work_hour.sales_rep }}"
+                    data-product-category="{{ work_hour.product_category }}"
+                    data-requirement="{{ work_hour.requirement }}"
+                    data-handling-content="{{ work_hour.handling_content }}"
+                    data-hours="{{ work_hour.hours }}">
+                    {{ work_hour.order_number }} {{ work_hour.customer_name }}：{{ work_hour.hours }}hr
+                  </button>
+                  {% endfor %}
+                </td>
+                {% else %}
                 <td>{{ obj.remark|safe|linebreaks }}</td>
+                {% endif %}
+                {% if not show_work_hours %}
                 <td>{{ obj.comment|safe|linebreaks }}</td>
+                {% endif %}
               </tr>
               {% empty %}
               <tr>
@@ -108,8 +134,43 @@
     </div>
   </div>
 </section>
+{% if show_work_hours %}
+<div class="modal fade" id="workHoursDetailModal" tabindex="-1" role="dialog" aria-labelledby="workHoursDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="workHoursDetailModalLabel">{% translate 'Work hours' %}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="{% translate 'Close' %}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <dl class="row mb-0">
+          <dt class="col-4">{% translate 'Order number' %}</dt>
+          <dd class="col-8" id="workHoursDetailOrderNumber"></dd>
+          <dt class="col-4">{% translate 'Customer name' %}</dt>
+          <dd class="col-8" id="workHoursDetailCustomerName"></dd>
+          <dt class="col-4">{% translate 'Sales rep' %}</dt>
+          <dd class="col-8" id="workHoursDetailSalesRep"></dd>
+          <dt class="col-4">{% translate 'Product category' %}</dt>
+          <dd class="col-8" id="workHoursDetailProductCategory"></dd>
+          <dt class="col-4">{% translate 'Requirement' %}</dt>
+          <dd class="col-8" id="workHoursDetailRequirement"></dd>
+          <dt class="col-4">{% translate 'Handling content' %}</dt>
+          <dd class="col-8" id="workHoursDetailHandlingContent" style="white-space: pre-wrap;"></dd>
+          <dt class="col-4">{% translate 'Hours' %}</dt>
+          <dd class="col-8" id="workHoursDetailHours"></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block extrajs %}
 <script src="{% static 'diary/js/diary_list.js' %}"></script>
+{% if show_work_hours %}
+<script src="{% static 'diary/js/diary_work_hours_detail_modal.js' %}"></script>
+{% endif %}
 {% endblock %}

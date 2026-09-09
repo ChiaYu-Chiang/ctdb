@@ -41,6 +41,101 @@
     </div>
   </div>
   {% endfor %}
+
+  {% if formset %}
+  {# Only rendered when the calling view passes a `formset` context var (currently: diary's I02 work-hours formset). Other apps that include this template without a `formset` variable are unaffected. #}
+  <div class="form-row">
+    <div class="form-group col">
+      <label>{% translate 'Work hours' %}{% translate ':' %}</label>
+      <div id="workHoursFormset" class="border rounded p-3">
+        {{ formset.management_form }}
+        <div id="workHoursRows">
+          {% for wh_form in formset %}
+          <div class="work-hours-row border-bottom pb-3 mb-3">
+            {{ wh_form.id }}
+            <div class="d-flex justify-content-end mb-1">
+              <button type="button" class="btn btn-sm btn-outline-danger removeWorkHoursRow" title="{% translate 'Remove' %}">&times;</button>
+            </div>
+            <div class="form-group">
+              <label class="small mb-1">{% translate 'Order number' %}</label>
+              {{ wh_form.order_number }}
+              {% for error in wh_form.order_number.errors %}<small class="text-danger d-block px-1">{{ error }}</small>{% endfor %}
+            </div>
+            <div class="form-group">
+              <label class="small mb-1">{% translate 'Customer name' %}</label>
+              {{ wh_form.customer_name }}
+              {% for error in wh_form.customer_name.errors %}<small class="text-danger d-block px-1">{{ error }}</small>{% endfor %}
+            </div>
+            <div class="form-group">
+              <label class="small mb-1">{% translate 'Sales rep' %}</label>
+              {{ wh_form.sales_rep }}
+              {% for error in wh_form.sales_rep.errors %}<small class="text-danger d-block px-1">{{ error }}</small>{% endfor %}
+            </div>
+            <div class="form-group">
+              <label class="small mb-1">{% translate 'Product category' %}</label>
+              {{ wh_form.product_category }}
+              {% for error in wh_form.product_category.errors %}<small class="text-danger d-block px-1">{{ error }}</small>{% endfor %}
+            </div>
+            <div class="form-group">
+              <label class="small mb-1">{% translate 'Requirement' %}</label>
+              {{ wh_form.requirement }}
+              {% for error in wh_form.requirement.errors %}<small class="text-danger d-block px-1">{{ error }}</small>{% endfor %}
+            </div>
+            <div class="form-group">
+              <label class="small mb-1">{% translate 'Handling content' %}</label>
+              {{ wh_form.handling_content }}
+              {% for error in wh_form.handling_content.errors %}<small class="text-danger d-block px-1">{{ error }}</small>{% endfor %}
+            </div>
+            <div class="form-group mb-0" style="max-width: 140px;">
+              <label class="small mb-1">{% translate 'Hours' %}</label>
+              {{ wh_form.hours }}
+              {% for error in wh_form.hours.errors %}<small class="text-danger d-block px-1">{{ error }}</small>{% endfor %}
+            </div>
+            {% if wh_form.instance.pk %}<div class="d-none">{{ wh_form.DELETE }}</div>{% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        <button type="button" id="addWorkHoursRow" class="btn btn-sm btn-outline-primary">{% translate 'Add item' %}</button>
+      </div>
+    </div>
+  </div>
+  <template id="workHoursEmptyForm">
+    <div class="work-hours-row border-bottom pb-3 mb-3">
+      <div class="d-flex justify-content-end mb-1">
+        <button type="button" class="btn btn-sm btn-outline-danger removeWorkHoursRow" title="{% translate 'Remove' %}">&times;</button>
+      </div>
+      <div class="form-group">
+        <label class="small mb-1">{% translate 'Order number' %}</label>
+        {{ formset.empty_form.order_number }}
+      </div>
+      <div class="form-group">
+        <label class="small mb-1">{% translate 'Customer name' %}</label>
+        {{ formset.empty_form.customer_name }}
+      </div>
+      <div class="form-group">
+        <label class="small mb-1">{% translate 'Sales rep' %}</label>
+        {{ formset.empty_form.sales_rep }}
+      </div>
+      <div class="form-group">
+        <label class="small mb-1">{% translate 'Product category' %}</label>
+        {{ formset.empty_form.product_category }}
+      </div>
+      <div class="form-group">
+        <label class="small mb-1">{% translate 'Requirement' %}</label>
+        {{ formset.empty_form.requirement }}
+      </div>
+      <div class="form-group">
+        <label class="small mb-1">{% translate 'Handling content' %}</label>
+        {{ formset.empty_form.handling_content }}
+      </div>
+      <div class="form-group mb-0" style="max-width: 140px;">
+        <label class="small mb-1">{% translate 'Hours' %}</label>
+        {{ formset.empty_form.hours }}
+      </div>
+    </div>
+  </template>
+  {% endif %}
+
   <div class="form-row">
     <div class="form-group col">
       {% if 'create' in form_buttons %}
