@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-09 17:16+0800\n"
+"POT-Creation-Date: 2026-09-16 18:07+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -129,30 +129,38 @@ msgid "T12 supervisor"
 msgstr "T12 主管"
 
 #: .\accounts\i18n.py:23
+msgid "T12 deputy"
+msgstr "T12 代理人"
+
+#: .\accounts\i18n.py:24
 msgid "T13 supervisor"
 msgstr "T13 主管"
 
-#: .\accounts\i18n.py:24
+#: .\accounts\i18n.py:25
 msgid "T15 supervisor"
 msgstr "T15 主管"
 
-#: .\accounts\i18n.py:25
+#: .\accounts\i18n.py:26
+msgid "T15 deputy"
+msgstr "T15 代理人"
+
+#: .\accounts\i18n.py:27
 msgid "I00 supervisor"
 msgstr "I00 主管"
 
-#: .\accounts\i18n.py:26
+#: .\accounts\i18n.py:28
 msgid "I01 supervisor"
 msgstr "I01 主管"
 
-#: .\accounts\i18n.py:27
+#: .\accounts\i18n.py:29
 msgid "I02 supervisor"
 msgstr "I02 主管"
 
-#: .\accounts\i18n.py:28
+#: .\accounts\i18n.py:30
 msgid "I03 supervisor"
 msgstr "I03 主管"
 
-#: .\accounts\i18n.py:29
+#: .\accounts\i18n.py:31
 msgid "I04 supervisor"
 msgstr "I04 主管"
 
