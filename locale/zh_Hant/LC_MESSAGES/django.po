@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-16 18:07+0800\n"
+"POT-Creation-Date: 2026-09-18 15:12+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,101 +68,157 @@ msgstr "日誌起始日"
 msgid "No user registering with this Email."
 msgstr "沒有以這個電子信箱註冊的使用者"
 
-#: .\accounts\i18n.py:8
+#: .\accounts\i18n.py:9
 msgid "T00 member"
 msgstr "T00 成員"
 
-#: .\accounts\i18n.py:9
-msgid "T11 member"
-msgstr "T11 成員"
-
 #: .\accounts\i18n.py:10
-msgid "T12 member"
-msgstr "T12 成員"
-
-#: .\accounts\i18n.py:11
-msgid "T13 member"
-msgstr "T13 成員"
-
-#: .\accounts\i18n.py:12
-msgid "T15 member"
-msgstr "T15 成員"
-
-#: .\accounts\i18n.py:13
-msgid "I00 member"
-msgstr "I00 成員"
-
-#: .\accounts\i18n.py:14
-msgid "I00 assistant"
-msgstr "I00 幕僚"
-
-#: .\accounts\i18n.py:15
-msgid "I01 member"
-msgstr "I01 成員"
-
-#: .\accounts\i18n.py:16
-msgid "I02 member"
-msgstr "I02 成員"
-
-#: .\accounts\i18n.py:17
-msgid "I03 member"
-msgstr "I03 成員"
-
-#: .\accounts\i18n.py:18
-msgid "I04 member"
-msgstr "I04 成員"
-
-#: .\accounts\i18n.py:19
 msgid "T00 supervisor"
 msgstr "T00 主管"
 
-#: .\accounts\i18n.py:20
+#: .\accounts\i18n.py:11
 msgid "T00 assistant"
 msgstr "T00 幕僚"
 
-#: .\accounts\i18n.py:21
+#: .\accounts\i18n.py:14
+msgid "T11 member"
+msgstr "T11 成員"
+
+#: .\accounts\i18n.py:15
 msgid "T11 supervisor"
 msgstr "T11 主管"
 
-#: .\accounts\i18n.py:22
+#: .\accounts\i18n.py:16
+msgid "T11 deputy"
+msgstr "T11 代理人"
+
+#: .\accounts\i18n.py:17
+msgid "T11 document controller"
+msgstr "T11 文管"
+
+#: .\accounts\i18n.py:20
+msgid "T12 member"
+msgstr "T12 成員"
+
+#: .\accounts\i18n.py:21
 msgid "T12 supervisor"
 msgstr "T12 主管"
 
-#: .\accounts\i18n.py:23
+#: .\accounts\i18n.py:22
 msgid "T12 deputy"
 msgstr "T12 代理人"
 
-#: .\accounts\i18n.py:24
+#: .\accounts\i18n.py:23
+msgid "T12 document controller"
+msgstr "T12 文管"
+
+#: .\accounts\i18n.py:26
+msgid "T13 member"
+msgstr "T13 成員"
+
+#: .\accounts\i18n.py:27
 msgid "T13 supervisor"
 msgstr "T13 主管"
 
-#: .\accounts\i18n.py:25
+#: .\accounts\i18n.py:28
+msgid "T13 deputy"
+msgstr "T13 代理人"
+
+#: .\accounts\i18n.py:29
+msgid "T13 document controller"
+msgstr "T13 文管"
+
+#: .\accounts\i18n.py:32
+msgid "T15 member"
+msgstr "T15 成員"
+
+#: .\accounts\i18n.py:33
 msgid "T15 supervisor"
 msgstr "T15 主管"
 
-#: .\accounts\i18n.py:26
+#: .\accounts\i18n.py:34
 msgid "T15 deputy"
 msgstr "T15 代理人"
 
-#: .\accounts\i18n.py:27
+#: .\accounts\i18n.py:35
+msgid "T15 document controller"
+msgstr "T15 文管"
+
+#: .\accounts\i18n.py:38
+msgid "I00 member"
+msgstr "I00 成員"
+
+#: .\accounts\i18n.py:39
 msgid "I00 supervisor"
 msgstr "I00 主管"
 
-#: .\accounts\i18n.py:28
+#: .\accounts\i18n.py:40
+msgid "I00 assistant"
+msgstr "I00 幕僚"
+
+#: .\accounts\i18n.py:43
+msgid "I01 member"
+msgstr "I01 成員"
+
+#: .\accounts\i18n.py:44
 msgid "I01 supervisor"
 msgstr "I01 主管"
 
-#: .\accounts\i18n.py:29
+#: .\accounts\i18n.py:45
+msgid "I01 deputy"
+msgstr "I01 代理人"
+
+#: .\accounts\i18n.py:46
+msgid "I01 document controller"
+msgstr "I01 文管"
+
+#: .\accounts\i18n.py:49
+msgid "I02 member"
+msgstr "I02 成員"
+
+#: .\accounts\i18n.py:50
 msgid "I02 supervisor"
 msgstr "I02 主管"
 
-#: .\accounts\i18n.py:30
+#: .\accounts\i18n.py:51
+msgid "I02 deputy"
+msgstr "I02 代理人"
+
+#: .\accounts\i18n.py:52
+msgid "I02 document controller"
+msgstr "I02 文管"
+
+#: .\accounts\i18n.py:55
+msgid "I03 member"
+msgstr "I03 成員"
+
+#: .\accounts\i18n.py:56
 msgid "I03 supervisor"
 msgstr "I03 主管"
 
-#: .\accounts\i18n.py:31
+#: .\accounts\i18n.py:57
+msgid "I03 deputy"
+msgstr "I03 代理人"
+
+#: .\accounts\i18n.py:58
+msgid "I03 document controller"
+msgstr "I03 文管"
+
+#: .\accounts\i18n.py:61
+msgid "I04 member"
+msgstr "I04 成員"
+
+#: .\accounts\i18n.py:62
 msgid "I04 supervisor"
 msgstr "I04 主管"
+
+#: .\accounts\i18n.py:63
+msgid "I04 deputy"
+msgstr "I04 代理人"
+
+#: .\accounts\i18n.py:64
+msgid "I04 document controller"
+msgstr "I04 文管"
 
 #: .\accounts\models.py:10 .\news\models.py:38
 msgid "User"
@@ -197,18 +253,29 @@ msgid "Supervise roles"
 msgstr "管理角色"
 
 #: .\accounts\models.py:92
+msgid "Excluded roles"
+msgstr ""
+
+#: .\accounts\models.py:97
+msgid ""
+"Among the users matched via \"supervise roles\", further exclude those who "
+"also belong to any of these roles (e.g. a deputy can see department members "
+"but not the supervisor)."
+msgstr "在「管理角色」所匹配的使用者中，進一步排除那些也屬於任何這些角色的使用者（例如，代理人可以看到部門成員，但看不到主管）。"
+
+#: .\accounts\models.py:100
 msgid "Is department"
 msgstr "是否為部門"
 
-#: .\accounts\models.py:96
+#: .\accounts\models.py:104
 msgid "Parent Department"
 msgstr "母部門"
 
-#: .\accounts\models.py:106
+#: .\accounts\models.py:114
 msgid "Group profile"
 msgstr "群組檔案"
 
-#: .\accounts\models.py:107
+#: .\accounts\models.py:115
 msgid "Group profiles"
 msgstr "群組檔案"
 
@@ -273,7 +340,7 @@ msgstr ""
 #: .\telecom\templates\telecom\isp_review.html:20
 #: .\telecom\templates\telecom\prefixlistupdatetask_form.html:21
 msgid "Please correct the errors below."
-msgstr ""
+msgstr "請修正以下錯誤。"
 
 #: .\accounts\templates\registration\login.html:51
 msgid "Forgot your password?"

@@ -27,7 +27,11 @@ class GroupProfileAdmin(admin.ModelAdmin):
     def get_supervise_roles(self, obj):
         return ', '.join(str(group) for group in obj.supervise_roles.all())
 
-    list_display = ['__str__', 'get_users', 'is_role', 'is_displayed', 'get_supervise_roles', 'is_department', 'parent_department']
+    def get_exclude_roles(self, obj):
+        return ', '.join(str(group) for group in obj.excluded_roles.all())
+
+
+    list_display = ['__str__', 'get_users', 'is_role', 'is_displayed', 'get_supervise_roles', 'get_exclude_roles', 'is_department', 'parent_department']
     list_editable = ['is_department', 'is_role', 'is_displayed']
 
 

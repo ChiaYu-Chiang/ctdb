@@ -88,6 +88,14 @@ class GroupProfile(models.Model):
         related_name='supervised_by_roles',
         limit_choices_to={'groupprofile__is_role': True},
     )
+    excluded_roles = models.ManyToManyField(
+        verbose_name=_('Excluded roles'),
+        to='auth.Group',
+        blank=True,
+        related_name='excluded_by_roles',
+        limit_choices_to={'groupprofile__is_role': True},
+        help_text=_('Among the users matched via "supervise roles", further exclude those who also belong to any of these roles (e.g. a deputy can see department members but not the supervisor).'),
+    )
     is_department = models.BooleanField(
         verbose_name=_('Is department'),
         default=False
