@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 15:12+0800\n"
+"POT-Creation-Date: 2026-09-24 16:08+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -228,7 +228,7 @@ msgstr "使用者"
 msgid "Phone number"
 msgstr "電話號碼"
 
-#: .\accounts\models.py:45 .\core\templates\standard_nav.html:317
+#: .\accounts\models.py:45 .\core\templates\standard_nav.html:315
 msgid "Profile"
 msgstr "個人檔案"
 
@@ -261,7 +261,9 @@ msgid ""
 "Among the users matched via \"supervise roles\", further exclude those who "
 "also belong to any of these roles (e.g. a deputy can see department members "
 "but not the supervisor)."
-msgstr "在「管理角色」所匹配的使用者中，進一步排除那些也屬於任何這些角色的使用者（例如，代理人可以看到部門成員，但看不到主管）。"
+msgstr ""
+"在「管理角色」所匹配的使用者中，進一步排除那些也屬於任何這些角色的使用者（例"
+"如，代理人可以看到部門成員，但看不到主管）。"
 
 #: .\accounts\models.py:100
 msgid "Is department"
@@ -298,7 +300,7 @@ msgstr "© 2020 保留所有權利。"
 #: .\accounts\templates\registration\signup.html:20
 #: .\accounts\templates\registration\signup_with_account_and_password.html:13
 #: .\accounts\templates\registration\signup_with_email.html:13
-#: .\core\templates\standard_nav.html:343
+#: .\core\templates\standard_nav.html:341
 msgid "Login"
 msgstr "登入"
 
@@ -362,7 +364,7 @@ msgid "Back to the homepage."
 msgstr "返回首頁"
 
 #: .\accounts\templates\registration\password_change_form.html:11
-#: .\core\templates\standard_nav.html:318
+#: .\core\templates\standard_nav.html:316
 msgid "Password change"
 msgstr "密碼變更"
 
@@ -409,8 +411,8 @@ msgid "I didn't recieve it."
 msgstr "我沒有收到"
 
 #: .\accounts\templates\registration\password_reset_form.html:11
-#: .\core\templates\standard_nav.html:320
-#: .\core\templates\standard_nav.html:346
+#: .\core\templates\standard_nav.html:318
+#: .\core\templates\standard_nav.html:344
 msgid "Password reset"
 msgstr "密碼重置"
 
@@ -423,7 +425,7 @@ msgstr "重置"
 #: .\accounts\templates\registration\signup_with_account_and_password.html:41
 #: .\accounts\templates\registration\signup_with_email.html:11
 #: .\accounts\templates\registration\signup_with_email.html:44
-#: .\core\templates\standard_nav.html:344
+#: .\core\templates\standard_nav.html:342
 msgid "Sign up"
 msgstr "註冊"
 
@@ -466,15 +468,15 @@ msgstr "上架時間"
 msgid "Visible Due"
 msgstr "下架時間"
 
-#: .\archive\models.py:23 .\core\templates\standard_nav.html:205
-#: .\core\templates\standard_nav.html:209
-#: .\core\templates\standard_nav.html:212
-#: .\core\templates\standard_nav.html:215
-#: .\core\templates\standard_nav.html:218
-#: .\core\templates\standard_nav.html:221
-#: .\core\templates\standard_nav.html:224
-#: .\core\templates\standard_nav.html:227
-#: .\core\templates\standard_nav.html:230 .\telecom\models.py:277
+#: .\archive\models.py:23 .\core\templates\standard_nav.html:204
+#: .\core\templates\standard_nav.html:208
+#: .\core\templates\standard_nav.html:211
+#: .\core\templates\standard_nav.html:214
+#: .\core\templates\standard_nav.html:217
+#: .\core\templates\standard_nav.html:220
+#: .\core\templates\standard_nav.html:223
+#: .\core\templates\standard_nav.html:226
+#: .\core\templates\standard_nav.html:229 .\telecom\models.py:277
 msgid "Archive"
 msgstr "檔案"
 
@@ -516,10 +518,10 @@ msgstr "搜尋.."
 #: .\core\templates\standard_nav.html:178
 #: .\core\templates\standard_nav.html:188
 #: .\core\templates\standard_nav.html:194
-#: .\core\templates\standard_nav.html:212
-#: .\core\templates\standard_nav.html:247
-#: .\core\templates\standard_nav.html:263
-#: .\core\templates\standard_nav.html:282
+#: .\core\templates\standard_nav.html:211
+#: .\core\templates\standard_nav.html:245
+#: .\core\templates\standard_nav.html:261
+#: .\core\templates\standard_nav.html:280
 #: .\dep_calendar\templates\dep_calendar\calendar.html:68
 #: .\dep_calendar\templates\dep_calendar\event_form.html:66
 #: .\diary\templates\diary\diary_list.html:65
@@ -979,7 +981,7 @@ msgid "Department Report"
 msgstr "各部回報"
 
 #: .\core\templates\standard_nav.html:55 .\core\templates\standard_nav.html:64
-#: .\core\templates\standard_nav.html:74 .\core\templates\standard_nav.html:297
+#: .\core\templates\standard_nav.html:74 .\core\templates\standard_nav.html:295
 #: .\diary\models.py:30 .\diary\models.py:76
 msgid "Diary"
 msgstr "日誌"
@@ -991,12 +993,12 @@ msgstr "日誌"
 #: .\core\templates\standard_nav.html:174
 #: .\core\templates\standard_nav.html:183
 #: .\core\templates\standard_nav.html:191
-#: .\core\templates\standard_nav.html:209
-#: .\core\templates\standard_nav.html:244
-#: .\core\templates\standard_nav.html:260
-#: .\core\templates\standard_nav.html:278
-#: .\core\templates\standard_nav.html:298
-#: .\core\templates\standard_nav.html:302
+#: .\core\templates\standard_nav.html:208
+#: .\core\templates\standard_nav.html:242
+#: .\core\templates\standard_nav.html:258
+#: .\core\templates\standard_nav.html:276
+#: .\core\templates\standard_nav.html:296
+#: .\core\templates\standard_nav.html:300
 msgid "List"
 msgstr "列表"
 
@@ -1055,64 +1057,64 @@ msgstr "Prefix-list 更新任務"
 msgid "Example archive"
 msgstr "範例檔案"
 
-#: .\core\templates\standard_nav.html:215
+#: .\core\templates\standard_nav.html:214
 msgid "journals List"
 msgstr "月刊列表"
 
-#: .\core\templates\standard_nav.html:218
+#: .\core\templates\standard_nav.html:217
 msgid "journals Add"
 msgstr "新增月刊"
 
-#: .\core\templates\standard_nav.html:221
+#: .\core\templates\standard_nav.html:220
 msgid "announce List"
 msgstr "處級佈達列表"
 
-#: .\core\templates\standard_nav.html:224
+#: .\core\templates\standard_nav.html:223
 msgid "announce Add"
 msgstr "新增處級佈達"
 
-#: .\core\templates\standard_nav.html:227
+#: .\core\templates\standard_nav.html:226
 msgid "manual List"
 msgstr "操作說明列表"
 
-#: .\core\templates\standard_nav.html:230
+#: .\core\templates\standard_nav.html:229
 msgid "manual Add"
 msgstr "新增操作說明"
 
-#: .\core\templates\standard_nav.html:240
-#: .\core\templates\standard_nav.html:244
-#: .\core\templates\standard_nav.html:247 .\tool\models.py:14
+#: .\core\templates\standard_nav.html:238
+#: .\core\templates\standard_nav.html:242
+#: .\core\templates\standard_nav.html:245 .\tool\models.py:14
 msgid "Tool"
 msgstr "工具"
 
-#: .\core\templates\standard_nav.html:256
-#: .\core\templates\standard_nav.html:260
-#: .\core\templates\standard_nav.html:263
+#: .\core\templates\standard_nav.html:254
+#: .\core\templates\standard_nav.html:258
+#: .\core\templates\standard_nav.html:261
 #: .\terms\templates\terms\terms_list.html:179
 msgid "Specialized Terminology Database"
 msgstr "專有名詞對照表"
 
-#: .\core\templates\standard_nav.html:273
-#: .\core\templates\standard_nav.html:277
-#: .\core\templates\standard_nav.html:281
+#: .\core\templates\standard_nav.html:271
+#: .\core\templates\standard_nav.html:275
+#: .\core\templates\standard_nav.html:279
 msgid "Post Board"
 msgstr "留言討論版"
 
-#: .\core\templates\standard_nav.html:293
-#: .\core\templates\standard_nav.html:297
-#: .\core\templates\standard_nav.html:301 .\log\models.py:18
+#: .\core\templates\standard_nav.html:291
+#: .\core\templates\standard_nav.html:295
+#: .\core\templates\standard_nav.html:299 .\log\models.py:18
 msgid "Log"
 msgstr ""
 
-#: .\core\templates\standard_nav.html:316
+#: .\core\templates\standard_nav.html:314
 msgid "Logout"
 msgstr "登出"
 
-#: .\core\templates\standard_nav.html:332
+#: .\core\templates\standard_nav.html:330
 msgid "No available roles"
 msgstr "沒有可用的角色"
 
-#: .\core\templates\standard_nav.html:340
+#: .\core\templates\standard_nav.html:338
 msgid "Guest"
 msgstr "訪客"
 

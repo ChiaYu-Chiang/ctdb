@@ -197,7 +197,6 @@
           {% endif %}
         </li>
         {% endif %}
-        {% if not is_t00_user %}
         <li class="nav-item dropdown">
           {% if perms.archive.view_archive or perms.archive.add_archive or perms.archive.view_manual or perms.archive.add_manual %}
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -232,7 +231,6 @@
           </div>
           {% endif %}
         </li>
-        {% endif %}
         {% if not is_t00_user %}
         <li class="nav-item dropdown">
           {% if perms.tool.view_tool or perms.tool.add_tool %}
