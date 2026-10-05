@@ -90,6 +90,7 @@ class DiaryWorkHour(models.Model):
     handling_content = models.TextField(verbose_name=_('Handling content'), blank=True)
     hours = models.DecimalField(verbose_name=_('Hours'), max_digits=5, decimal_places=1)
     order = models.PositiveIntegerField(verbose_name=_('Order'), default=0)
+    comment = models.TextField(verbose_name=_('Comment'), blank=True)
 
     class Meta:
         ordering = ['order', 'id']

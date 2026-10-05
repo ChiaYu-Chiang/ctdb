@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 16:08+0800\n"
+"POT-Creation-Date: 2026-09-24 16:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -735,7 +735,8 @@ msgstr "貼文"
 #: .\comment\models.py:24
 #: .\comment\templates\comment\comment_action_dropdown.html:17
 #: .\comment\templates\comment\comment_action_dropdown.html:20
-#: .\diary\models.py:25 .\diary\templates\diary\diary_action_dropdown.html:19
+#: .\diary\models.py:25 .\diary\models.py:93
+#: .\diary\templates\diary\diary_action_dropdown.html:19
 #: .\diary\templates\diary\diary_list.html:85
 msgid "Comment"
 msgstr "評論"
@@ -1406,11 +1407,11 @@ msgstr "備註"
 msgid "Order"
 msgstr ""
 
-#: .\diary\models.py:96
+#: .\diary\models.py:97
 msgid "Diary work hour"
 msgstr ""
 
-#: .\diary\models.py:97
+#: .\diary\models.py:98
 msgid "Diary work hours"
 msgstr ""
 
