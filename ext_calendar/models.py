@@ -65,6 +65,7 @@ class CalendarEvent(models.Model):
         ('CCX', 'CCX'),
         ('Chief Cloud', 'Chief Cloud'),
         ('轉售/代收代付', '轉售/代收代付'),
+        ('其他', '其他'),
     ]
 
     title = models.CharField(max_length=255, verbose_name=_('Title'))
