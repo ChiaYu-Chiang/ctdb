@@ -316,7 +316,8 @@ def news_dashboard(request):
     is_authorized = is_global or (
         role is not None and (
             role.name.endswith('supervisor') or
-            role.name.endswith('assistant')
+            role.name.endswith('assistant') or
+            role.name.endswith('deputy')
         )
     )
     if not is_authorized:
