@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import URLValidator
 import os
 
 from .storage import UUIDFileSystemStorage
@@ -9,8 +10,12 @@ from .storage import UUIDFileSystemStorage
 uuid_file_system_storage = UUIDFileSystemStorage()
 
 
+class LongURLValidator(URLValidator):
+    max_length = 8192
+
 class Archive(models.Model):
-    archive = models.FileField(storage=uuid_file_system_storage, upload_to='archive')
+    archive = models.FileField(storage=uuid_file_system_storage, upload_to='archive', blank=True)
+    url = models.TextField(blank=True, validators=[LongURLValidator()])
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
     created_by = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -51,8 +56,20 @@ class Archive(models.Model):
         return reverse('archive:manual_create')
 
     def get_full_filename(self):
-        _, extension = os.path.splitext(self.archive.name)
+        if not self.archive:
+            return self.name
+        extension = os.path.splitext(self.archive.name)
         return f"{self.name}{extension}"
+
+    def is_link(self):
+        return bool(self.url) and not self.archive
+
+    def get_link(self):
+        if self.url:
+            return self.url
+        if self.archive:
+            return self.archive.url
+        return ''
 
     def get_convert_to_reminders_url(self):
         """取得轉換為提醒的 URL"""

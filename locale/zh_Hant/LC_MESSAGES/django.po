@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 16:17+0800\n"
+"POT-Creation-Date: 2026-10-30 17:45+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -443,32 +443,40 @@ msgstr "以 Chief 電子信箱繼續"
 msgid "Already have an account?"
 msgstr "已經有帳號了嗎？"
 
-#: .\archive\forms.py:24 .\news\forms.py:26
+#: .\archive\forms.py:26
+msgid "Please upload a file or enter a URL."
+msgstr "請上傳檔案或輸入 URL。"
+
+#: .\archive\forms.py:28
+msgid "Please choose either a file or a URL, not both."
+msgstr "請選擇檔案或 URL，不能同時選擇兩者。"
+
+#: .\archive\forms.py:32 .\news\forms.py:26
 msgid "If you do not choose to save permanently, you must set a start time."
 msgstr "若不選擇永久保存，必須設定開始時間。"
 
-#: .\archive\forms.py:26 .\news\forms.py:28
+#: .\archive\forms.py:34 .\news\forms.py:28
 msgid ""
 "If you do not choose to save permanently, you must set an expiration time."
 msgstr "若不選擇永久保存，必須設定過期時間。"
 
-#: .\archive\forms.py:28 .\news\forms.py:30
+#: .\archive\forms.py:36 .\news\forms.py:30
 msgid "Expiration time must be later than start time."
 msgstr "過期時間必須晚於開始時間。"
 
-#: .\archive\models.py:17 .\news\models.py:16
+#: .\archive\models.py:22 .\news\models.py:16
 msgid "Is permanent"
 msgstr "永久顯示"
 
-#: .\archive\models.py:18 .\news\models.py:17
+#: .\archive\models.py:23 .\news\models.py:17
 msgid "Visible Start"
 msgstr "上架時間"
 
-#: .\archive\models.py:19 .\news\models.py:18
+#: .\archive\models.py:24 .\news\models.py:18
 msgid "Visible Due"
 msgstr "下架時間"
 
-#: .\archive\models.py:23 .\core\templates\standard_nav.html:204
+#: .\archive\models.py:28 .\core\templates\standard_nav.html:204
 #: .\core\templates\standard_nav.html:208
 #: .\core\templates\standard_nav.html:211
 #: .\core\templates\standard_nav.html:214
@@ -480,7 +488,7 @@ msgstr "下架時間"
 msgid "Archive"
 msgstr "檔案"
 
-#: .\archive\models.py:24 .\telecom\models.py:278
+#: .\archive\models.py:29 .\telecom\models.py:278
 msgid "Archives"
 msgstr "檔案"
 
@@ -575,7 +583,7 @@ msgstr "動作"
 #: .\comment\templates\comment\comment_message_list.html:36
 #: .\comment\templates\comment\message_list.html:26 .\dep_calendar\models.py:50
 #: .\diary\models.py:26 .\diary\templates\diary\diary_list.html:74
-#: .\ext_calendar\models.py:78 .\log\models.py:13
+#: .\ext_calendar\models.py:79 .\log\models.py:13
 #: .\log\templates\log\diary_log_list.html:27 .\news\models.py:19
 #: .\reminder\models.py:45 .\reminder\templates\reminder\reminder_list.html:32
 #: .\telecom\models.py:93 .\telecom\models.py:124 .\telecom\models.py:207
@@ -602,10 +610,10 @@ msgstr "建立者"
 msgid "Name"
 msgstr "名稱"
 
-#: .\archive\templates\archive\announce_list.html:39
-#: .\archive\templates\archive\archive_list.html:41
-#: .\archive\templates\archive\journals_list.html:47
-#: .\archive\templates\archive\manual_list.html:38
+#: .\archive\templates\archive\announce_list.html:47
+#: .\archive\templates\archive\archive_list.html:49
+#: .\archive\templates\archive\journals_list.html:55
+#: .\archive\templates\archive\manual_list.html:46
 #: .\comment\templates\comment\comment_list.html:49
 #: .\comment\templates\comment\comment_message_list.html:50
 #: .\comment\templates\comment\message_list.html:45
@@ -723,7 +731,7 @@ msgstr "貼文類型"
 
 #: .\comment\models.py:18
 #: .\comment\templates\comment\comment_message_list.html:15
-#: .\dep_calendar\models.py:44 .\ext_calendar\models.py:70 .\news\models.py:11
+#: .\dep_calendar\models.py:44 .\ext_calendar\models.py:71 .\news\models.py:11
 #: .\news\templates\news\dashboard.html:269
 msgid "Title"
 msgstr "標題"
@@ -963,7 +971,7 @@ msgid "T00"
 msgstr "技術處"
 
 #: .\core\templates\standard_nav.html:32 .\core\templates\standard_nav.html:39
-#: .\dep_calendar\models.py:51 .\ext_calendar\models.py:79
+#: .\dep_calendar\models.py:51 .\ext_calendar\models.py:80
 msgid "Department"
 msgstr "部門"
 
@@ -1268,7 +1276,7 @@ msgstr "近端支援"
 msgid "others"
 msgstr "其它"
 
-#: .\dep_calendar\models.py:45 .\ext_calendar\models.py:74
+#: .\dep_calendar\models.py:45 .\ext_calendar\models.py:75
 msgid "Product Type"
 msgstr "產品類型"
 
@@ -1276,19 +1284,19 @@ msgstr "產品類型"
 msgid "Event type"
 msgstr "事件類型"
 
-#: .\dep_calendar\models.py:47 .\ext_calendar\models.py:75 .\terms\models.py:13
+#: .\dep_calendar\models.py:47 .\ext_calendar\models.py:76 .\terms\models.py:13
 msgid "Description"
 msgstr "描述"
 
-#: .\dep_calendar\models.py:48 .\ext_calendar\models.py:76
+#: .\dep_calendar\models.py:48 .\ext_calendar\models.py:77
 msgid "Start time"
 msgstr "開始於"
 
-#: .\dep_calendar\models.py:49 .\ext_calendar\models.py:77
+#: .\dep_calendar\models.py:49 .\ext_calendar\models.py:78
 msgid "End time"
 msgstr "結束於"
 
-#: .\dep_calendar\models.py:52 .\ext_calendar\models.py:80
+#: .\dep_calendar\models.py:52 .\ext_calendar\models.py:81
 msgid "Participants"
 msgstr "參與者"
 
@@ -1431,7 +1439,7 @@ msgstr "搜尋"
 msgid "Close"
 msgstr "關閉"
 
-#: .\ext_calendar\forms.py:9 .\ext_calendar\models.py:72
+#: .\ext_calendar\forms.py:9 .\ext_calendar\models.py:73
 msgid "Support Consultant"
 msgstr "詢問人"
 
@@ -1455,11 +1463,11 @@ msgstr ""
 msgid "D11"
 msgstr ""
 
-#: .\ext_calendar\models.py:71
+#: .\ext_calendar\models.py:72
 msgid "Support Group"
 msgstr "支援單位"
 
-#: .\ext_calendar\models.py:73
+#: .\ext_calendar\models.py:74
 msgid "Client Name"
 msgstr "客戶名稱"
 
@@ -1656,7 +1664,7 @@ msgstr "你沒有權限讀取這個列表。"
 msgid "You have no permission to export this list."
 msgstr "你沒有權限匯出這個列表。"
 
-#: .\news\views.py:323
+#: .\news\views.py:324
 msgid "You have no permission to view this page."
 msgstr "你沒有權限查看這個頁面。"
 

@@ -32,7 +32,15 @@
               <tr>
                 <td class="text-nowrap">{% include 'standard_action_dropdown.html' %}</td>
                 <td class="text-nowrap">{{ obj.created_by }}</td>
-                <td class="text-nowrap"><a href="{{ obj.archive.url }}"	download="{{ obj.get_full_filename }}">{{ obj.name }}</a></td>
+                <td class="text-nowrap">
+                  {% if obj.url %}
+                  <a href="{{ obj.url }}" target="_blank" rel="noopener noreferrer">{{ obj.name }}</a>
+                  {% elif obj.archive %}
+                  <a href="{{ obj.archive.url }}" download="{{ obj.get_full_filename }}">{{ obj.name }}</a>
+                  {% else %}
+                  {{ obj.name }}
+                  {% endif %}
+                </td>
               </tr>
               {% empty %}
               <tr>

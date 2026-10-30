@@ -9,15 +9,23 @@ class ArchiveModelForm(forms.ModelForm):
         model = Archive
         exclude = ['created_by', 'type']
         widgets = {
+            'url': forms.URLInput(),
             'visible_at': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M',),
             'visible_due': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M',),
         }
 
     def clean(self):
         cleaned_data = super().clean()
+        archive = cleaned_data.get('archive')
+        url = cleaned_data.get('url')
         is_permanent = cleaned_data.get('is_permanent')
         visible_at = cleaned_data.get('visible_at')
         visible_due = cleaned_data.get('visible_due')
+
+        if not archive and not url:
+            self.add_error(None, _('Please upload a file or enter a URL.'))
+        if archive and url:
+            self.add_error(None, _('Please choose either a file or a URL, not both.'))
         
         if is_permanent is False:
             if not visible_at:
